@@ -1,6 +1,7 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
+local SteeringInput = require(script.Parent.SteeringInput)
 local Controller = {}
 
 function Controller.Start(gaugeGui, resultGui, remotes)
@@ -28,6 +29,7 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 		cameraRestore()
 	end
 	local function stopFlight(run)
+		if run.steeringInput then run.steeringInput.Stop(); run.steeringInput = nil end
 		for _, effect in ipairs(run.effects) do effect:Destroy() end
 		table.clear(run.effects)
 		if run.animate and run.animate.Parent then run.animate.Disabled = run.animateDisabled end
@@ -105,7 +107,7 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 			end)
 		end))
 	end)
-	fire.OnClientEvent:Connect(function(velocity, id, character, saved)
+	fire.OnClientEvent:Connect(function(velocity, id, character, saved, steeringSettings)
 		if not matches(id, character) or (active.state ~= "Aiming" and active.state ~= "LaunchPending") then return end
 		local run = active
 		stopAim(run)
@@ -137,6 +139,11 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 		else run.animate = nil end
 		humanoid.AutoRotate, humanoid.PlatformStand = false, true
 		humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+		run.steeringInput = SteeringInput.Start(function(axis)
+			if active == run and run.state == "Flying" and player.Character == character then
+				remotes.SteerFlight:FireServer(axis, id)
+			end
+		end, steeringSettings)
 		-- Initial velocity is applied once, by the server. No fixed-duration cleanup.
 	end)
 	state.OnClientEvent:Connect(function(value, id, character, reason)

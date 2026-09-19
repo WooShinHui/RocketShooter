@@ -3,6 +3,8 @@ local RunService = game:GetService("RunService")
 local Remotes = require(script.Parent.Remotes)
 local Data = require(script.Parent.PlayerData)
 local Policy = require(script.Parent.RunPolicy)
+local Steering = require(script.Parent.HorizontalSteering)
+local SteeringConfig = require(script.Parent.SteeringConfig)
 local Flight = {}
 local runs = {}
 local occupant = nil
@@ -52,6 +54,7 @@ end
 local function cleanup(run, restorePosition)
 	if run.cleaned then return end
 	run.cleaned = true
+	run.steering = nil
 	for _, connection in ipairs(run.connections) do connection:Disconnect() end
 	table.clear(run.connections)
 	release(run)
@@ -174,12 +177,13 @@ local function fire(player, multiplier, id)
 	run.launchedAt, run.lastSample = os.clock(), os.clock()
 	run.lastPosition, run.maxDistance = run.root.Position, (run.root.Position - run.startPosition).Magnitude
 	run.speedBudget = velocity.Magnitude
+	run.steering = Steering.Create(velocity)
 	run.humanoid.AutoRotate, run.humanoid.PlatformStand = false, true
 	run.root.AssemblyAngularVelocity = Vector3.zero
 	run.root.AssemblyLinearVelocity = velocity -- Client never reapplies this impulse.
 	restoreParts(run, true, false)
 	player:SetAttribute("FlightState", "Flying")
-	fireRemote:FireClient(player, velocity, run.id, run.character, run.saved)
+	fireRemote:FireClient(player, velocity, run.id, run.character, run.saved, SteeringConfig.Client)
 	aimRemote:FireClient(player, false, cannon, run.id, run.character)
 	release(run)
 end
@@ -240,6 +244,12 @@ function Flight.Start(model)
 		launchPoint.CFrame = cylinder.CFrame * CFrame.new(0, 0, -cylinder.Size.Z / 2)
 	end)
 	fireRemote.OnServerEvent:Connect(fire)
+	remotes.SteerFlight.OnServerEvent:Connect(function(player, axis, id)
+		local run = runs[player]
+		if not Policy.isCurrent(run, id, player.Character) or run.state ~= "Flying"
+			or not live(run) or not Data.IsReady(player) then return end
+		Steering.Accept(run.steering, axis, os.clock())
+	end)
 	remotes.ReturnToSpawn.OnServerEvent:Connect(function(player, id)
 		local run = runs[player]
 		if not Policy.isCurrent(run, id, player.Character) or not live(run)
@@ -309,6 +319,15 @@ function Flight.Start(model)
 					run.groundedAt = run.groundedAt or now
 					if now - run.groundedAt >= 0.15 then finish(run) end
 				else run.groundedAt = nil end
+			end
+			-- Apply only after validation and landing finalization. A completed run
+			-- receives no final steering impulse; rewards/grounding remain PHASE 0 rules.
+			if run.state == "Flying" then
+				local corrected, budget = Steering.Step(run.steering, velocity, sampleDt, now)
+				if budget > 0 then
+					run.root.AssemblyLinearVelocity = corrected
+					run.speedBudget += budget -- Account for legitimate lateral acceleration.
+				end
 			end
 		end
 	end)

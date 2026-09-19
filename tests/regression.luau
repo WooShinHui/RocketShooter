@@ -33,6 +33,7 @@ local function environment()
 	vector.__mul = function(a,b) return vec.new(a.X*b,a.Y*b,a.Z*b) end
 	vector.__div = function(a,b) return vec.new(a.X/b,a.Y/b,a.Z/b) end
 	vector.__index = function(a,key)
+		if key == "Dot" then return function(self,b) return self.X*b.X+self.Y*b.Y+self.Z*b.Z end end
 		if key == "Magnitude" then return math.sqrt(a.X*a.X+a.Y*a.Y+a.Z*a.Z) end
 		if key == "Unit" then return a/a.Magnitude end
 	end
@@ -52,6 +53,10 @@ local function environment()
 	env.Enum={HumanoidStateType={GettingUp="GettingUp",Physics="Physics"}, Material={Air="Air",Grass="Grass"}, RaycastFilterType={Exclude="Exclude"},
 		MouseBehavior={Default="Default",LockCenter="LockCenter"},CameraType={Custom="Custom",Scriptable="Scriptable"},
 		UserInputType={MouseButton1="MouseButton1"},OrientationAlignmentMode={OneAttachment="OneAttachment"}}
+	env.Enum.KeyCode={A="A",D="D",Left="Left",Right="Right"}
+	env.Enum.UserInputState={Begin="Begin",End="End",Cancel="Cancel"}
+	env.Enum.ContextActionResult={Sink="Sink",Pass="Pass"}
+	env.Enum.ContextActionPriority={High={Value=3000}}
 	env.Color3={fromRGB=function(...) return {...} end}
 	env.ColorSequence={new=function(...) return {...} end}
 	env.NumberSequence=env.ColorSequence; env.UDim2=env.ColorSequence
@@ -134,10 +139,22 @@ local function environment()
 	function env.players:GetPlayers() return self:GetChildren() end
 	function env.players:GetPlayerFromCharacter(char) for _,p in ipairs(self:GetChildren()) do if p.Character==char then return p end end end
 	env.rs=instance("ReplicatedStorage")
-	for _,name in ipairs({"AimCannon","FireCannon","FlightResult","ReturnToSpawn","FlightState"}) do local r=instance("RemoteEvent"); r.Name=name; r.Parent=env.rs end
+	for _,name in ipairs({"AimCannon","FireCannon","FlightResult","ReturnToSpawn","FlightState","SteerFlight"}) do local r=instance("RemoteEvent"); r.Name=name; r.Parent=env.rs end
 	env.heartbeat=event()
 	env.render=event()
 	env.input={InputBegan=event(),GetMouseDelta=function() return {X=0,Y=0} end}
+	env.keys={}
+	env.input.GetFocusedTextBox=function() return env.focusedTextBox end
+	env.input.IsKeyDown=function(_,key) return env.keys[key] end
+	env.input.WindowFocusReleased=event(); env.input.WindowFocused=event(); env.input.TextBoxFocused=event()
+	env.actions={bindings={}}
+	function env.actions:BindActionAtPriority(name,callback,touch,priority,...)
+		self.bindings[name]={callback=callback,touch=touch,priority=priority,keys={...}}
+	end
+	function env.actions:UnbindAction(name) self.bindings[name]=nil end
+	function env.key(key,inputState)
+		for name,binding in pairs(env.actions.bindings) do binding.callback(name,inputState,{KeyCode=key}) end
+	end
 	local store={}
 	function store:GetAsync(key)
 		env.reads+=1
@@ -153,7 +170,7 @@ local function environment()
 		if result then env.saved=table.clone(result) end
 		return result
 	end
-	local services={Players=env.players,ReplicatedStorage=env.rs,UserInputService=env.input,
+	local services={Players=env.players,ReplicatedStorage=env.rs,UserInputService=env.input,ContextActionService=env.actions,
 		RunService={Heartbeat=env.heartbeat,RenderStepped=env.render,IsStudio=function() return env.studio end},
 		DataStoreService={GetDataStore=function(_,name)
 			env.opens+=1
@@ -323,7 +340,7 @@ do
 	env.rs.FlightState.OnClientEvent:Fire("Cancelled",1,char)
 	check(env.render:Count()==1,"old cancellation cannot clean new aiming run")
 	local saved={walkSpeed=23,useJumpPower=true,jumpPower=61,jumpHeight=9,autoRotate=true,platformStand=false}
-	env.rs.FireCannon.OnClientEvent:Fire(env.Vector3.new(0,10,-250),2,char,saved)
+	env.rs.FireCannon.OnClientEvent:Fire(env.Vector3.new(0,10,-250),2,char,saved,SteeringConfig.Client)
 	env.time+=7
 	check(char.Humanoid.PlatformStand and env.render:Count()==0,"client physics persists past six seconds until server end")
 	check(char.HumanoidRootPart.FlyOrientation.Mode=="OneAttachment","flight orientation uses one attachment")
@@ -332,6 +349,7 @@ do
 	env.rs.FlightResult.OnClientEvent:Fire(300,450,1,true,2,char)
 	check(results.Enabled and not char.Humanoid.PlatformStand and char.Humanoid.WalkSpeed==23
 		and char.HumanoidRootPart:FindFirstChild("FlyTrail")==nil,"server result restores client physics and removes effects")
+	check(next(env.actions.bindings)==nil and env.heartbeat:Count()==0,"result transition removes flight steering adapter")
 	button.Activated:Fire()
 	check(results.Enabled and #env.rs.ReturnToSpawn.requests==1,"return UI waits for server acknowledgement")
 	button.Activated:Fire()
@@ -400,14 +418,17 @@ do
 	check(not data.IsReady(p) and p:GetAttribute("DataMode")=="Persistent","zero IDs outside Studio cannot enable memory fallback")
 end
 do
-	local env=environment(); env.rs.FlightState:Destroy()
+	local env=environment(); env.rs.FlightState:Destroy(); env.rs.SteerFlight:Destroy()
 	local original={env.rs.AimCannon,env.rs.FireCannon,env.rs.FlightResult,env.rs.ReturnToSpawn}
 	local registry=newRemotes(env); local first=registry.Ensure(); local second=registry.Ensure()
-	check(#env.rs:GetChildren()==7 and first.BuyUpgrade:IsA("RemoteFunction") and first.FlightState:IsA("RemoteEvent"),"server creates all missing remotes from original Studio inventory")
+	check(#env.rs:GetChildren()==8 and first.BuyUpgrade:IsA("RemoteFunction") and first.FlightState:IsA("RemoteEvent") and first.SteerFlight:IsA("RemoteEvent"),"server creates all missing remotes including steering")
 	check(first.AimCannon==original[1] and first.FireCannon==original[2] and first.FlightResult==original[3]
 		and first.ReturnToSpawn==original[4] and first.BuyUpgrade==second.BuyUpgrade,"repeated bootstrap preserves original remotes without duplication")
 	check(first.ResetData.OnServerInvoke()==false,"legacy reset remains inert")
 	check(newRemoteClient(env).Wait(15).BuyUpgrade==first.BuyUpgrade,"client resolves complete typed remote inventory")
+	first.SteerFlight:Destroy(); local waitStart=env.time
+	check(newRemoteClient(env).Wait(15)==nil and env.time-waitStart==15,"missing steering remote has bounded client startup wait")
+	registry.Ensure()
 	first.BuyUpgrade:Destroy(); local before=env.time
 	check(newRemoteClient(env).Wait(15)==nil and env.time-before==15,"missing BuyUpgrade returns after bounded total wait")
 	local wrong=env.Instance.new("Folder"); wrong.Name="BuyUpgrade"; wrong.Parent=env.rs
@@ -443,4 +464,109 @@ do
 	check(p:GetAttribute("FlightState")=="Idle" and p.loadCount==1 and env.opens==0
 		and env.reads==0 and env.writes==0,"unpublished integrated return completes with zero DataStore API calls")
 	end
+local function near(a,b) return math.abs(a-b)<0.00001 end
+do
+	local env=environment(); local steer=newHorizontalSteering(env); local v=env.Vector3.new(0,50,-250)
+	local control=steer.Create(v)
+	local unchanged,budget=steer.Step(control,v,0.05,0)
+	check(unchanged==v and budget==0,"no steering input preserves PHASE 0 trajectory exactly")
+	check(not steer.Accept(control,0/0,0) and not steer.Accept(control,math.huge,0)
+		and not steer.Accept(control,"1",0) and not steer.Accept(control,1.01,0),"steering rejects non-finite wrong-type and out-of-range axes")
+	check(steer.Accept(control,1,0) and not steer.Accept(control,-1,0.001),"server steering packet rate limit")
+	local nextVelocity=steer.Step(control,v,0.05,0.05)
+	check(near(nextVelocity.X,2) and nextVelocity.Y==v.Y and nextVelocity.Z==v.Z,"right input adds bounded lateral acceleration only")
+	local left=steer.Create(v); steer.Accept(left,-1,0)
+	check(near(steer.Step(left,v,0.05,0.05).X,-2),"left input has correct launch-relative sign")
+	local held=steer.Create(v)
+	for i=1,200 do steer.Accept(held,1,i*0.05); v=steer.Step(held,v,0.05,i*0.05) end
+	check(near(v.X,45) and v.Z==-250 and v.Y==50,"held input cannot exceed lateral target or increase forward speed")
+	steer.Accept(held,0,11)
+	local released=steer.Step(held,v,0.05,11)
+	check(near(released.X,44.6),"release keeps inertia and decays gently")
+	steer.Accept(held,-1,12)
+	check(near(steer.Step(held,v,0.05,12).X,43),"opposite input cannot reverse lateral momentum instantly")
+	steer.Accept(held,1,13)
+	check(near(steer.Step(held,v,0.05,14).X,44.6),"expired input becomes neutral rather than sticky steering")
+	local weak=env.Vector3.new(0,30,-10); local c=steer.Create(weak)
+	steer.Accept(c,1,1)
+	check(near(steer.Step(c,weak,0.1,1).X,2),"lateral target scales down with remaining forward speed")
+	local slow=env.Vector3.new(0,30,-2)
+	check(steer.Step(steer.Create(slow),slow,0.1,1)==slow,"near-vertical launch cannot generate sideways free flight")
+	local c2=steer.Create(env.Vector3.new(0,0,-250)); steer.Accept(c2,1,1)
+	check(steer.Step(c2,slow,0.1,1)==slow,"loss of forward momentum prevents new sideways thrust")
+	local diagonal=env.Vector3.new(100,70,-100); local c3=steer.Create(diagonal); steer.Accept(c3,1,1)
+	local corrected=steer.Step(c3,diagonal,0.1,1)
+	check(near(corrected:Dot(c3.forward),diagonal:Dot(c3.forward)) and corrected.Y==70
+		and corrected.X>diagonal.X and corrected.Z>diagonal.Z,"rotated cannon steering preserves its own forward and vertical components")
+	local c4=steer.Create(diagonal); steer.Accept(c4,1,1)
+	check(near(select(2,steer.Step(c4,diagonal,3,1)),4),"stalled frame has bounded steering correction")
+	local boosted=diagonal*1.43+env.Vector3.new(0,40,0)
+	local withBoost=steer.Step(c3,boosted,0.05,1.05)
+	check(near(withBoost:Dot(c3.forward),boosted:Dot(c3.forward)) and withBoost.Y==boosted.Y,"steering preserves ring-modified forward and vertical velocity")
+	local function simulate(dt,steps)
+		local velocity=env.Vector3.new(0,0,-250); local c5=steer.Create(velocity)
+		for i=1,steps do steer.Accept(c5,1,i*dt); velocity=steer.Step(c5,velocity,dt,i*dt) end
+		return velocity.X
+	end
+	check(near(simulate(0.05,20),simulate(1/60,60)),"steering response is timestep independent at normal frame rates")
+end
+do
+	local env=flightEnvironment(); local a,b=env.player(60),env.player(61)
+	local id=env.enter(a)
+	env.rs.SteerFlight.OnServerEvent:Fire(a,1,id) -- Aiming, must be ignored.
+	env.fire(a,id); env.step(0.1)
+	local root=a.Character.HumanoidRootPart
+	check(root.AssemblyLinearVelocity.X==0,"aiming steering packet does not carry into flight")
+	env.rs.SteerFlight.OnServerEvent:Fire(b,1,id)
+	env.rs.SteerFlight.OnServerEvent:Fire(a,1,id+100)
+	env.rs.SteerFlight.OnServerEvent:Fire(a,0/0,id)
+	env.rs.SteerFlight.OnServerEvent:Fire(a,2,id)
+	env.step(0.1)
+	check(root.AssemblyLinearVelocity.X==0,"foreign stale and invalid steering requests cannot change flight")
+	env.rs.SteerFlight.OnServerEvent:Fire(a,1,id)
+	env.rs.SteerFlight.OnServerEvent:Fire(a,-1,id)
+	env.step(0.1)
+	check(near(root.AssemblyLinearVelocity.X,4) and root.AssemblyLinearVelocity.Z==-250,"validated steering applied by server and spam reversal ignored")
+	local bid=env.enter(b); env.fire(b,bid)
+	env.rs.SteerFlight.OnServerEvent:Fire(b,-1,bid); env.step(0.1)
+	check(root.AssemblyLinearVelocity.X>0 and b.Character.HumanoidRootPart.AssemblyLinearVelocity.X<0,"simultaneous players steer independent runs")
+	local before=root.AssemblyLinearVelocity.X; env.step(0.5)
+	check(root.AssemblyLinearVelocity.X<before and root.AssemblyLinearVelocity.X>0,"missing input packets remove thrust without instant stop")
+	a.Character.Humanoid.FloorMaterial="Grass"; env.step(0.3); env.step(0.2)
+	local landed=root.AssemblyLinearVelocity
+	env.rs.SteerFlight.OnServerEvent:Fire(a,1,id); env.step(0.2)
+	check(a:GetAttribute("FlightState")=="Result" and root.AssemblyLinearVelocity==landed,"result state rejects steering and has no residual physics update")
+	env.rs.ReturnToSpawn.OnServerEvent:Fire(a,id)
+	local nextId=env.enter(a); env.fire(a,nextId)
+	env.rs.SteerFlight.OnServerEvent:Fire(a,-1,id); env.step(0.1)
+	check(a.Character.HumanoidRootPart.AssemblyLinearVelocity.X==0,"old steering cannot affect next character/run")
+end
+do
+	local env=environment(); local input=newSteeringInput(env); local sent={}
+	local controller=input.Start(function(axis) table.insert(sent,axis) end,SteeringConfig.Client)
+	check(#sent==1 and sent[1]==0,"steering adapter starts neutral")
+	env.key("D","Begin"); env.step(0.1)
+	check(sent[#sent]==1,"D produces right axis")
+	env.key("A","Begin"); env.step(0.1)
+	check(sent[#sent]==0,"opposing keys cancel")
+	env.key("D","End"); env.step(0.1)
+	check(sent[#sent]==-1,"releasing one opposing key retains the other")
+	env.key("A","End"); env.key("Right","Begin"); env.step(0.1)
+	check(sent[#sent]==1,"right arrow is supported")
+	env.key("Right","End"); env.key("Left","Begin"); env.step(0.1)
+	check(sent[#sent]==-1,"left arrow is supported")
+	env.focusedTextBox={}; env.input.TextBoxFocused:Fire(); env.key("D","Begin"); env.step(0.1)
+	check(sent[#sent]==0,"typing in a text box never steers")
+	env.focusedTextBox=nil; env.key("D","Begin"); env.input.WindowFocusReleased:Fire(); env.step(0.1)
+	check(sent[#sent]==0,"focus loss neutralizes held keys")
+	env.input.WindowFocused:Fire(); env.step(0.1)
+	check(sent[#sent]==0,"focus return does not resurrect stale held input")
+	controller.SetAxis(0.4); env.step(0.1)
+	check(sent[#sent]==0.4,"normalized analog adapter supports future non-keyboard controls")
+	local packets=#sent; env.step(2)
+	check(#sent==packets+1,"slow frame sends no catch-up packet burst")
+	controller.Stop(); controller.Stop(); packets=#sent; env.key("D","Begin"); env.step(1)
+	check(#sent==packets and next(env.actions.bindings)==nil and env.heartbeat:Count()==0
+		and env.input.WindowFocusReleased:Count()==0,"steering stop is idempotent and removes bindings and connections")
+end
 print("All "..count.." regression checks passed (mock engine; Studio physics not tested).")

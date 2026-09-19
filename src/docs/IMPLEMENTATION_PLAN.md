@@ -14,7 +14,8 @@ Do not automatically begin the next major phase.
 
 ## PHASE 0 — Stabilize & Consolidate Existing Flight Loop
 
-CURRENT PRIORITY.
+ACCEPTED BASELINE: the user confirmed the basic flight loop passed Studio
+acceptance testing on 2026-09-20. Preserve this PHASE 0 behavior in later phases.
 
 Existing gameplay:
 
@@ -106,6 +107,11 @@ unintended defaults.
 ---
 
 ## PHASE 1 — Horizontal Flight Control
+
+CURRENT PHASE. Local implementation and automated verification completed on
+2026-09-20 (112 mock-engine checks, Luau compilation and Rojo build).
+Studio steering acceptance is pending and separate from the accepted PHASE 0 baseline.
+See PHASE_1_HANDOFF.md. Do not begin PHASE 2 automatically.
 
 Add meaningful left/right steering.
 

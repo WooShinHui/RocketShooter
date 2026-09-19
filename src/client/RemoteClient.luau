@@ -4,6 +4,7 @@ local required = {
 	{"AimCannon", "RemoteEvent"}, {"FireCannon", "RemoteEvent"},
 	{"FlightResult", "RemoteEvent"}, {"ReturnToSpawn", "RemoteEvent"},
 	{"FlightState", "RemoteEvent"}, {"BuyUpgrade", "RemoteFunction"},
+	{"SteerFlight", "RemoteEvent"},
 }
 
 function RemoteClient.Wait(timeout)

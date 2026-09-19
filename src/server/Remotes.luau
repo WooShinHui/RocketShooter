@@ -6,6 +6,7 @@ local schema = {
 	FlightResult = "RemoteEvent",
 	ReturnToSpawn = "RemoteEvent",
 	FlightState = "RemoteEvent",
+	SteerFlight = "RemoteEvent",
 	BuyUpgrade = "RemoteFunction",
 	ResetData = "RemoteFunction", -- Legacy compatibility: always returns false.
 }
