@@ -1,0 +1,19 @@
+{
+  "name": "rocketShooter",
+  "tree": {
+    "$className": "DataModel",
+
+    "ServerScriptService": {
+      "$ignoreUnknownInstances": true,
+      "$path": "src/server"
+    },
+
+    "StarterPlayer": {
+      "$ignoreUnknownInstances": true,
+      "StarterPlayerScripts": {
+        "$ignoreUnknownInstances": true,
+        "$path": "src/client"
+      }
+    }
+  }
+}
