@@ -1,24 +1,11 @@
-local DataStoreService = game:GetService("DataStoreService")
+-- Remotes are independent of persistence and must exist before loading gameplay/data.
+local remotes = require(script.Parent.Remotes).Ensure()
 local RunService = game:GetService("RunService")
-local cannonDataStore = DataStoreService:GetDataStore("CannonGame_v3")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-local function getOrCreate(name, className)
-	local obj = ReplicatedStorage:FindFirstChild(name)
-	if not obj then
-		obj = Instance.new(className)
-		obj.Name = name
-		obj.Parent = ReplicatedStorage
-	end
-	return obj
-end
-
-local buyUpgradeRF = getOrCreate("BuyUpgrade", "RemoteFunction") :: RemoteFunction
-local resetDataRF = getOrCreate("ResetData", "RemoteFunction") :: RemoteFunction
-getOrCreate("AimCannon", "RemoteEvent")
-getOrCreate("FireCannon", "RemoteEvent")
-getOrCreate("FlightResult", "RemoteEvent")
-getOrCreate("ReturnToSpawn", "RemoteEvent")
+local Data = require(script.Parent.PlayerData)
+local Flight = require(script.Parent.FlightService)
+local buyUpgradeRF, resetDataRF = remotes.BuyUpgrade, remotes.ResetData
+buyUpgradeRF.OnServerInvoke = function(player, kind) return Data.Buy(player, kind) end
+Data.Start()
 
 local movingGimmicks = {}
 
@@ -26,8 +13,36 @@ local function buildMapGimmicks()
 	local folder = workspace:FindFirstChild("Gimmicks") or Instance.new("Folder")
 	folder.Name = "Gimmicks"
 	folder.Parent = workspace
-	folder:ClearAllChildren()
+	-- Remove only objects created by this implementation; preserve Studio-owned content.
+	for _, child in folder:GetChildren() do
+		if child:GetAttribute("Phase0Generated") then child:Destroy() end
+	end
 	movingGimmicks = {}
+	-- A Studio-saved layout may already exist. Reuse it instead of stacking a
+	-- second set of rings/targets or deleting hand-authored objects.
+	local existingLayout = false
+	for _, part in folder:GetChildren() do
+		if part:IsA("BasePart") then
+			local isRing = part.Name == "BoosterRing"
+			local isBomb = part.Name == "ObstacleBomb"
+			if isRing or isBomb then
+				existingLayout = true
+				table.insert(movingGimmicks, {
+					part = part, basePos = part.Position, baseRotation = part.CFrame.Rotation,
+					speed = isRing and (1.5 + math.random() * 1.5) or (2 + math.random()),
+					range = isRing and (30 + math.random(0, 20)) or 40,
+					offset = math.random() * math.pi * 2, isRing = isRing,
+				})
+				part.Touched:Connect(function(hit)
+					Flight.ApplyGimmick(part, hit, isRing and "Ring" or "Bomb")
+				end)
+			elseif string.find(part.Name, "TargetZone", 1, true) then existingLayout = true end
+		end
+	end
+	if existingLayout then
+		warn("[Gimmicks] Reusing Studio-owned layout; no duplicate generation. Check all intended rings, bombs and targets exist.")
+		return
+	end
 
 	for i = 1, 25 do
 		local ring = Instance.new("Part")
@@ -40,6 +55,7 @@ local function buildMapGimmicks()
 		ring.Material = Enum.Material.Neon
 		ring.Anchored = true
 		ring.CanCollide = false
+		ring:SetAttribute("Phase0Generated", true)
 		ring.Parent = folder
 
 		table.insert(movingGimmicks, {
@@ -51,22 +67,8 @@ local function buildMapGimmicks()
 			isRing = true
 		})
 
-		local touchDebounce = {}
 		ring.Touched:Connect(function(hit)
-			local character = hit.Parent
-			local player = game.Players:GetPlayerFromCharacter(character)
-			if player and not touchDebounce[player] then
-				touchDebounce[player] = true
-				local hrp = character:FindFirstChild("HumanoidRootPart") :: BasePart
-				local leaderstats = player:FindFirstChild("leaderstats")
-				local boostLvl = leaderstats and leaderstats:FindFirstChild("BoostLvl") and leaderstats.BoostLvl.Value or 1
-
-				if hrp then
-					local boostMult = 1.35 + (boostLvl * 0.08)
-					hrp.AssemblyLinearVelocity = hrp.AssemblyLinearVelocity * boostMult + Vector3.new(0, 40, 0)
-				end
-				task.delay(0.8, function() touchDebounce[player] = nil end)
-			end
+			Flight.ApplyGimmick(ring, hit, "Ring")
 		end)
 	end
 
@@ -81,6 +83,7 @@ local function buildMapGimmicks()
 		bomb.Material = Enum.Material.Neon
 		bomb.Anchored = true
 		bomb.CanCollide = false
+		bomb:SetAttribute("Phase0Generated", true)
 		bomb.Parent = folder
 
 		table.insert(movingGimmicks, {
@@ -92,19 +95,8 @@ local function buildMapGimmicks()
 			isRing = false
 		})
 
-		local touchDebounce = {}
 		bomb.Touched:Connect(function(hit)
-			local character = hit.Parent
-			local player = game.Players:GetPlayerFromCharacter(character)
-			if player and not touchDebounce[player] then
-				touchDebounce[player] = true
-				local hrp = character:FindFirstChild("HumanoidRootPart") :: BasePart
-
-				if hrp then
-					hrp.AssemblyLinearVelocity = hrp.AssemblyLinearVelocity * 0.4 + Vector3.new(0, -50, 0)
-				end
-				task.delay(1, function() touchDebounce[player] = nil end)
-			end
+			Flight.ApplyGimmick(bomb, hit, "Bomb")
 		end)
 	end
 
@@ -118,6 +110,7 @@ local function buildMapGimmicks()
 		zone.Material = Enum.Material.Neon
 		zone.Anchored = true
 		zone.CanCollide = false
+		zone:SetAttribute("Phase0Generated", true)
 		zone.Parent = folder
 
 		local highlight = Instance.new("Highlight")
@@ -136,7 +129,7 @@ RunService.Heartbeat:Connect(function()
 			local xOffset = math.sin(now * item.speed + item.offset) * item.range
 			local targetPos = item.basePos + Vector3.new(xOffset, 0, 0)
 			if item.isRing then
-				item.part.CFrame = CFrame.new(targetPos) * CFrame.Angles(0, 0, math.rad(90))
+				item.part.CFrame = CFrame.new(targetPos) * (item.baseRotation or CFrame.Angles(0, 0, math.rad(90)))
 			else
 				item.part.Position = targetPos
 			end
@@ -144,117 +137,11 @@ RunService.Heartbeat:Connect(function()
 	end
 end)
 
-game.Players.PlayerAdded:Connect(function(player)
-	local leaderstats = Instance.new("Folder")
-	leaderstats.Name = "leaderstats"
-	leaderstats.Parent = player
-
-	local gold = Instance.new("IntValue")
-	gold.Name = "Gold"
-	gold.Value = 0
-	gold.Parent = leaderstats
-
-	local trophies = Instance.new("IntValue")
-	trophies.Name = "Trophies"
-	trophies.Value = 0
-	trophies.Parent = leaderstats
-
-	local powerLvl = Instance.new("IntValue")
-	powerLvl.Name = "PowerLvl"
-	powerLvl.Value = 1
-	powerLvl.Parent = leaderstats
-
-	local boostLvl = Instance.new("IntValue")
-	boostLvl.Name = "BoostLvl"
-	boostLvl.Value = 1
-	boostLvl.Parent = leaderstats
-
-	local maxDistance = Instance.new("IntValue")
-	maxDistance.Name = "MaxDistance"
-	maxDistance.Value = 0
-	maxDistance.Parent = leaderstats
-
-	local dataKey = "Player_" .. player.UserId
-	local success, savedData = pcall(function()
-		return cannonDataStore:GetAsync(dataKey)
-	end)
-
-	if success and savedData then
-		gold.Value = savedData.Gold or 0
-		trophies.Value = savedData.Trophies or 0
-		powerLvl.Value = savedData.PowerLvl or 1
-		boostLvl.Value = savedData.BoostLvl or 1
-		maxDistance.Value = savedData.MaxDistance or 0
-	end
-end)
-
-game.Players.PlayerRemoving:Connect(function(player)
-	local dataKey = "Player_" .. player.UserId
-	local leaderstats = player:FindFirstChild("leaderstats")
-	if leaderstats then
-		local dataToSave = {
-			Gold = leaderstats.Gold.Value,
-			Trophies = leaderstats.Trophies.Value,
-			PowerLvl = leaderstats.PowerLvl.Value,
-			BoostLvl = leaderstats.BoostLvl.Value,
-			MaxDistance = leaderstats.MaxDistance.Value,
-		}
-		pcall(function()
-			cannonDataStore:SetAsync(dataKey, dataToSave)
-		end)
-	end
-end)
-
 buyUpgradeRF.OnServerInvoke = function(player, upgradeType)
-	local leaderstats = player:FindFirstChild("leaderstats")
-	if not leaderstats then return false end
-
-	if upgradeType == "Gold" then
-		local goldObj = leaderstats:FindFirstChild("Gold")
-		local powerLvlObj = leaderstats:FindFirstChild("PowerLvl")
-		if goldObj and powerLvlObj then
-			local cost = math.floor(100 * (1.18 ^ (powerLvlObj.Value - 1)))
-			if goldObj.Value >= cost then
-				goldObj.Value -= cost
-				powerLvlObj.Value += 1
-				return true
-			end
-		end
-	elseif upgradeType == "Trophy" then
-		local trophyObj = leaderstats:FindFirstChild("Trophies")
-		local boostLvlObj = leaderstats:FindFirstChild("BoostLvl")
-		if trophyObj and boostLvlObj then
-			local cost = boostLvlObj.Value * 2
-			if trophyObj.Value >= cost then
-				trophyObj.Value -= cost
-				boostLvlObj.Value += 1
-				return true
-			end
-		end
-	end
-	return false
+	return Data.Buy(player, upgradeType)
 end
 
-resetDataRF.OnServerInvoke = function(player)
-	local leaderstats = player:FindFirstChild("leaderstats")
-	if leaderstats then
-		if leaderstats:FindFirstChild("Gold") then leaderstats.Gold.Value = 0 end
-		if leaderstats:FindFirstChild("Trophies") then leaderstats.Trophies.Value = 0 end
-		if leaderstats:FindFirstChild("PowerLvl") then leaderstats.PowerLvl.Value = 1 end
-		if leaderstats:FindFirstChild("BoostLvl") then leaderstats.BoostLvl.Value = 1 end
-		if leaderstats:FindFirstChild("MaxDistance") then leaderstats.MaxDistance.Value = 0 end
-
-		local dataKey = "Player_" .. player.UserId
-		pcall(function()
-			cannonDataStore:SetAsync(dataKey, {
-				Gold = 0,
-				Trophies = 0,
-				PowerLvl = 1,
-				BoostLvl = 1,
-				MaxDistance = 0
-			})
-		end)
-		return true
-	end
+-- The old test reset could erase live progress. No destructive reset endpoint in PHASE 0.
+resetDataRF.OnServerInvoke = function()
 	return false
 end

@@ -1,7 +1,9 @@
 local Players = game:GetService("Players")
-local DataStoreService = game:GetService("DataStoreService")
+local RunService = game:GetService("RunService")
 local Policy = require(script.Parent.RunPolicy)
-local store = DataStoreService:GetDataStore("CannonGame_v3")
+-- Never open a DataStore during require: unpublished Places throw here.
+local store = nil
+local developmentMemory = false
 local Data = {}
 local profiles = {}
 local defaults = {Gold = 0, Trophies = 0, PowerLvl = 1, BoostLvl = 1, MaxDistance = 0}
@@ -70,6 +72,7 @@ end
 function Data.Save(player)
 	local profile = profiles[player]
 	if not profile or not profile.ready then return false end
+	if developmentMemory then return true end -- Session-only; no DataStore API calls.
 	while profile.saving do task.wait(0.05) end
 	if not profile.ready then return false end
 	profile.saving = true
@@ -125,12 +128,20 @@ local function load(player)
 	local profile = {ready = false, leaving = false, saving = false, lastBuy = -math.huge}
 	profiles[player] = profile
 	player:SetAttribute("DataReady", false)
+	player:SetAttribute("DataMode", developmentMemory and "StudioMemory" or "Persistent")
 	local ok, saved
-	for attempt = 1, 3 do
-		ok, saved = pcall(function() return store:GetAsync("Player_" .. player.UserId) end)
-		if ok then break end
-		if player.Parent ~= Players or profile.leaving or closing then return end
-		if attempt < 3 then task.wait(attempt) end
+	if developmentMemory then
+		ok, saved = true, nil
+	else
+		for attempt = 1, 3 do
+			ok, saved = pcall(function()
+				if not store then store = game:GetService("DataStoreService"):GetDataStore("CannonGame_v3") end
+				return store:GetAsync("Player_" .. player.UserId)
+			end)
+			if ok then break end
+			if player.Parent ~= Players or profile.leaving or closing then return end
+			if attempt < 3 then task.wait(attempt) end
+		end
 	end
 	if profiles[player] ~= profile or player.Parent ~= Players or profile.leaving or closing then return end
 	if not ok or (saved ~= nil and type(saved) ~= "table") then
@@ -169,6 +180,14 @@ end
 function Data.Start()
 	if started then return end
 	started = true
+	-- Environment selection, NOT an API-failure fallback. A published game's
+	-- storage outage must never turn into a writable default-data session.
+	developmentMemory = RunService:IsStudio() and (game.GameId == 0 or game.PlaceId == 0)
+	if developmentMemory then
+		warn("[PlayerData] StudioMemory: unpublished Studio session; defaults only, NO DataStore reads/writes. Progress resets after leaving/Stop.")
+	else
+		print("[PlayerData] Persistent mode: load failures disable play/save; no memory fallback.")
+	end
 	Players.PlayerAdded:Connect(load)
 	for _, player in Players:GetPlayers() do task.spawn(load, player) end
 	Players.PlayerRemoving:Connect(function(player)
@@ -178,6 +197,10 @@ function Data.Start()
 		Data.Save(player)
 		if profiles[player] == profile then profiles[player] = nil end
 	end)
+	if developmentMemory then
+		game:BindToClose(function() closing = true; table.clear(profiles) end)
+		return -- No autosave worker or persistent shutdown work in development.
+	end
 	task.spawn(function()
 		while not closing do
 			task.wait(60)

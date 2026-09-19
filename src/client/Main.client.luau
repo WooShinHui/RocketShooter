@@ -1,6 +1,5 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local StarterGui = game:GetService("StarterGui")
 
@@ -9,22 +8,9 @@ pcall(function()
 end)
 
 local player = Players.LocalPlayer
-local camera = workspace.CurrentCamera
-
-local aimRemote = ReplicatedStorage:WaitForChild("AimCannon") :: RemoteEvent
-local fireRemote = ReplicatedStorage:WaitForChild("FireCannon") :: RemoteEvent
-local flightResultRemote = ReplicatedStorage:WaitForChild("FlightResult") :: RemoteEvent
-local returnToSpawnRemote = ReplicatedStorage:WaitForChild("ReturnToSpawn") :: RemoteEvent
-local buyUpgradeRF = ReplicatedStorage:WaitForChild("BuyUpgrade") :: RemoteFunction
-local resetDataRF = ReplicatedStorage:WaitForChild("ResetData") :: RemoteFunction
-
-local renderConnection, inputConnection, gaugeConnection
-local yaw, pitch = 0, 0
-local SENSITIVITY = 0.15
-
-local isTimingActive = false
-local gaugeProgress = 0
-local gaugeDirection = 1
+local remotes = require(script.Parent.RemoteClient).Wait(15)
+if not remotes then return end
+local buyUpgradeRF = remotes.BuyUpgrade
 
 local function createGaugeGui()
 	local playerGui = player:WaitForChild("PlayerGui")
@@ -90,147 +76,6 @@ local function createGaugeGui()
 end
 
 local gaugeGui = createGaugeGui()
-
-aimRemote.OnClientEvent:Connect(function(enable: boolean, cannon: Model)
-	if enable and cannon then
-		camera.CameraType = Enum.CameraType.Scriptable
-		UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
-		yaw, pitch = 0, 0
-
-		renderConnection = RunService.RenderStepped:Connect(function()
-			local delta = UserInputService:GetMouseDelta()
-			yaw = math.clamp(yaw - (delta.X * SENSITIVITY), -30, 30)
-			pitch = math.clamp(pitch - (delta.Y * SENSITIVITY), -5, 45)
-
-			local cylinder = cannon:FindFirstChild("Cylinder") :: BasePart
-			if cylinder then
-				camera.CFrame = cylinder.CFrame * CFrame.new(0, 4, 12) * CFrame.Angles(math.rad(-5), 0, 0)
-			end
-			aimRemote:FireServer(yaw, pitch)
-		end)
-
-		isTimingActive = true
-		gaugeProgress = 0
-		gaugeDirection = 1
-		gaugeGui.Enabled = true
-
-		local bgBar = gaugeGui:WaitForChild("BgBar")
-		local pointer = bgBar:WaitForChild("Pointer") :: Frame
-
-		gaugeConnection = RunService.Heartbeat:Connect(function(dt)
-			gaugeProgress += dt * 1.2 * gaugeDirection
-			if gaugeProgress >= 1 then
-				gaugeProgress = 1
-				gaugeDirection = -1
-			elseif gaugeProgress <= 0 then
-				gaugeProgress = 0
-				gaugeDirection = 1
-			end
-			pointer.Position = UDim2.new(gaugeProgress, -3, 0, -4)
-		end)
-
-		inputConnection = UserInputService.InputBegan:Connect(function(input, gpe)
-			if not gpe and input.UserInputType == Enum.UserInputType.MouseButton1 then
-				if isTimingActive then
-					isTimingActive = false
-					if gaugeConnection then gaugeConnection:Disconnect() end
-
-					local diff = math.abs(gaugeProgress - 0.5)
-					local multiplier = 0.7
-					local text = "MISS! (0.7x)"
-
-					if diff <= 0.075 then
-						multiplier = 1.5
-						text = "★ PERFECT! (1.5x) ★"
-					elseif diff <= 0.25 then
-						multiplier = 1.0
-						text = "GOOD! (1.0x)"
-					end
-
-					local statusLabel = bgBar:FindFirstChild("StatusLabel") :: TextLabel
-					if statusLabel then statusLabel.Text = text end
-
-					task.wait(0.3)
-					gaugeGui.Enabled = false
-					fireRemote:FireServer(multiplier)
-				end
-			end
-		end)
-	else
-		if renderConnection then renderConnection:Disconnect() end
-		if inputConnection then inputConnection:Disconnect() end
-		if gaugeConnection then gaugeConnection:Disconnect() end
-
-		gaugeGui.Enabled = false
-		isTimingActive = false
-		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
-		camera.CameraType = Enum.CameraType.Custom
-
-		if player.Character then
-			camera.CameraSubject = player.Character:FindFirstChild("Humanoid")
-		end
-	end
-end)
-
-fireRemote.OnClientEvent:Connect(function(launchVelocity)
-	local character = player.Character
-	if not character then return end
-
-	local hrp = character:FindFirstChild("HumanoidRootPart") :: BasePart
-	local humanoid = character:FindFirstChild("Humanoid") :: Humanoid
-	local animate = character:FindFirstChild("Animate") :: LocalScript?
-
-	if not (hrp and humanoid) then return end
-
-	humanoid.WalkSpeed = 0
-	humanoid.JumpHeight = 0
-
-	local att0 = hrp:FindFirstChild("FlyAttachment0") or Instance.new("Attachment")
-	att0.Name = "FlyAttachment0"
-	att0.Position = Vector3.new(0, 1, 0)
-	att0.Parent = hrp
-
-	local att1 = hrp:FindFirstChild("FlyAttachment1") or Instance.new("Attachment")
-	att1.Name = "FlyAttachment1"
-	att1.Position = Vector3.new(0, -1, 0)
-	att1.Parent = hrp
-
-	local trail = hrp:FindFirstChild("FlyTrail") or Instance.new("Trail")
-	trail.Name = "FlyTrail"
-	trail.Attachment0 = att0
-	trail.Attachment1 = att1
-	trail.Lifetime = 0.5
-	trail.Color = ColorSequence.new(Color3.fromRGB(0, 200, 255), Color3.fromRGB(255, 100, 0))
-	trail.Transparency = NumberSequence.new(0.2, 1)
-	trail.Parent = hrp
-
-	local alignMode = hrp:FindFirstChild("FlyOrientation") or Instance.new("AlignOrientation")
-	alignMode.Name = "FlyOrientation"
-	alignMode.Attachment0 = att0
-	alignMode.CFrame = CFrame.lookAt(Vector3.zero, launchVelocity.Unit) * CFrame.Angles(math.rad(-90), 0, 0)
-	alignMode.RigidityEnabled = true
-	alignMode.Parent = hrp
-
-	if animate then animate.Disabled = true end
-	humanoid.AutoRotate = false
-	humanoid.PlatformStand = true
-	humanoid:ChangeState(Enum.HumanoidStateType.Physics)
-
-	hrp.AssemblyLinearVelocity = launchVelocity
-
-	task.delay(6, function()
-		if alignMode then alignMode:Destroy() end
-		if att0 then att0:Destroy() end
-		if att1 then att1:Destroy() end
-		if trail then trail:Destroy() end
-		if animate then animate.Disabled = false end
-		humanoid.AutoRotate = true
-		humanoid.PlatformStand = false
-		humanoid.WalkSpeed = 16
-		humanoid.JumpHeight = 7.2
-		humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
-	end)
-end)
 
 local function createResultGui()
 	local playerGui = player:WaitForChild("PlayerGui")
@@ -304,26 +149,13 @@ local function createResultGui()
 	btnCorner.CornerRadius = UDim.new(0, 8)
 	btnCorner.Parent = returnBtn
 
-	returnBtn.Activated:Connect(function()
-		screenGui.Enabled = false
-		returnToSpawnRemote:FireServer()
-	end)
 
 	return screenGui
 end
 
 local resultGui = createResultGui()
 
-flightResultRemote.OnClientEvent:Connect(function(distance, gold, trophies, isNewRecord)
-	local mainFrame = resultGui:WaitForChild("MainFrame")
-	local infoLabel = mainFrame:WaitForChild("InfoLabel") :: TextLabel
-	local recordBadge = mainFrame:WaitForChild("RecordBadge") :: TextLabel
-
-	infoLabel.Text = string.format("비행 거리: %dm\n획득 골드: +%d G\n획득 트로피: +%d 🏆", distance, gold, trophies or 0)
-	recordBadge.Visible = isNewRecord
-
-	resultGui.Enabled = true
-end)
+require(script.Parent.FlightClient).Start(gaugeGui, resultGui, remotes)
 
 local function createShopGui()
 	local playerGui = player:WaitForChild("PlayerGui")
@@ -388,22 +220,6 @@ local function createShopGui()
 	btnCorner2.CornerRadius = UDim.new(0, 8)
 	btnCorner2.Parent = buyBtnTrophy
 
-	local resetBtn = Instance.new("TextButton")
-	resetBtn.Name = "ResetButton"
-	resetBtn.Size = UDim2.new(0.85, 0, 0, 38)
-	resetBtn.Position = UDim2.new(0.075, 0, 0.78, 0)
-	resetBtn.Text = "🔄 데이터 초기화 (테스트)"
-	resetBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-	resetBtn.TextSize = 13
-	resetBtn.Font = Enum.Font.SourceSansBold
-	resetBtn.BackgroundColor3 = Color3.fromRGB(192, 57, 43)
-	resetBtn.BorderSizePixel = 0
-	resetBtn.Parent = shopFrame
-
-	local btnCorner3 = Instance.new("UICorner")
-	btnCorner3.CornerRadius = UDim.new(0, 8)
-	btnCorner3.Parent = resetBtn
-
 	local function updateShopUI()
 		local leaderstats = player:FindFirstChild("leaderstats")
 		if leaderstats then
@@ -419,24 +235,20 @@ local function createShopGui()
 	end
 
 	buyBtnGold.Activated:Connect(function()
-		local success = buyUpgradeRF:InvokeServer("Gold")
-		if success then updateShopUI() end
+		local ok, success = pcall(function() return buyUpgradeRF:InvokeServer("Gold") end)
+		if ok and success then updateShopUI() end
 	end)
 
 	buyBtnTrophy.Activated:Connect(function()
-		local success = buyUpgradeRF:InvokeServer("Trophy")
-		if success then updateShopUI() end
-	end)
-
-	resetBtn.Activated:Connect(function()
-		local success = resetDataRF:InvokeServer()
-		if success then updateShopUI() end
+		local ok, success = pcall(function() return buyUpgradeRF:InvokeServer("Trophy") end)
+		if ok and success then updateShopUI() end
 	end)
 
 	task.spawn(function()
-		local leaderstats = player:WaitForChild("leaderstats")
-		leaderstats:WaitForChild("PowerLvl").Changed:Connect(updateShopUI)
-		leaderstats:WaitForChild("BoostLvl").Changed:Connect(updateShopUI)
+		local leaderstats = player:WaitForChild("leaderstats", 30)
+		if not leaderstats then warn("[Shop] Data did not initialize; check server Output."); return end
+		leaderstats.PowerLvl.Changed:Connect(updateShopUI)
+		leaderstats.BoostLvl.Changed:Connect(updateShopUI)
 		updateShopUI()
 	end)
 end
