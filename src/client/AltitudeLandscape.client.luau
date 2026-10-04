@@ -71,7 +71,7 @@ game:GetService("RunService").Heartbeat:Connect(function(dt)
  for biome,region in Config.Biomes do
   if biome==1 then continue end
   local spacing=region.Spacing
-  local top=Config.Biomes[biome+1] and Config.Biomes[biome+1].Min or 180000
+  local top=Config.Biomes[biome+1] and Config.Biomes[biome+1].Min or math.huge
   if height<region.Min-spacing or height>top+spacing then continue end
   local index=math.floor((height-region.Min)/spacing)
   local gx,gz=math.floor(root.Position.X/600),math.floor(root.Position.Z/600)

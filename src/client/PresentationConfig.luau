@@ -15,6 +15,15 @@ return {
 	},
 	-- 새 음원을 확보하기 전까지 실제 기존 impact 계열을 사용하는 안전한 변형입니다.
 	-- TODO: Studio 청취 후 흙 붕괴/석조 붕괴 전용 음원의 필요성을 판단합니다.
+ WaxCrack={Cooldown=.12,Cues={
+  {Id="rbxassetid://82830482880732",Volume=.28,Speed=1,Seconds=.75},
+  {Id="rbxassetid://140472251389702",Volume=.26,Speed=1,Seconds=.75},
+ }},
+ ObjectCrack={Cooldown=.06,Cues={
+  {Id="rbxassetid://82830482880732",Volume=.55,Speed=1,Seconds=.6},
+  {Id="rbxassetid://140472251389702",Volume=.52,Speed=1,Seconds=.75},
+  {Id="rbxassetid://138269510979347",Volume=.5,Speed=1,Seconds=.75},
+ }},
 	DestructionProfiles = {
   Slime={Speed=1,Volume=1,Material="SmoothPlastic",Lifetime=.8,FragmentScale=.7},
 		Rock = {Speed = 1, Volume = 1, Material = "Rock", Lifetime = 1, FragmentScale = 1},

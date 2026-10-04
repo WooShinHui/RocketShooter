@@ -14,6 +14,8 @@ local previewStage = 1
 local biomeIndex = 1
 local stageNames = {"GROUND", "CLOUD", "HIGH_ALTITUDE", "SPACE"}
 local groundSky, spaceSky, activeSky
+local skyBandIndex = 1
+local activeSkyKey
 local lightingTween, atmosphereTween
 local originalAtmosphere
 local Preview = Config.HeightPresentation or PresentationConfig.DestructionPreview
@@ -24,65 +26,40 @@ local function cancelTransition()
 end
 
 local function switchPreviewSky(space)
-	-- Templates remain untouched in ReplicatedStorage; only the active local clone changes.
-	local template
-	if space then template = spaceSky else template = groundSky end
-	if activeSky then activeSky:Destroy() end
-	-- Never reuse an unidentified Lighting sky as Ground (it may be Space).
-	activeSky = template and template:IsA("Sky") and template:Clone() or Instance.new("Sky")
-	activeSky.StarCount = if space then 3000 else 0
-    activeSky.CelestialBodiesShown = true
-	activeSky.Name = "FlightSky"
-	activeSky.Parent = Lighting
+ local band = Preview.SkyBands and Preview.SkyBands[skyBandIndex]
+ local key = band and (tostring(band.Min)..":"..(band.AssetId or band.Name)) or (space and "Space" or "Ground")
+ if activeSkyKey == key and activeSky then return end
+ local template = if space then spaceSky else groundSky
+ local nextSky = if band then Instance.new("Sky") else (template and template:IsA("Sky") and template:Clone() or Instance.new("Sky"))
+ if band then
+  for property, value in band.Properties do nextSky[property] = value end
+ else
+  nextSky.StarCount = if space then 3000 else 0
+  nextSky.CelestialBodiesShown = true
+ end
+ nextSky.Name = "FlightSky"
+ nextSky.Parent = Lighting
+ if activeSky then activeSky:Destroy() end
+ activeSky, activeSkyKey = nextSky, key
+ Lighting:SetAttribute("AltitudeSky", band and band.Name or key)
+ Lighting:SetAttribute("AltitudeSkyAsset", band and band.AssetId or nil)
 end
 
-local function applyPreview(stage, immediate, biome)
+local function applyPreview(stage, immediate, biome, band)
+	skyBandIndex = band or 1
 	biomeIndex = biome or 1
 	Lighting:SetAttribute("AltitudeBiome", biomeIndex)
 	cancelTransition()
 	local wasSpace = previewStage == 4
 	previewStage = stage
 	Lighting:SetAttribute("AltitudeLayer", stageNames[stage])
-	if immediate or wasSpace ~= (stage == 4) then switchPreviewSky(stage == 4) end
-	local settings = stage == 2 and Config.Clouds or Config.Ground
-	local lighting = {
-		ClockTime = Presentation.ClockTime, Brightness = settings.Brightness,
-		ExposureCompensation = settings.Exposure,
-		Ambient = Color3.fromRGB(table.unpack(settings.Ambient)),
-		OutdoorAmbient = Color3.fromRGB(table.unpack(settings.Outdoor)),
-		FogColor = Color3.fromRGB(210, 230, 250), FogEnd = settings.FogEnd,
-	}
-	local air = {Density = settings.Density, Haze = settings.Haze,
-		Color = originalAtmosphere.Color, Decay = originalAtmosphere.Decay}
-	if stage == 2 then
-		air.Color, air.Decay = Color3.fromRGB(218, 233, 250), Color3.fromRGB(170, 194, 225)
-	elseif stage == 3 then
-		lighting.ClockTime = 17
-        lighting.Brightness, lighting.ExposureCompensation = 1.8, -0.08
-		lighting.Ambient, lighting.OutdoorAmbient = Color3.fromRGB(83, 108, 155), Color3.fromRGB(105, 133, 182)
-		lighting.FogColor = Color3.fromRGB(85, 124, 190)
-		air.Density, air.Haze = 0.12, 0.15
-		air.Color, air.Decay = Color3.fromRGB(127, 166, 225), Color3.fromRGB(60, 89, 150)
-	elseif stage == 4 then
-		lighting.ClockTime, lighting.Brightness, lighting.ExposureCompensation = 0, 1.1, -0.1
-		lighting.Ambient, lighting.OutdoorAmbient = Color3.fromRGB(65, 75, 105), Color3.fromRGB(90, 105, 140)
-		lighting.FogColor = Color3.fromRGB(25, 35, 65)
-		air.Density, air.Haze = 0, 0
-	end
-	-- Strong region identities, while the existing 100km Space switch stays intact.
-    local profiles={
-        [3]={Clock=13,Ambient={142,191,222},Color={193,229,255},Decay={97,149,195},Density=.17,Haze=.5},
-        [4]={Clock=18.4,Ambient={116,77,167},Color={165,131,233},Decay={66,48,127},Density=.1,Haze=.3},
-        [5]={Clock=19.6,Ambient={62,99,140},Color={77,126,177},Decay={35,48,80},Density=.2,Haze=1.2},
-        [6]={Clock=18.1,Ambient={166,103,92},Color={243,153,101},Decay={105,60,111},Density=.07,Haze=.2},
-        [7]={Clock=22,Ambient={63,110,143},Color={79,151,192},Decay={28,45,82},Density=.025,Haze=0},
-    }
-    local profile=profiles[biomeIndex]
-    if profile then
-        lighting.ClockTime=profile.Clock;lighting.Ambient=Color3.fromRGB(table.unpack(profile.Ambient));lighting.OutdoorAmbient=lighting.Ambient
-        lighting.FogColor=Color3.fromRGB(table.unpack(profile.Color))
-        air.Color=lighting.FogColor;air.Decay=Color3.fromRGB(table.unpack(profile.Decay));air.Density=profile.Density;air.Haze=profile.Haze
-    end
+	switchPreviewSky(stage == 4)
+ -- Sky textures define the background. Altitude does not tint, darken or fog them.
+ local lighting={ClockTime=Presentation.ClockTime,Brightness=Config.Ground.Brightness,
+  ExposureCompensation=Config.Ground.Exposure,Ambient=Color3.fromRGB(table.unpack(Config.Ground.Ambient)),
+  OutdoorAmbient=Color3.fromRGB(table.unpack(Config.Ground.Outdoor)),
+  FogColor=Color3.fromRGB(210,230,250),FogStart=100000000,FogEnd=1000000000}
+ local air={Density=0,Haze=0,Glare=0,Color=originalAtmosphere.Color,Decay=originalAtmosphere.Decay}
 	if immediate then
 		for property, value in lighting do Lighting[property] = value end
 		for property, value in air do atmosphere[property] = value end
@@ -161,7 +138,7 @@ function Sky.Start()
 	local sky = Instance.new("Sky")
 	sky.Name, sky.StarCount, sky.Parent = "FlightSky", 0, Lighting
 	activeSky = sky
-	if preview then
+	if preview and not Preview.SkyBands then
 		-- Replication may deliver the existing Studio-owned Sky assets after Main starts.
 		for _, name in {"SkyGround", "SkySpace"} do
 			task.spawn(function()
@@ -208,8 +185,12 @@ function Sky.Start()
                 local definitions=Preview.Biomes or {}
                 while biome<#definitions and altitude>=definitions[biome+1].Min do biome+=1 end
                 while biome>1 and altitude<definitions[biome].Min-Preview.Hysteresis do biome-=1 end
-                if stage ~= previewStage or biome ~= biomeIndex then
-                 applyPreview(stage, false, biome)
+                local band = skyBandIndex
+                local bands = Preview.SkyBands or {}
+                while band < #bands and altitude >= bands[band+1].Min do band += 1 end
+                while band > 1 and altitude < bands[band].Min - Preview.Hysteresis do band -= 1 end
+                if stage ~= previewStage or biome ~= biomeIndex or band ~= skyBandIndex then
+                 applyPreview(stage, false, biome, band)
                  if label and definitions[biome] then label.Text=definitions[biome].Name.."\n구름 경계를 통과했습니다!";label.Visible=true;noticeUntil=os.clock()+2.5 end
                 end
 			end

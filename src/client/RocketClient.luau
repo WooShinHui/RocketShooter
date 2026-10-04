@@ -46,6 +46,29 @@ function Controller.Start(remotes,objective)
  end
  local diveButton=choice("Dive",-88,"급강하 [F]",Color3.fromRGB(36,135,215))
  local explodeButton=choice("Explode",88,"폭파 귀환 [E]",Color3.fromRGB(220,73,80))
+ -- Keep both flight actions on the right, above the mobile jump area.
+ local function layoutActions()
+  local camera=workspace.CurrentCamera;if not camera then return end
+  local compact=camera.ViewportSize.Y<500
+  local width,height=compact and 136 or 160,compact and 44 or 52
+  local gap=compact and 8 or 12
+  for index,button in {diveButton,explodeButton} do
+   button.AnchorPoint=Vector2.new(1,.5)
+   button.Position=UDim2.new(1,-20,compact and .55 or .62,(index-1.5)*(height+gap))
+   button.Size=UDim2.fromOffset(width,height)
+   button.TextSize=compact and 17 or 20
+  end
+ end
+ local actionViewportConnection
+ local function bindActionViewport()
+  if actionViewportConnection then actionViewportConnection:Disconnect() end
+  local camera=workspace.CurrentCamera
+  if camera then actionViewportConnection=camera:GetPropertyChangedSignal("ViewportSize"):Connect(layoutActions) end
+  layoutActions()
+ end
+ workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(bindActionViewport)
+ bindActionViewport()
+
  local eventHint=Instance.new("TextLabel");eventHint.Name="GoldRingEventNotice";eventHint.AnchorPoint=Vector2.new(.5,0);eventHint.Position=UDim2.new(.5,0,0,54);eventHint.Size=UDim2.new(.8,0,0,28);eventHint.BackgroundTransparency=1;eventHint.TextColor3=Color3.fromRGB(255,220,62);eventHint.TextStrokeTransparency=.15;eventHint.Font=Enum.Font.GothamBlack;eventHint.TextSize=22;eventHint.Parent=gui
  local targetHint=Instance.new("TextLabel");targetHint.Name="TrophyTarget";targetHint.AnchorPoint=Vector2.new(.5,0);targetHint.Position=UDim2.new(.5,0,0,88);targetHint.Size=UDim2.new(.9,0,0,46);targetHint.BackgroundTransparency=1;targetHint.TextColor3=Color3.fromRGB(255,229,91);targetHint.TextStrokeTransparency=.1;targetHint.Font=Enum.Font.GothamBold;targetHint.TextSize=22;targetHint.TextWrapped=true;targetHint.Visible=false;targetHint.Parent=gui
  local function act(action)

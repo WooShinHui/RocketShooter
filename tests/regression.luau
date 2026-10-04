@@ -78,6 +78,7 @@ local function environment()
 	env.Enum.KeyCode={A="A",D="D",Left="Left",Right="Right"}
 	env.Enum.Material.SmoothPlastic = "SmoothPlastic"
 	env.Enum.SurfaceType = {Smooth = "Smooth"}
+ env.Enum.ModelStreamingMode={Persistent="Persistent"}
 	env.collection = {
 		AddTag = function(_, instance, tag) instance._tags = instance._tags or {}; instance._tags[tag] = true end,
 		HasTag = function(_, instance, tag) return instance._tags ~= nil and instance._tags[tag] == true end,
@@ -773,7 +774,7 @@ do
 	check(old.destroyed and env.lighting.FlightSky and env.lighting.ClockTime==14,"bright sky applies immediately without character or remote availability")
 	local p=env.players.LocalPlayer; p.Character=env.character(); p.Character.HumanoidRootPart.Position=env.Vector3.new(0,5000,0)
 	p:SetAttribute("FlightState","Flying"); env.step(0.1)
-	check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE" and env.lighting.FlightSky.StarCount==0,"5000m gives high-altitude appearance without changing discovery rewards")
+	check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE" and env.lighting:GetAttribute("AltitudeSky")=="Skybox HD","5000m uses the requested purple regional sky")
 	sky.SetRegion({Region="Clouds",FirstEntry=true,FirstDiscovery=true})
 	check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE" and p.PlayerGui.DiscoveryGui.Notice.Visible,"server discovery notice does not overwrite altitude appearance")
 	env.step(CloudConfig.NoticeSeconds+.1)
@@ -781,17 +782,17 @@ do
 	sky.SetRegion({Region="Ground",FirstEntry=false})
 	check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE","server region event does not override local high layer")
     p.Character.HumanoidRootPart.Position=env.Vector3.new(0,100050,0);env.step(.1)
-    check(env.lighting.FlightSky.StarCount==3000 and env.lighting.ClockTime==0,"100km enters space with night and stars")
+    check(env.lighting.FlightSky.StarCount==3000 and env.lighting.ClockTime==14,"100km switches space texture without darkening the scene")
     p.Character.HumanoidRootPart.Position=env.Vector3.new(0,99996,0);env.step(.1)
     check(env.lighting:GetAttribute("AltitudeLayer")=="SPACE","boundary jitter stays in space within hysteresis")
     p.Character.HumanoidRootPart.Position=env.Vector3.new(0,99990,0);env.step(.1)
     check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE","descent leaves space below hysteresis threshold")
     p.Character.HumanoidRootPart.Position=env.Vector3.new(0,300,0);env.step(.1)
-    check(env.lighting:GetAttribute("AltitudeLayer")=="CLOUD" and env.lighting.Brightness==CloudConfig.Clouds.Brightness,"300m restores bright cloud layer")
+    check(env.lighting:GetAttribute("AltitudeLayer")=="CLOUD" and env.lighting.Brightness==CloudConfig.Ground.Brightness,"300m retains neutral lighting with the cloud layer")
     p.Character.HumanoidRootPart.Position=env.Vector3.new(0,100,0);env.step(.1)
     check(env.lighting:GetAttribute("AltitudeLayer")=="GROUND" and env.lighting.ClockTime==14,"low descent restores daytime")
 	p.CharacterRemoving:Fire(p.Character)
-	check(env.lighting.FlightSky.StarCount==0,"character removal restores bright sky immediately")
+	check(env.lighting:GetAttribute("AltitudeSky")=="Realistic Sky","character removal restores mountain sky immediately")
 	local audio=newAudio(env); audio.Play("Launch"); audio.Play("Result"); audio.Play("Unknown")
 	check(#env.soundService:GetChildren()==2 and env.soundService.FlightAudio_Launch.played,"known sounds use bounded reusable voices; unknown cues ignored")
 	env.soundService.FlightAudio_Launch.IsLoaded=false; env.soundService.FlightAudio_Launch.played=false

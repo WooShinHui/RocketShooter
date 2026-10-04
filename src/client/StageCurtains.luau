@@ -4,6 +4,7 @@ function Curtains.Start()
  if started then return end;started=true
  local player=game:GetService("Players").LocalPlayer
  local config=require(game:GetService("ReplicatedStorage"):WaitForChild("CloudConfig"))
+ if config.HeightPresentation.CloudCurtainsEnabled==false then return end
  local definitions=config.HeightPresentation.Biomes;local active={}
  local folder=Instance.new("Folder");folder.Name="StageCloudCurtains";folder.Parent=workspace
  local function make(index)

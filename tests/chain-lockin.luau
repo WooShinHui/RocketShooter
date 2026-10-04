@@ -20,3 +20,12 @@ do
  check(award==40 and emitted==1 and run.Count==1,"server awards actual swept row hit once")
  check(c.Sample(run,V.new(0,0,-10),V.new(0,0,10),function()emitted+=1 end)==0 and emitted==1,"repeated crossing cannot duplicate destruction rewards")
 end
+
+do
+ local env=environment();local V=env.Vector3;V.one=V.new(1,1,1);local course=newBreakCourse(env)
+ local row={Frame=env.CFrame.new(),Size=V.new(100,64,8),Position=V.zero,Score=60,Index=3,Dive=true,Model={GetChildren=function()return {}end}}
+ local player={Character={}};local run={Rows={row},Count=0,Id=9,Tier=course.Tier(30),Player=player};local payload
+ local award=course.Sample(run,V.new(0,0,20),V.new(0,0,-20),function(data)payload=data end)
+ check(award==60 and payload.CourseHit and payload.Index==3 and payload.Award==60,"descending brick hit emits the same chain notice and actual award as ascent")
+ check(payload.RunId==9 and payload.Character==player.Character,"descent notice retains the run and character identity")
+end

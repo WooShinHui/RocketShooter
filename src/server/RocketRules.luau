@@ -6,6 +6,15 @@ function Rules.DiveSpeed(current,target,gravity,age,dt)
  else local ramp=math.clamp((age-1.2)/2,0,1);acceleration=gravity+math.max(0,target*.65-gravity)*ramp*ramp end
  return math.min(target,current+acceleration*math.clamp(dt,0,.1))
 end
+function Rules.DiveTarget(height,boost,current,normalLimit,boostLimit)
+ local limit=boost and boostLimit or normalLimit
+ local desired=math.min(limit,math.max(boost and 180 or 90,height/(boost and 7 or 10)))
+ -- Releasing acceleration retains momentum, always within the boosted ceiling.
+ return math.max(math.min(current or 0,boostLimit),desired)
+end
+function Rules.FlightTimeout(height,burn,normalLimit)
+ return math.max(110,burn+height/normalLimit+35)
+end
 function Rules.Input(value)
  if typeof(value)~="Vector2" or value.X~=value.X or value.Y~=value.Y or math.abs(value.X)>1 or math.abs(value.Y)>1 or value.Magnitude>1.05 then return nil end
  return value

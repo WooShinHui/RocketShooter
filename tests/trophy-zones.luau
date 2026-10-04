@@ -19,6 +19,8 @@ do
  check(collision==false and body.CollisionGroup=="RocketAscentBody","rockets pass upwards through trophy decks instead of hitting a ceiling")
  zones.Restore(saved);check(body.CollisionGroup=="CustomRig","dive and cleanup restore the rig collision settings for landing")
  local deck=env.workspace.RocketTrophyZones.TrophyLayer1.LandingDeck
+ check(deck.Parent.ModelStreamingMode=="Persistent","trophy destination stays replicated independently of altitude streaming")
+ check(deck.ZoneSign.MaxDistance==450 and deck.ZoneSign.AlwaysOnTop==false,"trophy signs have a readable approach distance while preserving cloud occlusion")
  check(zones.Resolve(deck,V.new(120,90,20),V.new(0,1,0)).Reward==1,"real registered top-face contact grants the first trophy zone reward")
  check(zones.Resolve(deck,V.new(120,90,20),V.new(1,0,0))==nil,"side contact does not count as landing")
  check(zones.Resolve(deck,V.new(151,90,20),V.new(0,1,0))==nil,"missing deck footprint cannot award trophies")

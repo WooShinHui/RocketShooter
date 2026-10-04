@@ -13,7 +13,7 @@ function Zones.Start(launchPosition,ground)
  folder=Instance.new("Folder");folder.Name="RocketTrophyZones";folder.Parent=workspace
  for i=1,Config.Count do
   local layer=Config.Layer(i);local center=origin+Vector3.new(layer.Offset,layer.Height,0)
-  local model=Instance.new("Model");model.Name="TrophyLayer"..i;model.Parent=folder
+  local model=Instance.new("Model");model.Name="TrophyLayer"..i;model.ModelStreamingMode=Enum.ModelStreamingMode.Persistent;model.Parent=folder
   local deck=part("LandingDeck",Vector3.new(Config.Width,4,Config.Depth),center-Vector3.new(0,2,0),Color3.fromRGB(48,124,131),true,model)
   deck:SetAttribute("TrophyZoneIndex",i);deck:SetAttribute("TrophyReward",layer.Reward);registered[deck]=layer
   deck.CollisionGroup="RocketTrophyDeck"
@@ -24,7 +24,7 @@ function Zones.Start(launchPosition,ground)
   part("TrophyStem",Vector3.new(2,5,2),base+Vector3.new(0,3,0),Color3.fromRGB(255,215,64),false,model)
   local cup=part("TrophyCup",Vector3.new(8,6,7),base+Vector3.new(0,7,0),Color3.fromRGB(255,215,64),false,model);cup.Shape=Enum.PartType.Ball
   for _,side in {-1,1}do local handle=part("TrophyHandle",Vector3.new(3,5,2),base+Vector3.new(side*5,7,0),Color3.fromRGB(255,215,64),false,model);handle.Shape=Enum.PartType.Ball end
-  local gui=Instance.new("BillboardGui");gui.Name="ZoneSign";gui.Size=UDim2.fromOffset(330,100);gui.StudsOffset=Vector3.new(0,16,0);gui.MaxDistance=105;gui.AlwaysOnTop=false;gui.Parent=deck
+  local gui=Instance.new("BillboardGui");gui.Name="ZoneSign";gui.Size=UDim2.fromOffset(330,100);gui.StudsOffset=Vector3.new(0,16,0);gui.MaxDistance=450;gui.AlwaysOnTop=false;gui.Parent=deck
   local label=Instance.new("TextLabel");label.Size=UDim2.fromScale(1,1);label.BackgroundTransparency=1;label.BackgroundColor3=Color3.fromRGB(15,55,64);label.TextColor3=Color3.fromRGB(255,229,91);label.Font=Enum.Font.GothamBlack;label.TextSize=20;label.TextStrokeTransparency=.25;label.TextWrapped=true;label.Text=string.format("🏆 트로피 존 %d · %dm\n+%d 트로피",i,layer.Height,layer.Reward);label.Parent=gui
  end
 end

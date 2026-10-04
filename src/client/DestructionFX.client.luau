@@ -94,6 +94,20 @@ for kind in profiles do
 	pools[kind] = {Impact = newVoice("Destruction" .. kind .. "Impact", cues.Impact),
 		Chain = chains, Next = 0, Finish = newVoice("Destruction" .. kind .. "Finish", cues.Finish)}
 end
+-- Two bounded accent voices, triggered only by validated non-brick collisions.
+local waxConfig=presentation.WaxCrack
+local waxVoices={};local waxNext=0;local lastWax=-math.huge
+if waxConfig then
+ for index,cue in waxConfig.Cues do waxVoices[index]=newVoice("DestructionWaxCrack"..index,cue) end
+end
+-- Soft Slime objects share nine bounded voices, rotating the three requested wax recordings.
+local objectConfig=presentation.ObjectCrack
+local objectVoices={};local objectNext=0;local lastObjectAudio=-math.huge
+if objectConfig then
+ for index=1,9 do
+  objectVoices[index]=newVoice("DestructionObjectWax"..index,objectConfig.Cues[(index-1)%#objectConfig.Cues+1])
+ end
+end
 local preloadThread = task.spawn(function()
 	local ok, reason = pcall(function()
 		ContentProvider:PreloadAsync(soundList, function(id, status)
@@ -327,9 +341,9 @@ local eventConnection = event.OnClientEvent:Connect(function(data)
 		or typeof(data.Size) ~= "Vector3" or typeof(data.Color) ~= "Color3" then return end
 	if data.Character and data.Character~=player.Character then return end
     if data.RunId and data.RunId~=player:GetAttribute("SkyRunSerial") then return end
-    if data.CourseHit or data.Pierce then
+    if data.CourseHit or data.Pierce or data.PartyChain or (not data.PartyMember and type(data.Award)=="number" and data.Award>0) then
         noticeSerial+=1;local serial=noticeSerial;chainLabel.Visible=true
-        chainLabel.Text=if data.Pierce then "적을 뚫었습니다! +"..tostring(data.Award) else tostring(data.Index).." 연쇄!"
+        chainLabel.Text=if data.Pierce then "적을 뚫었습니다! +"..tostring(data.Award) elseif data.PartyChain then tostring(data.PartyChain).." 연쇄! +"..tostring(data.ChainAward) elseif data.CourseHit then tostring(data.Index).." 연쇄! +"..tostring(data.Award) else "파괴 +"..tostring(data.Award)
         task.delay(.8,function() if serial==noticeSerial then chainLabel.Visible=false end end)
     end
     local now = os.clock()
@@ -343,7 +357,12 @@ local eventConnection = event.OnClientEvent:Connect(function(data)
 	impactLayers(data, first, intensity, false)
 	spawnFragments(data, first, intensity)
 	-- Fragment events can arrive every18ms. Keep audible attacks60ms apart and rotate full pop tails.
-	if now-(pool.LastAudio or -math.huge)>=.06 then
+	if kind=="Slime" and not data.Pierce and objectConfig then
+  if now-lastObjectAudio>=objectConfig.Cooldown then
+   lastObjectAudio=now;objectNext=objectNext%#objectVoices+1
+   playCue(objectVoices[objectNext],math.min(intensity,1.2),{Volume=1,Speed=1})
+  end
+ elseif now-(pool.LastAudio or -math.huge)>=.06 then
 		pool.LastAudio=now
 		if first and kind~="Slime"then playCue(pool.Impact,1,profile)
 		else
@@ -351,6 +370,11 @@ local eventConnection = event.OnClientEvent:Connect(function(data)
 			playCue(pool.Chain[pool.Next],if kind=="Slime"and first then 1.3 else intensity,profile)
 		end
 	end
+ -- Preserve the previous enemy impact and wax accent; object hits use wax only.
+ if waxConfig and data.Pierce and now-lastWax>=waxConfig.Cooldown then
+  waxNext=waxNext%#waxVoices+1;lastWax=now
+  playCue(waxVoices[waxNext],if data.Pierce then 1.15 else .9,{Volume=1,Speed=1})
+ end
 	startMotion()
 	-- Exactly one cancellable reservation; leaving flight cancels it as well.
 	finishThread = task.delay(BURST_GAP, function()
@@ -358,7 +382,7 @@ local eventConnection = event.OnClientEvent:Connect(function(data)
 		if player:GetAttribute("FlightState") ~= "Flying" then return end
 		burstHits = 0
 		impactLayers(data, false, intensity, true)
-		playCue(pool.Finish, 1, profile)
+		if kind~="Slime" or data.Pierce or not objectConfig then playCue(pool.Finish, 1, profile) end
 		startMotion()
 	end)
 end)

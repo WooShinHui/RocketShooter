@@ -13,6 +13,12 @@ local bands={
  {Min=3630,Max=7200,Count=36,Reach=1500,Spread=220,Score=250,Names={"별사탕 말랑이","토끼 말랑이","브레인롯"},Color=Color3.fromRGB(185,127,255)},
  {Min=7230,Max=16000,Count=42,Reach=1900,Spread=240,Score=250,Names={"토끼 말랑이","왁뿌볼","67 밈"},Color=Color3.fromRGB(99,246,255)},
 }
+-- A bounded moving window, with no maximum altitude section.
+function Life.StreamSectionRange(altitude,verticalSpeed)
+ local section=math.floor((altitude-16000)/2000)
+ local ahead=math.clamp(math.ceil((verticalSpeed or 0)*.5/2000),-8,8)
+ return math.max(0,math.min(section,section+ahead)-1),math.max(0,math.max(section,section+ahead)+1)
+end
 local function part(m,name,pos,size,color,shape)
  local p=Instance.new("Part");p.Name=name;p.Size=size;p.Position=pos;p.Color=color;p.Shape=shape or Enum.PartType.Ball
  p.Material=Enum.Material.SmoothPlastic;p.Anchored=true;p.CanCollide=false;p.CanTouch=false;p.CanQuery=false;p.Parent=m;return p
@@ -45,13 +51,13 @@ function Life.Start(frame)
    local f=if lane==0 then 25+y*.025 elseif lane==1 then 35+y*.08 else 50+y*.13
    if band.AnchorForward then f=band.AnchorForward+(lane-1)*110 end
    local side=if i%2==0 then 1 else -1
-   local pos=at(f+random:NextNumber(-12,12),side*(if enemy then 175 else 32)+random:NextNumber(-12,12),y)
+   local pos=at(f+random:NextNumber(-12,12),(band.AnchorRight or 0)+side*(if enemy then 175 else 32)+random:NextNumber(-12,12),y)
    if nearLaunch then pos=at(random:NextNumber(10,80),random:NextNumber(-45,45),y) end
    if nearLaunch then name="만두 말랑이" end
    local radius=if enemy then 8 else random:NextNumber(17,22)
    local color=if enemy then Color3.fromRGB(55,25,40) elseif string.find(name,"왁뿌") then Color3.fromRGB(240,97,107) elseif string.find(name,"페비") then Color3.fromRGB(255,175,73) else band.Color
    local m=Instance.new("Model");m.Name=name;m:SetAttribute("SkyKind",if enemy then "Enemy" else "Bonus");m:SetAttribute("AltitudeBand",b)
-   m:SetAttribute("HitRadius",radius);m:SetAttribute("HazardRadius",if enemy then radius else nil);m:SetAttribute("Score",band.Score);m:SetAttribute("TargetId",b*1000+i)
+   m:SetAttribute("HitRadius",radius);m:SetAttribute("HazardRadius",if enemy then radius else nil);m:SetAttribute("Score",band.Score);m:SetAttribute("TargetId",if b>=8 then "Altitude:"..tostring(b-8)..":"..i else b*1000+i)
    m:SetAttribute("MinAltitude",band.Min)
    m.PrimaryPart=part(m,"Body",pos,Vector3.one*radius*2,color)
    for _,s in {-1,1} do
@@ -100,7 +106,7 @@ function Life.Start(frame)
    local lane=(i-1)%3;local f=if lane==0 then 30+y*.025 elseif lane==1 then 35+y*.08 else 50+y*.13
    if band.AnchorForward then f=band.AnchorForward+(lane-1)*110 end
    local pos=at(f+95,(-1)^i*115,y)
-   local m=Instance.new("Model");m.Name="하늘섬";m:SetAttribute("SkyKind","Island");m:SetAttribute("AltitudeBand",b);m:SetAttribute("HitRadius",21);m:SetAttribute("HitBoxSize",Vector3.new(120,64,90));m:SetAttribute("Score",band.Score*4);m:SetAttribute("TargetId",b*1000+100+i)
+   local m=Instance.new("Model");m.Name="하늘섬";m:SetAttribute("SkyKind","Island");m:SetAttribute("AltitudeBand",b);m:SetAttribute("HitRadius",21);m:SetAttribute("HitBoxSize",Vector3.new(120,64,90));m:SetAttribute("Score",band.Score*4);m:SetAttribute("TargetId",if b>=8 then "AltitudeIsland:"..tostring(b-8)..":"..i else b*1000+100+i)
    m.PrimaryPart=part(m,"Body",pos,Vector3.new(120,64,90),Color3.fromRGB(111,111,123),Enum.PartType.Block)
    m.PrimaryPart.Transparency=1;m.PrimaryPart:SetAttribute("CollisionProxy",true)
    local definition=biomes[1]
@@ -176,17 +182,17 @@ function Life.Start(frame)
    if root then
     table.insert(roots,root)
     if p:GetAttribute("FlightState")=="Flying" and root.Position.Y-origin.Y>=14000 then
-     local section=math.floor((root.Position.Y-origin.Y-16000)/2000)
-     for index=math.max(0,section-1),math.min(71,section+1) do
+     local first,last=Life.StreamSectionRange(root.Position.Y-origin.Y,root.AssemblyLinearVelocity.Y)
+     for index=first,last do
       local center=17000+index*2000;local estimate=math.clamp((center-root.Position.Y)/math.max(100,math.abs(root.AssemblyLinearVelocity.Y)),-2,6)
-      wanted[index]=(root.Position-origin):Dot(frame.Forward)+root.AssemblyLinearVelocity:Dot(frame.Forward)*estimate
+      wanted[index]={Forward=(root.Position-origin):Dot(frame.Forward)+root.AssemblyLinearVelocity:Dot(frame.Forward)*estimate,Right=(root.Position-origin):Dot(frame.Right)+root.AssemblyLinearVelocity:Dot(frame.Right)*estimate}
      end
     end
    end
   end
   for index,forward in wanted do if not streamed[index] then
    local band={Min=16030+index*2000,Max=17980+index*2000,Count=18,Reach=2000,Spread=240,Score=250,
-    Names={"토끼 말랑이","퉁퉁퉁 사후르","별사탕 말랑이","트랄랄레로 트랄랄라","버섯 말랑이","발레리나 카푸치나"},Color=Color3.fromRGB(164,223,255),AnchorForward=forward}
+    Names={"토끼 말랑이","퉁퉁퉁 사후르","별사탕 말랑이","트랄랄레로 트랄랄라","버섯 말랑이","발레리나 카푸치나"},Color=Color3.fromRGB(164,223,255),AnchorForward=forward.Forward,AnchorRight=forward.Right}
    spawnBand(8+index,band);streamed[index]=true
   end end
   -- Extend the existing grass datum under long flights; no new launch station or field mechanic.
@@ -270,6 +276,12 @@ function Life.Collect(player,from,to,visited)
   if m:GetAttribute("PartyGroup") and id and not visited[id] and (m:GetAttribute("AvailableAt") or 0)<=now
    and (m:GetAttribute("PartyEndsAt") or 0)>now and touches(m,from,to,m:GetAttribute("HitRadius") or 18) then partyHit=true;break end
  end
+ local partyCount,partyAward=0,0
+ if partyHit then for _,m in folder:GetChildren()do
+  local id=m:GetAttribute("TargetId")
+  if m:GetAttribute("PartyGroup") and id and not visited[id] and (m:GetAttribute("AvailableAt")or 0)<=now and (m:GetAttribute("PartyEndsAt")or 0)>now then partyCount+=1;partyAward+=m:GetAttribute("Score")or 0 end
+ end end
+ local partyNotice=false
  for _,m in folder:GetChildren() do
   local kind=m:GetAttribute("SkyKind");local id=m:GetAttribute("TargetId");local r=m:GetAttribute("HitRadius")
   if (kind~="Bonus" and kind~="Island") or not id or visited[id] or (m:GetAttribute("AvailableAt") or 0)>now then continue end
@@ -278,10 +290,12 @@ function Life.Collect(player,from,to,visited)
   local cells={};for _,p in m:GetChildren() do if p:IsA("BasePart") and not p:GetAttribute("CollisionProxy") then table.insert(cells,{Position=p.Position,Size=p.Size,Color=p.Color}) end end
   hide(m,true);local running=(player:GetAttribute("DestructionRunScore") or 0)+score
   local character=player.Character;local runToken=visited
+  local announceParty=partyHit and m:GetAttribute("PartyGroup") and not partyNotice
+  if announceParty then partyNotice=true end
   for i,cell in cells do
    task.delay((i-1)*.018,function()
     if player.Parent==Players and player.Character==character and player:GetAttribute("FlightState")=="Flying" and player:GetAttribute("SkyRunSerial")==runToken.serial then
-     remote:FireClient(player,{Position=cell.Position,Size=cell.Size,Color=cell.Color,MaterialTag=if kind=="Island" then "FloatingIsland" else "Slime",Index=i,RunScore=running,Award=if i==1 then award else 0})
+     remote:FireClient(player,{Position=cell.Position,Size=cell.Size,Color=cell.Color,MaterialTag=if kind=="Island" then "FloatingIsland" else "Slime",Index=i,RunScore=running,Award=if i==1 then award else 0,PartyMember=partyHit and m:GetAttribute("PartyGroup")~=nil,PartyChain=if i==1 and announceParty then partyCount else nil,ChainAward=if i==1 and announceParty then partyAward else nil})
     end
    end)
   end

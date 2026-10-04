@@ -9,6 +9,23 @@ function Motion.Create(vertical,gravity)
  return {LaunchSpeed=vertical,Ignition=.65,Peak=peak,PeakTime=duration/2,Burn=duration,Gravity=gravity,
   Idle=height/duration*30*ignitionU^2*(1-ignitionU)^2,BurnHeight=height,ApexTime=duration,TargetHeight=height}
 end
+-- Rocket-only progression bypasses the legacy cannon speed clamp.
+-- Logarithmic growth beyond the former ceiling prevents exponential rebirth power
+-- from producing astronomical coordinates while still increasing reachable height.
+function Motion.CreateRocket(vertical,gravity)
+ local p=Motion.Create(vertical,gravity)
+ local formerHeight=7500^2/(2*gravity)
+ if p.TargetHeight>formerHeight then
+  local height=formerHeight*(1+math.log(p.TargetHeight/formerHeight))
+  local duration=math.max(p.Burn,height*1.875/25000)
+  local ignitionU=p.Ignition/duration
+  p.LaunchSpeed=math.sqrt(2*gravity*height)
+  p.TargetHeight=height;p.BurnHeight=height;p.Burn=duration;p.ApexTime=duration
+  p.PeakTime=duration/2;p.Peak=height*1.875/duration
+  p.Idle=height/duration*30*ignitionU^2*(1-ignitionU)^2
+ end
+ return p
+end
 function Motion.Sample(p,time)
  local t=math.max(0,time);local velocity,height,throttle,phase
  if t<p.Burn then

@@ -49,20 +49,20 @@ do
 	end
 	local sky = newSkyController(env); sky.Start()
 	check(legacy.destroyed and env.lighting:GetAttribute("AltitudeLayer") == "GROUND", "preview starts Ground even when Lighting initially contains Space")
-	check(env.lighting.FlightSky:GetAttribute("Template") ~= "Space" and env.lighting.FlightSky.StarCount == 0, "missing Ground asset cannot fall back to legacy Space")
+	check(env.lighting:GetAttribute("AltitudeSky") == "Realistic Sky", "source catalog starts with mountains without legacy templates")
 	local ground = env.Instance.new("Sky"); ground.Name, ground.Parent = "SkyGround", env.rs
 	function ground:Clone()
 		local clone = env.Instance.new("Sky"); clone:SetAttribute("Template", "Ground"); return clone
 	end
 	for _, job in env.queued do job[1]() end
-	check(env.lighting.FlightSky:GetAttribute("Template") == "Ground", "late Ground template replaces safe fallback")
+	check(env.lighting:GetAttribute("AltitudeSky") == "Realistic Sky", "late legacy Ground template cannot override selected mountain sky")
 	player:SetAttribute("FlightState", "Flying")
 	local function altitude(y) player.Character.HumanoidRootPart.Position = env.Vector3.new(0, y, 0); env.step(0.1) end
 	altitude(270); check(env.lighting:GetAttribute("AltitudeLayer") == "CLOUD", "ascending reaches the raised first cloud boundary")
 	altitude(3600); check(env.lighting:GetAttribute("AltitudeLayer") == "HIGH_ALTITUDE", "ascending reaches High Altitude")
-	altitude(100050); check(env.lighting:GetAttribute("AltitudeLayer") == "SPACE" and env.lighting.FlightSky:GetAttribute("Template") == "Space", "Space activates only at its flight altitude")
+	altitude(100050); check(env.lighting:GetAttribute("AltitudeLayer") == "SPACE" and env.lighting:GetAttribute("AltitudeSky") == "Space Sky HD", "HD space sky activates at 100km")
 	altitude(99996); check(env.lighting:GetAttribute("AltitudeLayer") == "SPACE", "descending retains existing hysteresis")
-	altitude(99990); check(env.lighting:GetAttribute("AltitudeLayer") == "HIGH_ALTITUDE" and env.lighting.FlightSky:GetAttribute("Template") == "Ground", "descending exits Space and restores Ground sky asset")
+	altitude(99990); check(env.lighting:GetAttribute("AltitudeLayer") == "HIGH_ALTITUDE" and env.lighting:GetAttribute("AltitudeSky") == "Sky", "descending below HD restores first space sky")
 	player:SetAttribute("FlightState", "Result"); signals.FlightState:Fire()
 	check(env.lighting:GetAttribute("AltitudeLayer") == "GROUND", "result/return resets Ground immediately")
 end

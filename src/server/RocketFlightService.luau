@@ -81,9 +81,9 @@ local function launch(player)
  local localPosition=pad.CFrame:PointToObjectSpace(root.Position)
  if math.abs(localPosition.X)>pad.Size.X/2+1 or math.abs(localPosition.Z)>pad.Size.Z/2+1 or localPosition.Y<0 or localPosition.Y>4.5 then return end
  local power=(Data.GetLevel(player,"PowerLvl")or 1)+Data.GetTrainingPower(player)
- local _,vertical=Balance.LaunchComponents(power,math.sin(math.rad(65)),1)
+ local vertical=Balance.VerticalPower(power)*math.sin(math.rad(65))
  serial+=1;cooldowns[player]=os.clock()
- local profile=Motion.Create(vertical,workspace.Gravity)
+ local profile=Motion.CreateRocket(vertical,workspace.Gravity)
  local run={motion=profile,player=player,character=character,root=root,humanoid=hum,id=serial,state="Flying",connections={},score=0,xp=0,pierced=0,
   peak=root.Position.Y,lastPosition=root.Position,lastSample=os.clock(),launchedAt=os.clock(),lastXP=os.clock(),axis=Vector2.zero,lastAxis=-math.huge,lastPacket=-math.huge,
   speedBudget=math.max(profile.LaunchSpeed,profile.Peak),power=power,extraScore=0,visited={serial=serial},returnFrame=pad.CFrame*CFrame.new(Config.ReturnOffset,hum.HipHeight+root.Size.Y/2+1.6,0)}
@@ -156,7 +156,7 @@ function Service.Start(cannon)
  remotes.ReturnToSpawn.OnServerEvent:Connect(function(p,id,action)
   local run=runs[p];if not run or run.id~=id or run.character~=p.Character or run.state~="Flying" then return end
   if action=="Explode" and run.diving then finish(run,"Exploded",true)
-  elseif action=="Dive" and run.diving then run.diveBoost=true;run.speedBudget=math.max(run.speedBudget,run.motion.TargetHeight/7+200)
+  elseif action=="Dive" and run.diving then run.diveBoost=true;run.speedBudget=math.max(run.speedBudget,Config.DiveBoostMaxSpeed+200)
   elseif action=="DiveStop" and run.diving then run.diveBoost=false
   elseif action==nil then finish(run,"Cancelled",false) end
  end)
@@ -172,7 +172,7 @@ function Service.Start(cannon)
     end
     local v=run.root.AssemblyLinearVelocity;local vy
     if run.diving then
-     local target=math.max(run.diveSpeed or 0,run.diveBoost and 180 or 90,run.motion.TargetHeight/(run.diveBoost and 7 or 10))
+     local target=Rules.DiveTarget(run.motion.TargetHeight,run.diveBoost,run.diveSpeed,Config.DiveMaxSpeed,Config.DiveBoostMaxSpeed)
      run.diveSpeed=Rules.DiveSpeed(run.diveSpeed,target,workspace.Gravity*(run.diveBoost and 1.6 or 1),age-run.diveAt,dt);vy=-run.diveSpeed
     else vy=Motion.Sample(run.motion,t+dt*.5) end
     run.root.AssemblyLinearVelocity=Vector3.new(v.X,vy+workspace.Gravity*dt*.5,v.Z)
@@ -202,7 +202,7 @@ function Service.Start(cannon)
    run.speedBudget+=workspace.Gravity*sampleDt
    if not validVector(position)or not validVector(velocity)or velocity.Magnitude>run.speedBudget+100 or (position-run.lastPosition).Magnitude>run.speedBudget*math.max(sampleDt,.1)+32 then finish(run,"InvalidPhysics",false);continue end
    run.peak=math.max(run.peak,position.Y)
-      if now-run.launchedAt>110 then finish(run,"Timeout",true);continue end
+      if now-run.launchedAt>Rules.FlightTimeout(run.motion.TargetHeight,run.motion.Burn,Config.DiveMaxSpeed) then finish(run,"Timeout",true);continue end
    local _,_,throttle,phase,fuel=Motion.Sample(run.motion,now-run.launchedAt);Rocket.Pulse(run.character,throttle,run.diving and "Diving"or phase,fuel)
    Course.Update(run.course,position,velocity,now-run.launchedAt,run.diving)
    local cumulative=run.score
