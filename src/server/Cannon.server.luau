@@ -12,4 +12,4 @@ for _, child in cannon:GetDescendants() do
 		return
 	end
 end
-require(script.Parent.FlightService).Start(cannon)
+require(script.Parent.RocketFlightService).Start(cannon)

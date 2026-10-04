@@ -1,8 +1,21 @@
-# Project place file
+# Source-driven Rojo build outputs; the hand-authored binary place is tracked.
 /rocketShooter.rbxlx
-
-# Roblox Studio lock files
 /*.rbxlx.lock
 /*.rbxl.lock
+/sourcemap.json
 
-sourcemap.json
+# Local validation scratch and generated bundles.
+/.fuel-sky-check/
+/.proto-check/
+/.repair-1-check/
+/.rocket-ui-check/
+/tests/.generated/
+*.log
+
+# Credentials and local editor state.
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.vscode/

@@ -6,7 +6,7 @@ local ACTION = "RocketShooterFlightSteer"
 
 -- This adapter emits only a normalized axis; a future touch adapter can call
 -- SetAxis(-1..1) without changing the remote contract or the physics implementation.
-function Input.Start(sendAxis, settings)
+function Input.Start(sendAxis, settings, mobile)
 	local stopped, axis, elapsed, focused = false, 0, 0, true
 	local held = {}
 	local connections = {}
@@ -57,9 +57,11 @@ function Input.Start(sendAxis, settings)
 		end
 	end))
 	sendAxis(axis)
+    local touch=mobile and mobile.Steer(controller.SetAxis)
 	function controller.Stop()
 		if stopped then return end
 		stopped = true
+        if touch then touch.Stop() end
 		ContextActionService:UnbindAction(ACTION)
 		for _, connection in ipairs(connections) do connection:Disconnect() end
 		table.clear(connections)

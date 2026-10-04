@@ -2,12 +2,55 @@
   "name": "rocketShooter",
   "tree": {
     "$className": "DataModel",
-
+    "ReplicatedStorage": {
+      "$ignoreUnknownInstances": true,
+      "BalanceConfig": {
+        "$path": "src/shared/BalanceConfig.luau"
+      },
+      "CloudConfig": {
+        "$path": "src/shared/CloudConfig.luau"
+      },
+      "ProtoFuelConstants": {
+        "$path": "src/shared/ProtoFuelConstants.luau"
+      },
+      "SkyIslandConfig": {
+        "$path": "src/shared/SkyIslandConfig.luau"
+      },
+      "DestructionSpikeFlag": {
+        "$path": "src/shared/DestructionSpikeFlag.luau"
+      },
+      "RocketUI": {
+        "$path": "src/shared/RocketUI.luau"
+      },
+      "SimulatorHUD": {
+        "$path": "src/shared/SimulatorHUD.luau"
+      },
+      "ProgressionConfig": {
+        "$path": "src/shared/ProgressionConfig.luau"
+      },
+      "RocketModeConfig": {
+        "$path": "src/shared/RocketModeConfig.luau"
+      },
+      "RocketMotion": {
+        "$path": "src/shared/RocketMotion.luau"
+      },
+      "RocketStyles": {
+        "$path": "src/shared/RocketStyles.luau"
+      },
+      "ClickerConfig": {
+        "$path": "src/shared/ClickerConfig.luau"
+      },
+      "ClickerUI": {
+        "$path": "src/shared/ClickerUI.luau"
+      },
+      "RocketSkinCatalog": {
+        "$path": "src/shared/RocketSkinCatalog.luau"
+      }
+    },
     "ServerScriptService": {
       "$ignoreUnknownInstances": true,
       "$path": "src/server"
     },
-
     "StarterPlayer": {
       "$ignoreUnknownInstances": true,
       "StarterPlayerScripts": {

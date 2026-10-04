@@ -2,9 +2,13 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local SteeringInput = require(script.Parent.SteeringInput)
+local Audio = require(script.Parent.Audio)
+local Presentation = require(script.Parent.PresentationConfig)
+local FlightCamera = require(script.Parent.FlightCamera)
+local Sky = require(script.Parent.SkyController)
 local Controller = {}
 
-function Controller.Start(gaugeGui, resultGui, remotes)
+function Controller.Start(aimGui, resultGui, remotes, objectiveHud, mobile)
 	local player = Players.LocalPlayer
 	local aim = remotes.AimCannon
 	local fire = remotes.FireCannon
@@ -25,10 +29,15 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 	local function stopAim(run)
 		for _, connection in ipairs(run.aimConnections) do connection:Disconnect() end
 		table.clear(run.aimConnections)
-		gaugeGui.Enabled = false
+		aimGui.Enabled = false
+        if run.touchAim then run.touchAim.Stop();run.touchAim=nil end
 		cameraRestore()
 	end
 	local function stopFlight(run)
+		if objectiveHud then objectiveHud.Stop() end
+		-- Keep this run's metadata for FlightResult, which may follow the Result state event.
+		Sky.Reset()
+		if run.flightCamera then run.flightCamera.Stop(); run.flightCamera = nil end
 		if run.steeringInput then run.steeringInput.Stop(); run.steeringInput = nil end
 		for _, effect in ipairs(run.effects) do effect:Destroy() end
 		table.clear(run.effects)
@@ -48,8 +57,9 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 	end
 	local function clear()
 		if active then stopAim(active); stopFlight(active) end
+		if objectiveHud then objectiveHud.Stop() end
 		active = nil
-		resultGui.Enabled, gaugeGui.Enabled = false, false
+		resultGui.Enabled, aimGui.Enabled = false, false
 		cameraRestore()
 	end
 	local function matches(id, character)
@@ -58,7 +68,7 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 	aim.OnClientEvent:Connect(function(enable, cannon, id, character)
 		if type(id) ~= "number" or character ~= player.Character then return end
 		if not enable then
-			if matches(id, character) then stopAim(active) end
+			if matches(id, character) and active.state ~= "Flying" then stopAim(active) end
 			return
 		end
 		if id <= newestId or not cannon or not cannon:IsA("Model") then return end
@@ -66,17 +76,22 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 		newestId = id
 		local run = {id = id, character = character, state = "Aiming", aimConnections = {}, effects = {}}
 		active = run
-		local yaw, pitch, progress, direction, sendElapsed = 0, 0, 0, 1, 0
-		local bar = gaugeGui.BgBar
-		bar.StatusLabel.Text = "클릭하여 발사 타이밍을 잡으세요!"
-		bar.Pointer.Position = UDim2.new(0, -3, 0, -4)
-		gaugeGui.Enabled = true
-		UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+		local yaw, pitch, sendElapsed = 0, Presentation.InitialAimPitch, 0
+		aimGui.Enabled = true
+		aim:FireServer(yaw, pitch, id) -- Immediate click uses the displayed initial aim.
+		UserInputService.MouseBehavior = if mobile then Enum.MouseBehavior.Default else Enum.MouseBehavior.LockCenter
+        local function launch()
+            if active~=run or run.state~="Aiming" then return end
+            aim:FireServer(yaw,pitch,id);run.state="LaunchPending";aimGui.Enabled=false;fire:FireServer(1,id)
+        end
+        if mobile then run.touchAim=mobile.Aim(aimGui,function(x,y)
+            yaw=math.clamp(yaw+x,-30,30);pitch=math.clamp(pitch+y,15,75)
+        end,launch) end
 		table.insert(run.aimConnections, RunService.RenderStepped:Connect(function(dt)
 			if active ~= run or player.Character ~= character then return end
-			local delta = UserInputService:GetMouseDelta()
+			local delta = if mobile then Vector2.zero else UserInputService:GetMouseDelta()
 			yaw = math.clamp(yaw - delta.X * 0.15, -30, 30)
-			pitch = math.clamp(pitch - delta.Y * 0.15, -5, 45)
+			pitch = math.clamp(pitch - delta.Y * 0.15, -5, 75)
 			local cylinder = cannon:FindFirstChild("Cylinder")
 			local camera = workspace.CurrentCamera
 			if cylinder and camera then
@@ -85,35 +100,27 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 			end
 			sendElapsed += dt
 			if sendElapsed >= 1 / 30 then sendElapsed = 0; aim:FireServer(yaw, pitch, id) end
-			if run.state == "Aiming" then
-				progress += dt * 1.2 * direction
-				if progress >= 1 then progress, direction = 1, -1 end
-				if progress <= 0 then progress, direction = 0, 1 end
-				bar.Pointer.Position = UDim2.new(progress, -3, 0, -4)
-			end
 		end))
 		table.insert(run.aimConnections, UserInputService.InputBegan:Connect(function(input, processed)
-			if processed or input.UserInputType ~= Enum.UserInputType.MouseButton1 or active ~= run or run.state ~= "Aiming" then return end
+			if mobile or processed or (input.UserInputType ~= Enum.UserInputType.MouseButton1 and input.UserInputType ~= Enum.UserInputType.Touch) or active ~= run or run.state ~= "Aiming" then return end
 			run.state = "LaunchPending"
-			local diff = math.abs(progress - 0.5)
-			local multiplier, label = 0.7, "MISS! (0.7x)"
-			if diff <= 0.075 then multiplier, label = 1.5, "★ PERFECT! (1.5x) ★"
-			elseif diff <= 0.25 then multiplier, label = 1, "GOOD! (1.0x)" end
-			bar.StatusLabel.Text = label
-			task.delay(0.3, function()
-				if active ~= run or run.state ~= "LaunchPending" or player.Character ~= character then return end
-				gaugeGui.Enabled = false
-				fire:FireServer(multiplier, id)
-			end)
+			aimGui.Enabled = false
+			fire:FireServer(1, id) -- Server accepts only the baseline launch multiplier.
 		end))
 	end)
-	fire.OnClientEvent:Connect(function(velocity, id, character, saved, steeringSettings)
+	fire.OnClientEvent:Connect(function(velocity, id, character, saved, steeringSettings, objectiveMeta)
 		if not matches(id, character) or (active.state ~= "Aiming" and active.state ~= "LaunchPending") then return end
 		local run = active
 		stopAim(run)
 		run.state, run.saved = "Flying", saved
+		Audio.Play("Launch")
 		local root, humanoid = character:FindFirstChild("HumanoidRootPart"), character:FindFirstChildOfClass("Humanoid")
 		if not root or not humanoid then return end
+		if objectiveHud then
+			run.objectiveMeta = objectiveHud.Start(root, objectiveMeta, function()
+				return active == run and run.state == "Flying" and player.Character == character
+			end)
+		end
 		local function effect(class, name)
 			local obj = Instance.new(class)
 			obj.Name = name
@@ -143,12 +150,40 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 			if active == run and run.state == "Flying" and player.Character == character then
 				remotes.SteerFlight:FireServer(axis, id)
 			end
-		end, steeringSettings)
+		end, steeringSettings, mobile)
+		run.flightCamera = FlightCamera.Start(root, velocity, function()
+			return active == run and run.state == "Flying" and player.Character == character
+		end)
 		-- Initial velocity is applied once, by the server. No fixed-duration cleanup.
 	end)
 	state.OnClientEvent:Connect(function(value, id, character, reason)
 		if not matches(id, character) then return end
-		if value == "Result" then
+		if value == "Effect" then
+			if active.state == "Flying" then
+				Audio.Play(reason)
+				if reason == "Ring" and active.flightCamera then active.flightCamera.Pulse() end
+			end
+		elseif value == "Descent" then
+            local root=character:FindFirstChild("HumanoidRootPart")
+            local orientation=root and root:FindFirstChild("FlyOrientation")
+            if orientation and type(reason)=="table" and reason.Dive then orientation.CFrame=CFrame.Angles(0,0,math.pi) end
+        elseif value == "Region" then
+			if active.state == "Flying" then
+				if reason.FirstEntry then
+					if active.cloudNoticeShown then return end
+					active.cloudNoticeShown = true
+					Audio.Play("Discovery")
+				end
+				Sky.SetRegion(reason)
+			end
+		elseif value == "Destination" then
+			if active.state == "Flying" and type(reason) == "table" and type(reason.Id) == "string" then
+				active.destinationNotices = active.destinationNotices or {}
+				if active.destinationNotices[reason.Id] then return end
+				active.destinationNotices[reason.Id] = true
+				Sky.ShowDestination(reason)
+			end
+		elseif value == "Result" then
 			stopAim(active); stopFlight(active); active.state = "Result"
 		elseif value == "Returning" then
 			stopAim(active); stopFlight(active); active.state = "Returning"; resultGui.Enabled = false
@@ -157,14 +192,44 @@ function Controller.Start(gaugeGui, resultGui, remotes)
 			if reason then warn("[Flight] Run ended:", reason) end
 		end
 	end)
-	result.OnClientEvent:Connect(function(distance, gold, trophies, record, id, character)
+	result.OnClientEvent:Connect(function(distance, gold, trophies, record, id, character, metrics)
 		if not matches(id, character) or active.resultShown or active.state == "Returning" then return end
 		stopAim(active); stopFlight(active)
 		active.state, active.resultShown = "Result", true
+		Audio.Play("Result")
 		local frame = resultGui.MainFrame
-		frame.InfoLabel.Text = string.format("비행 거리: %dm\n획득 골드: +%d G\n획득 트로피: +%d 🏆", distance, gold, trophies)
-		frame.RecordBadge.Visible = record
-		resultGui.Enabled = true
+		local objectiveLabel = frame:FindFirstChild("ObjectiveLabel")
+		if objectiveLabel then
+			objectiveLabel.Text = "자동으로 발사장에 돌아갑니다"
+			local objectiveMeta = active.objectiveMeta
+			if objectiveMeta then
+				local reachedObjective = active.destinationNotices ~= nil
+					and active.destinationNotices[objectiveMeta.id] == true
+				if reachedObjective then
+					objectiveLabel.Text = "구름 전초기지 도착!"
+				elseif type(metrics) == "table" and type(metrics.MaxAltitude) == "number"
+					and metrics.MaxAltitude == metrics.MaxAltitude and math.abs(metrics.MaxAltitude) < math.huge then
+					if metrics.MaxAltitude < objectiveMeta.requiredAltitude then
+						local shortfall = math.ceil(objectiveMeta.requiredAltitude - metrics.MaxAltitude)
+						objectiveLabel.Text = string.format("구름 구역까지 %d m 남음",shortfall)
+					else
+						objectiveLabel.Text = "높이 달성! 다음에는 구름 쪽으로 조준"
+					end
+				end
+			end
+		end
+		frame.InfoLabel.Text = string.format("최고 높이  %d m   |   파괴 점수  %d\n수련 경험치  +%d XP\n골드  +%d   |   트로피  +%d",metrics and metrics.MaxAltitude or 0,metrics and metrics.SkyScore or 0,metrics and metrics.XPGain or 0,gold,trophies)
+		if metrics and metrics.landingType == "SkyIsland" then
+			frame.InfoLabel.Text ..= "\n구름 전초기지 도착!"
+		end
+		if metrics and metrics.DescentRings then
+            frame.InfoLabel.Text ..= string.format("\n하락 링 %d / 3 · 착륙 %s\n하락 보너스 트로피 +%d (위 합계에 포함)",metrics.DescentRings,metrics.LandingGrade or "표적 밖",metrics.DescentTrophies or 0)
+        end
+        local altitudeRecord = metrics and metrics.AltitudeRecord
+		frame.RecordBadge.Visible = record or altitudeRecord == true
+		frame.RecordBadge.Text = "★ 새로운 최고 기록! ★"
+		resultGui.Enabled = false
+
 	end)
 	resultGui.MainFrame.ReturnButton.Activated:Connect(function()
 		if not active or active.state ~= "Result" then return end

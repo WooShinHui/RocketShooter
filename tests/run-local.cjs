@@ -1,26 +1,62 @@
-// Usage: node tests/run-local.cjs <path-to-luau.exe> [output-directory]
-// Runs production modules with a small engine mock, not a Studio physics test.
-const fs = require('node:fs');
-const path = require('node:path');
-const cp = require('node:child_process');
+// Usage: node tests/run-local.cjs <luau.exe> [scratch-output-directory]
+// Real production modules; Roblox APIs are mocked. Not a physics/Studio test.
+const fs = require('node:fs'), path = require('node:path'), cp = require('node:child_process');
 const root = path.resolve(__dirname, '..');
 const out = path.resolve(process.argv[3] || path.join(root, 'tests/.generated'));
 fs.mkdirSync(out, {recursive: true});
-const source = name => fs.readFileSync(path.join(root, 'src/server', name + '.luau'), 'utf8');
-const wrap = (name, dependencies) => `local function new${name}(env${dependencies ? ', '+dependencies : ''})\nlocal game, Instance, task, os, workspace = env.game, env.Instance, env.task, env.os, env.workspace\nlocal Vector3, CFrame, Enum, RaycastParams, typeof = env.Vector3, env.CFrame, env.Enum, env.RaycastParams, env.typeof\nlocal script = {Parent = {RunPolicy=Policy, PlayerData=${dependencies || 'nil'}, Remotes=${name === 'FlightService' ? 'newRemotes(env)' : 'nil'}, SteeringConfig=SteeringConfig, HorizontalSteering=${name === 'FlightService' ? 'newHorizontalSteering(env)' : 'nil'}}}\nlocal require = function(value) return value end\nlocal warn = function(...) table.insert(env.warnings, {...}) end\n${source(name)}\nend\n`;
-const clientSource = fs.readFileSync(path.join(root, 'src/client/FlightClient.luau'), 'utf8');
-const steeringSource = fs.readFileSync(path.join(root, 'src/client/SteeringInput.luau'), 'utf8');
-const steeringWrap = 'local function newSteeringInput(env)\nlocal game, Enum = env.game, env.Enum\n' + steeringSource + '\nend\n';
-const clientWrap = 'local function newFlightClient(env)\nlocal game, Instance, task, workspace = env.game, env.Instance, env.task, env.workspace\nlocal Vector3, CFrame, Enum = env.Vector3, env.CFrame, env.Enum\nlocal Color3, ColorSequence, NumberSequence, UDim2 = env.Color3, env.ColorSequence, env.NumberSequence, env.UDim2\nlocal warn = function(...) end\nlocal os = env.os\nlocal script={Parent={SteeringInput=newSteeringInput(env)}}\nlocal require=function(value) return value end\n' + clientSource + '\nend\n';
-const gateSource = fs.readFileSync(path.join(root, 'src/server/Cannon.server.luau'), 'utf8');
-const gateWrap = 'local function runGate(env, service)\nlocal workspace = env.workspace\nlocal script = {Parent={FlightService=service,Remotes=newRemotes(env)}}\nlocal require = function(value) return value end\nlocal warn = function(...) table.insert(env.warnings,{...}) end\n' + gateSource + '\nend\n';
-const remoteClientSource = fs.readFileSync(path.join(root, 'src/client/RemoteClient.luau'), 'utf8');
-const remoteClientWrap = 'local function newRemoteClient(env)\nlocal game, os = env.game, env.os\nlocal warn = function(...) table.insert(env.warnings,{...}) end\n' + remoteClientSource + '\nend\n';
-const managerSource = fs.readFileSync(path.join(root, 'src/server/DataManager.server.luau'), 'utf8');
-const managerWrap = 'local function runManager(env, data, flight)\nlocal game, Instance, workspace = env.game, env.Instance, env.workspace\nlocal Vector3, CFrame, Enum, Color3 = env.Vector3, env.CFrame, env.Enum, env.Color3\nlocal script={Parent={PlayerData=data,FlightService=flight,Remotes=newRemotes(env)}}\nlocal require=function(value) return value end\nlocal warn=function(...) table.insert(env.warnings,{...}) end\n' + managerSource + '\nend\n';
-const bundle = `local SteeringConfig = (function()\n${source('SteeringConfig')}\nend)()\nlocal Policy = (function()\n${source('RunPolicy')}\nend)()\n` +
-  wrap('HorizontalSteering') + steeringWrap + wrap('Remotes') + wrap('PlayerData') + wrap('FlightService','Data') + clientWrap + gateWrap + remoteClientWrap + managerWrap + fs.readFileSync(path.join(__dirname, 'regression.luau'), 'utf8');
-const file = path.join(out, 'regression.generated.luau');
-fs.writeFileSync(file, bundle);
-const run = cp.spawnSync(process.argv[2], [file], {stdio:'inherit'});
+const source = (name, area='server') => fs.readFileSync(path.join(root,'src',area,name+'.luau'),'utf8');
+const literal = (name, text) => 'local '+name+' = (function()\n'+text+'\nend)()\n';
+const moduleWrap = (name, deps='{}', area='server', extra='') =>
+ 'local function new'+name+'(env, deps)\n'+
+ 'local game, Instance, task, os, workspace = env.game, env.Instance, env.task, env.os, env.workspace\n'+
+ 'local Vector3, CFrame, Enum, RaycastParams, typeof = env.Vector3, env.CFrame, env.Enum, env.RaycastParams, env.typeof\n'+
+ 'local Color3, ColorSequence, NumberSequence, UDim2 = env.Color3, env.ColorSequence, env.NumberSequence, env.UDim2\nlocal TweenInfo = env.TweenInfo\n'+
+ 'local script={Parent=deps or '+deps+'}\nlocal require=function(v) return v.__module or v end\n'+
+ 'local warn=function(...) table.insert(env.warnings,{...}) end\n'+extra+source(name,area)+'\nend\n';
+let bundle = literal('Skins',source('RocketSkinCatalog','shared')) + literal('XPProjection',source('XPProjection','client')) + literal('ClickerConfig',source('ClickerConfig','shared')) + literal('TrophyConfig',source('TrophyZoneConfig','shared')) + literal('Motion',source('RocketMotion','shared')) + literal('Growth','local Color3={fromRGB=function(...) return {...} end}\n'+source('ProgressionConfig','shared')) + literal('Balance',source('BalanceConfig','shared')) + literal('CloudConfig',source('CloudConfig','shared')) +
+ literal('ProtoFuelConstants',source('ProtoFuelConstants','shared')) +
+ literal('GameLevelConfig', 'local require=function(v) return v end\nlocal game={GetService=function() return {WaitForChild=function() return setmetatable({IsA=function() return true end},{__index=CloudConfig}) end} end}\n'+fs.readFileSync(path.join(__dirname,'legacy-course-config.luau'),'utf8')) +
+ literal('LevelConfig',fs.readFileSync(path.join(__dirname,'phase2-config.luau'),'utf8')) + 'LevelConfig = table.clone(LevelConfig)\nLevelConfig.Destinations = LevelConfig.Destinations or {}\n' +
+ literal('SteeringConfig',source('SteeringConfig')) + literal('Policy','local require=function(v) return v.__module or v end\nlocal game={GetService=function() return {WaitForChild=function() return {__module=Balance,IsA=function(_,c) return c=="ModuleScript" end} end} end}\n'+source('RunPolicy')) +
+ literal('PresentationConfig',source('PresentationConfig','client'));
+bundle += moduleWrap('AssetRegistry') + moduleWrap('WorldCoordinates') +
+ moduleWrap('LaunchTrajectory') +
+ moduleWrap('CloudDiscovery','{LevelConfig=GameLevelConfig}') +
+ moduleWrap('CloudSection','{AssetRegistry=newAssetRegistry(env),WorldCoordinates=newWorldCoordinates(env)}') +
+ moduleWrap('FlightMetrics','{WorldCoordinates=newWorldCoordinates(env)}') +
+ moduleWrap('ObstaclePatterns','{AssetRegistry=newAssetRegistry(env),WorldCoordinates=newWorldCoordinates(env)}') +
+ moduleWrap('CourseSection','{WorldCoordinates=newWorldCoordinates(env),LaunchTrajectory=newLaunchTrajectory(env)}') +
+ moduleWrap('Destination','{AssetRegistry=newAssetRegistry(env),WorldCoordinates=newWorldCoordinates(env)}') +
+ moduleWrap('LevelBuilder','{Destination=newDestination(env),CloudSection=newCloudSection(env),ObstaclePatterns=newObstaclePatterns(env),AssetRegistry=newAssetRegistry(env),WorldCoordinates=newWorldCoordinates(env),CourseSection=newCourseSection(env)}') +
+ moduleWrap('LegacyGimmicks') + moduleWrap('WorldService') + moduleWrap('SpawnService') +
+ moduleWrap('HorizontalSteering','{RunPolicy=Policy,SteeringConfig=SteeringConfig}') +
+ moduleWrap('FlightCamera','{PresentationConfig=PresentationConfig}','client') + moduleWrap('SteeringInput','{}','client') + moduleWrap('Remotes') + moduleWrap('PlayerData','{RunPolicy=Policy}') +
+ moduleWrap('Audio','{PresentationConfig=PresentationConfig}','client') +
+ moduleWrap('SkyController','{PresentationConfig=PresentationConfig}','client') + moduleWrap('CurrencyHud','{}','client');
+bundle += moduleWrap('SkyIslandConfig','{}','shared') +
+ moduleWrap('SkyIslandSpawner.server','{LevelConfig=GameLevelConfig,WorldCoordinates=newWorldCoordinates(env)}')
+ .replace('newSkyIslandSpawner.server(env, deps)','runSkyIslandSpawner(env, deps)') +
+ moduleWrap('ProtoFuelServer.server','{ProtoFuelService=fuel}')
+ .replace('newProtoFuelServer.server(env, deps)','runProtoFuelServer(env, fuel)').replace('Parent=deps or','Parent=') +
+ moduleWrap('DiveImpact') + moduleWrap('TrophyZones','{DiveImpact=newDiveImpact(env)}') + moduleWrap('GoldRingEvent') + moduleWrap('RocketRules') + moduleWrap('RocketEconomy') + moduleWrap('LimbLanding') + moduleWrap('BreakCourse') + moduleWrap('ProtoFuelService') + moduleWrap('DescentChallenge') + moduleWrap('SkyPatrol') + moduleWrap('SkyLife','{SkyPatrol=newSkyPatrol(env),BrainrotVisuals={Apply=function()return false end}}') + moduleWrap('FlightService',
+ '{RunPolicy=Policy,PlayerData=Data,Remotes=newRemotes(env),FlightMetrics=newFlightMetrics(env),CloudDiscovery=newCloudDiscovery(env),LaunchTrajectory=newLaunchTrajectory(env),WorldService=env.world or {Start=function() end,GroundY=function() return 0 end,ExitReason=function() end,TargetCount=function() return 0 end,SampleDestination=function() end,GetCloudOutpostObjective=function() return nil end},HorizontalSteering=newHorizontalSteering(env),SteeringConfig=SteeringConfig}')
+ .replace('(env, deps)','(env, Data)').replace('Parent=deps or','Parent=')
+ .replace('local warn=function', 'script.Parent.FindFirstChild=function(self,key) return self[key] end\nif env.protoFuel then script.Parent.ProtoFuelService=env.protoFuel end\nlocal warn=function');
+bundle += moduleWrap('ClickerService.server','{PlayerData=data,Remotes=newRemotes(env)}').replace('newClickerService.server(env, deps)','runClickerService(env, data)').replace('Parent=deps or','Parent=');
+bundle += moduleWrap('FlightClient','{SkyController={ShowDestination=function(r) table.insert(env.regions,r) end,Reset=function() env.skyReset=true end,SetRegion=function(r) table.insert(env.regions,r) end},FlightCamera=newFlightCamera(env),SteeringInput=newSteeringInput(env),PresentationConfig=PresentationConfig,Audio={Play=function(kind) table.insert(env.audio,kind) end}}','client') +
+ moduleWrap('RemoteClient','{}','client');
+bundle += moduleWrap('Cannon.server','{FlightService=service,RocketFlightService=service,Remotes=newRemotes(env)}')
+ .replace('newCannon.server(env, deps)','runGate(env, service)').replace('Parent=deps or','Parent=');
+bundle += moduleWrap('DataManager.server','{PlayerData=data,Remotes=newRemotes(env)}')
+ .replace('newDataManager.server(env, deps)','runManager(env, data, flight)').replace('Parent=deps or','Parent=');
+bundle += moduleWrap('DestructibleConfig') + moduleWrap('BarrierSpawner.server')
+ .replace('newBarrierSpawner.server(env, deps)', 'runBarrierSpawner(env, deps)');
+bundle += fs.readFileSync(path.join(__dirname,'regression.luau'),'utf8').replace(
+ 'print("All "..count.." regression checks passed (mock engine; Studio physics not tested).")',
+ fs.readFileSync(path.join(__dirname,'balance.luau'),'utf8')+'\n'+
+ fs.readFileSync(path.join(__dirname,'target-choice.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'playtest-repair.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'proto-fuel.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'progression.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'descent.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'sky-bonuses.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'altitude-regions.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'chain-lockin.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'dive-impact.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-rebuild.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-polish.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-orbit.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-feel.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-passive.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-dive.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-impact.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'trophy-zones.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-growth.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-contact.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'rocket-clicker.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'xp-projection.luau'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'balance-skins.luau'),'utf8')+'\nprint("All "..count.." regression checks passed (mock engine; legacy course fixture; Studio physics not tested).")');
+const file=path.join(out,'regression.generated.luau');
+fs.writeFileSync(file,bundle);
+const run=cp.spawnSync(process.argv[2],[file],{stdio:'inherit'});
 process.exit(run.status ?? 1);
+

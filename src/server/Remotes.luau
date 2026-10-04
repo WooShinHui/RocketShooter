@@ -1,6 +1,10 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Remotes = {}
 local schema = {
+ SelectRocketSkin = "RemoteFunction",
+ ClickTraining = "RemoteEvent",
+ ToggleAutoClick = "RemoteFunction",
+ ExperienceGained = "RemoteEvent",
 	AimCannon = "RemoteEvent",
 	FireCannon = "RemoteEvent",
 	FlightResult = "RemoteEvent",
