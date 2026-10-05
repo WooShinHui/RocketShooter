@@ -379,6 +379,7 @@ Validation: production Luau compilation, Rojo build,2935 mocked checks. Actual S
 
 Final camera correction: side targets and cloud enemy lanes freeze along the validated camera-relative right vector at descent start, rather than global X. Steering packets carry a normalized optional camera basis; server validates it with RocketRules.Input and only uses it to orient run-owned geometry, never to grant rewards. Blocks and hit bounds share the rotated frame. Existing controls are unchanged. RocketClient shows a cyan descent piercing hint instead of the ascent chase countdown. Actual final Lv20 D-input test hit3 central and2 side targets,10 rings and2 cloud enemies, then returned safely. Final mocked count2937.
 
+
 ### 2026-10-05 — Readable high-speed descent targets
 
 Supersedes the fixed 18-stud descent chain spacing and fixed 420/280/140 final floors for fast flights. Course targets use current validated speed (90–3600), 1.8 seconds of spawn lead (minimum160 studs), and0.7 seconds between rows (minimum60 studs). Flights below500 studs retain a compact above-ground layout. Subsequent packs wait until the preceding pack's lowest spawned row is passed; cloud exclusions and below-ground clipping remain. Long flights above8000 reserve the final choice zone through5180 studs (140 + two0.7-second intervals at3600), so ordinary chain walls cannot distract from final lane choices.
