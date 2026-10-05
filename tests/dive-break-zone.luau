@@ -1,6 +1,11 @@
 do
  local env=environment();env.Vector3.one=env.Vector3.new(1,1,1);env.Vector3.yAxis=env.Vector3.new(0,1,0);local zone=newDiveBreakZone(env);local course=newBreakCourse(env)
  check(#zone.Plan(79)==0,"very low aborts do not create targets under ground")
+ for _,speed in {180,1800,2400,3600}do
+  local plan=zone.Plan(50000,speed)
+  local gap=plan[1].Height-plan[4].Height
+  check(gap>=speed*.7 and plan[7].Height==140,"high-speed final layers retain at least .7 seconds between choices")
+ end
  for _,height in {80,180,600,12000,300000}do
   local plan=zone.Plan(height);check(#plan==9,"three descent layers have three lanes")
   for _,r in plan do

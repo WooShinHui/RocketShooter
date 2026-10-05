@@ -6,12 +6,14 @@ local Gates=require(RS:WaitForChild("CloudConfig")).HeightPresentation.Gates
 local Families=require(RS:WaitForChild("GateEncounterConfig"))
 local Rules=require(script.Parent.RocketRules)
 local Zone={Enabled=true}
-function Zone.Plan(height)
+function Zone.Plan(height,speed)
  if height<80 then return {}end
- local top=math.min(420,height-45);local rows={}
+ local gap=math.max(140,math.clamp(speed or 0,0,3600)*.7)
+ local top=math.min(140+gap*2,height-45);local rows={}
+ if top<140+gap*2 then gap=top/3 end
  for layer=1,3 do
   for _,lane in {0,-1,1}do
-   table.insert(rows,{Height=top*(4-layer)/3,Layer=layer,Lane=lane,Offset=lane*200,Units=lane==0 and 1 or 3,
+   table.insert(rows,{Height=top-gap*(layer-1),Layer=layer,Lane=lane,Offset=lane*200,Units=lane==0 and 1 or 3,
     Size=Vector3.new(240,24,280)})
   end
  end
@@ -38,9 +40,11 @@ function Zone.Update(z,position,velocity,diving,basis)
   end end
   return
  end
- if position.Y-z.GroundY>420+math.max(270,math.abs(velocity.Y)*3)then return end
+ local speed=math.clamp(math.abs(velocity.Y),0,3600)
+ local top=140+math.max(140,speed*.7)*2
+ if position.Y-z.GroundY>top+math.max(270,speed*1.8)then return end
  z.Spawned=true;z.Origin=position
- for _,r in Zone.Plan(position.Y-z.GroundY)do
+ for _,r in Zone.Plan(position.Y-z.GroundY,speed)do
   r.Position=Vector3.new(position.X,r.Height+z.GroundY,position.Z)+(z.Basis or Vector3.new(1,0,0))*r.Offset;r.Frame=frame(z,r.Position)
   r.Color=r.Lane==0 and Color3.fromRGB(102,229,255)or Color3.fromRGB(255,202,62)
   local m=Instance.new("Model");m.Name="DiveLayer"..r.Layer.."Lane"..r.Lane;m.ModelStreamingMode=Enum.ModelStreamingMode.Persistent

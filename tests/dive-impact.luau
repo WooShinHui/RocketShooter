@@ -4,14 +4,14 @@ do
  local slow=course.Plan(position,V.new(0,-180,0),196.2,200,true)
  local fast=course.Plan(position,V.new(0,-24000,0),196.2,200,true)
  check(#slow==32 and #fast==32,"dive encounters keep progression chain lengths")
- check(near(slow[1].Position.Y,fast[1].Position.Y) and near(slow[32].Position.Y,fast[32].Position.Y),"dive course spacing stays readable independently of fall speed")
- check(position.Y-slow[1].Position.Y>=160 and slow[1].Position.Y-slow[2].Position.Y==18,"dive pack gives advance notice and fixed chain spacing")
+ check(near((position.Y-slow[1].Position.Y)/180,1.8) and near((position.Y-fast[1].Position.Y)/3600,1.8),"slow and boost targets have 1.8 seconds of spawn lead")
+ check(near((slow[1].Position.Y-slow[2].Position.Y)/180,.7) and near((fast[1].Position.Y-fast[2].Position.Y)/3600,.7),"target crossing interval scales with normal and boosted speed")
  for _,r in fast do r.Dive=true end
  local nearest,left=course.DiveTarget({Rows=fast},position)
  check(left==32 and nearest==fast[1],"dive guidance selects nearest unbroken target below player")
  fast[1].Hit=true;nearest,left=course.DiveTarget({Rows=fast},position)
  check(left==31 and nearest==fast[2],"target guidance advances after each destruction")
- nearest,left=course.DiveTarget({Rows=fast},V.new(0,100000,0))
+ nearest,left=course.DiveTarget({Rows=fast},V.new(0,0,0))
  check(nearest==nil and left==0,"passed targets cannot hold descent in slow mode")
  local character=env.Instance.new("Model");local root=env.Instance.new("Part");root.Parent=character
  local torso=env.Instance.new("Part");torso.Parent=character

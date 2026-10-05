@@ -13,9 +13,15 @@ function Course.Plan(position,velocity,gravity,level,dive,motion)
   local time=.20+(i-1)*.055
   local center,tangent
   if dive then
-   local spacing=math.min(18,math.max(5,height*.35/tier.Count))
-   local approach=if motion then math.min(height*.4,math.max(40,math.abs(velocity.Y)*.65)) else math.min(160,height*.4)
-   center=position+Vector3.new(0,-approach-spacing*i,0);tangent=Vector3.new(0,-1,0)
+   -- Travel time, rather than a fixed 18-stud stack, gives each row an aiming window.
+   local speed=math.clamp(math.abs(velocity.Y),90,3600)
+   local spacing=math.max(60,speed*.7)
+   local approach=math.max(160,speed*1.8)
+   if height<500 then
+    spacing=math.min(spacing,math.max(5,height*.35/tier.Count))
+    approach=math.min(approach,height*.4)
+   end
+   center=position+Vector3.new(0,-approach-spacing*(i-1),0);tangent=Vector3.new(0,-1,0)
   elseif motion then
    local delay=.55;time+=delay
    local _,h0=motion.Sample(motion.Profile,motion.Elapsed);local vy,h=motion.Sample(motion.Profile,motion.Elapsed+time)
@@ -53,8 +59,12 @@ function Course.Create(player,id,position,velocity,gravity,level,motion)
 end
 function Course.Spawn(c,position,velocity,dive)
  if dive then c.DivePacks+=1 else c.AscentPacks+=1 end
+ local lowest
  for i,row in Course.Plan(position,velocity,c.Gravity,c.Level,dive,c.Motion) do
   if row.Position.Y<9 then continue end
+  -- Keep long-flight chain walls out of the final choice zone, including F speed.
+  -- Its highest floor is 140 + two 0.7-second intervals at the 3600 speed cap.
+  if dive and (c.DiveStarted or position.Y)>8000 and row.Position.Y<=140+2*3600*.7 then continue end
   local inGate=false
   for _,gate in Gates do if row.Position.Y+40>=gate.Bottom and row.Position.Y-40<=gate.Top then inGate=true;break end end
   if inGate then continue end
@@ -80,15 +90,19 @@ function Course.Spawn(c,position,velocity,dive)
   end end
   local core=makePart(m,"ChainCore",Vector3.new(8,8,8),row.Frame*CFrame.new(0,0,-5),color);core.Material=Enum.Material.Neon
   m.Parent=c.Folder;row.Model=m;row.Index=i;row.Dive=dive;table.insert(c.Rows,row)
+  lowest=math.min(lowest or row.Position.Y,row.Position.Y)
  end
+ return lowest
 end
 function Course.Update(c,position,velocity,elapsed,descent)
  if c.Motion then c.Motion.Elapsed=elapsed end
  if descent then
   if not c.DiveStarted then c.DiveStarted=position.Y;c.NextDive=position.Y;c.DiveOrigin=position end
   if c.DivePacks<c.Tier.Packs and position.Y<=c.NextDive then
-   Course.Spawn(c,Vector3.new(c.DiveOrigin.X,position.Y,c.DiveOrigin.Z),velocity,true)
-   c.NextDive=c.DiveStarted*(if c.DivePacks==1 then .55 else .25)
+   local lowest=Course.Spawn(c,Vector3.new(c.DiveOrigin.X,position.Y,c.DiveOrigin.Z),velocity,true)
+   local nextHeight=c.DiveStarted*(if c.DivePacks==1 then .55 else .25)
+   -- A long, readable pack must finish before the next pack occupies the same lane.
+   c.NextDive=lowest and math.min(nextHeight,lowest)or nextHeight
   end
  elseif c.Motion and c.AscentPacks==0 then
   if velocity.Y>0 and position.Y-c.OriginY>=35 then Course.Spawn(c,position,velocity,false);c.NextAscent=elapsed+1.2 end
