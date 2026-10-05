@@ -1,1 +1,1 @@
-return table.freeze({Enabled=true,ReturnOffset=22,DropDistance=8,ReturnDelay=.2,SteerSpeed=90,SteerAcceleration=240,FlightXPInterval=1,DiveMaxSpeed=2400,DiveBoostMaxSpeed=3600})
+return table.freeze({Enabled=true,ReturnOffset=22,DropDistance=8,ReturnDelay=.2,SteerSpeed=90,SteerAcceleration=240,FlightXPInterval=1,DiveSteerMinSpeed=0,DiveSteerMaxSpeed=480,DiveSteerRatio=.2,DiveSteerAcceleration=120,DiveAimSpeed=1800,DiveAimDeceleration=2400,DiveMaxSpeed=2400,DiveBoostMaxSpeed=3600})

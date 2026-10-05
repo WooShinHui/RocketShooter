@@ -225,7 +225,7 @@ local function environment()
 			asset.IsLoaded=not env.audioLoadFail
 			callback(asset.SoundId,env.audioLoadFail and "Failure" or "Success")
 		end
-	end},TweenService={Create=function(_,object,info,properties) return {Play=function()for key,value in properties do object[key]=value end end,Cancel=function()end} end},Lighting=env.lighting,SoundService=env.soundService,Debris={AddItem=function(_,v,seconds) table.insert(env.debris,{v,seconds}) end},ServerStorage=env.storage,Players=env.players,ReplicatedStorage=env.rs,UserInputService=env.input,ContextActionService=env.actions,
+	end},TweenService={Create=function(_,object,info,properties) local done=event();return {Completed=done,Play=function()for key,value in properties do object[key]=value end;done:Fire()end,Cancel=function()done:Fire()end} end},Lighting=env.lighting,SoundService=env.soundService,Debris={AddItem=function(_,v,seconds) table.insert(env.debris,{v,seconds}) end},ServerStorage=env.storage,Players=env.players,ReplicatedStorage=env.rs,UserInputService=env.input,ContextActionService=env.actions,
 		RunService={Heartbeat=env.heartbeat,RenderStepped=env.render,IsStudio=function() return env.studio end},
 		DataStoreService={GetDataStore=function(_,name)
 			env.opens+=1
@@ -494,7 +494,7 @@ do
 	local env=environment(); env.rs.FlightState:Destroy(); env.rs.SteerFlight:Destroy()
 	local original={env.rs.AimCannon,env.rs.FireCannon,env.rs.FlightResult,env.rs.ReturnToSpawn}
 	local registry=newRemotes(env); local first=registry.Ensure(); local second=registry.Ensure()
-	check(#env.rs:GetChildren()==12 and first.SelectRocketSkin:IsA("RemoteFunction") and first.BuyUpgrade:IsA("RemoteFunction") and first.FlightState:IsA("RemoteEvent") and first.SteerFlight:IsA("RemoteEvent") and first.ExperienceGained:IsA("RemoteEvent"),"server creates all missing remotes including steering and XP notifications")
+	check(#env.rs:GetChildren()==13 and first.SelectRocketTrail:IsA("RemoteFunction") and first.SelectRocketSkin:IsA("RemoteFunction") and first.BuyUpgrade:IsA("RemoteFunction") and first.FlightState:IsA("RemoteEvent") and first.SteerFlight:IsA("RemoteEvent") and first.ExperienceGained:IsA("RemoteEvent"),"server creates all missing remotes including steering and XP notifications")
 	check(first.AimCannon==original[1] and first.FireCannon==original[2] and first.FlightResult==original[3]
 		and first.ReturnToSpawn==original[4] and first.BuyUpgrade==second.BuyUpgrade,"repeated bootstrap preserves original remotes without duplication")
 	check(first.ResetData.OnServerInvoke()==false,"legacy reset remains inert")
@@ -772,23 +772,23 @@ do
 	local old=env.Instance.new("Sky"); old.Parent=env.lighting
 	env.players.LocalPlayer.Character=nil; sky.Start()
 	check(old.destroyed and env.lighting.FlightSky and env.lighting.ClockTime==14,"bright sky applies immediately without character or remote availability")
-	local p=env.players.LocalPlayer; p.Character=env.character(); p.Character.HumanoidRootPart.Position=env.Vector3.new(0,5000,0)
+	local p=env.players.LocalPlayer; p.Character=env.character(); p.Character.HumanoidRootPart.Position=env.Vector3.new(0,CloudConfig.HeightPresentation.Gates[3].Top+500,0)
 	p:SetAttribute("FlightState","Flying"); env.step(0.1)
-	check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE" and env.lighting:GetAttribute("AltitudeSky")=="Skybox HD","5000m uses the requested purple regional sky")
+	check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE" and env.lighting:GetAttribute("AltitudeSky")=="Skybox HD","third exit uses the requested purple regional sky")
 	sky.SetRegion({Region="Clouds",FirstEntry=true,FirstDiscovery=true})
 	check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE" and p.PlayerGui.DiscoveryGui.Notice.Visible,"server discovery notice does not overwrite altitude appearance")
 	env.step(CloudConfig.NoticeSeconds+.1)
 	check(not p.PlayerGui.DiscoveryGui.Notice.Visible,"discovery notice expires without delayed task affecting next run")
 	sky.SetRegion({Region="Ground",FirstEntry=false})
 	check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE","server region event does not override local high layer")
-    p.Character.HumanoidRootPart.Position=env.Vector3.new(0,100050,0);env.step(.1)
+    p.Character.HumanoidRootPart.Position=env.Vector3.new(0,CloudConfig.HeightPresentation.Enter[3]+50,0);env.step(.1)
     check(env.lighting.FlightSky.StarCount==3000 and env.lighting.ClockTime==14,"100km switches space texture without darkening the scene")
-    p.Character.HumanoidRootPart.Position=env.Vector3.new(0,99996,0);env.step(.1)
+    p.Character.HumanoidRootPart.Position=env.Vector3.new(0,CloudConfig.HeightPresentation.Enter[3]-4,0);env.step(.1)
     check(env.lighting:GetAttribute("AltitudeLayer")=="SPACE","boundary jitter stays in space within hysteresis")
-    p.Character.HumanoidRootPart.Position=env.Vector3.new(0,99990,0);env.step(.1)
+    p.Character.HumanoidRootPart.Position=env.Vector3.new(0,CloudConfig.HeightPresentation.Enter[3]-10,0);env.step(.1)
     check(env.lighting:GetAttribute("AltitudeLayer")=="HIGH_ALTITUDE","descent leaves space below hysteresis threshold")
-    p.Character.HumanoidRootPart.Position=env.Vector3.new(0,300,0);env.step(.1)
-    check(env.lighting:GetAttribute("AltitudeLayer")=="CLOUD" and env.lighting.Brightness==CloudConfig.Ground.Brightness,"300m retains neutral lighting with the cloud layer")
+    p.Character.HumanoidRootPart.Position=env.Vector3.new(0,700,0);env.step(.1)
+    check(env.lighting:GetAttribute("AltitudeLayer")=="CLOUD" and env.lighting.Brightness==CloudConfig.Ground.Brightness,"700m retains neutral lighting with the cloud layer")
     p.Character.HumanoidRootPart.Position=env.Vector3.new(0,100,0);env.step(.1)
     check(env.lighting:GetAttribute("AltitudeLayer")=="GROUND" and env.lighting.ClockTime==14,"low descent restores daytime")
 	p.CharacterRemoving:Fire(p.Character)

@@ -55,8 +55,9 @@ RS:WaitForChild("FlightResult").OnClientEvent:Connect(function(_,gold,trophies,r
  if id~=activeId or character~=activeCharacter then return end
  activeId=nil;metrics=metrics or {}
  -- Tutorial (deferred): "트로피는 하늘의 트로피 존에 착지해서 획득"
- local rows={{"비행 경험치 +"..(metrics.XPGain or 0).." XP",goldColor},{trophies>0 and ("🏆 트로피 존 착지! +"..trophies.." 트로피")or "트로피 +0",green},
+ local rows={{"비행 경험치 +"..(metrics.XPGain or 0).." XP",goldColor},{trophies>0 and ("안전 귀환! +"..trophies.." 트로피")or "트로피 +0",green},
  {string.format("최고 높이 %s · 파괴 %d점",Cloud.FormatAltitude(metrics.MaxAltitude or 0),metrics.SkyScore or 0),Color3.fromRGB(133,222,255)}}
+ if metrics.EndReason=="BrainrotCaught"then table.insert(rows,1,{"브레인롯에게 잡힘! 이번 비행 트로피 소멸",Color3.fromRGB(255,98,112)})end
  if metrics.GoldRings and metrics.GoldRings>0 then table.insert(rows,{"골드 링 "..metrics.GoldRings.."개 · 대량 경험치 획득!",goldColor}) end
  if metrics.DiveHits and metrics.DiveHits>0 then table.insert(rows,{"다이빙 파괴 "..metrics.DiveHits.."회",green}) end
  if metrics.DescentRings then table.insert(rows,{string.format("링 %d/3 · %s",metrics.DescentRings,metrics.LandingGrade or "표적 밖"),green}) end

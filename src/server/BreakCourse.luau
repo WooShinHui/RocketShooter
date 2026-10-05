@@ -1,4 +1,7 @@
 -- Run-owned encounters. Layout predicts validated physics; awards require real swept hits.
+local RS=game:GetService("ReplicatedStorage")
+local Gates=require(RS:WaitForChild("CloudConfig")).HeightPresentation.Gates
+local Visual=require(RS:WaitForChild("CourseVisualConfig"))
 local Course={}
 function Course.Tier(level)
  local count=if level<5 then 2 elseif level<20 then 5 elseif level<60 then 11 elseif level<200 then 20 else 32
@@ -20,7 +23,7 @@ function Course.Plan(position,velocity,gravity,level,dive,motion)
    if previousY then center=Vector3.new(center.X,math.max(center.Y,previousY+12),center.Z)end
    previousY=center.Y
   else center=position+velocity*time-Vector3.new(0,gravity*time*time/2,0);tangent=velocity-Vector3.new(0,gravity*time,0) end
-  table.insert(rows,{Position=center,Direction=tangent,Size=Vector3.new(100,64,8),Score=tier.Score})
+  table.insert(rows,{Position=center,Direction=tangent,Size=dive and Vector3.new(360,280,24)or Vector3.new(100,64,8),Score=tier.Score})
  end
  return rows
 end
@@ -52,14 +55,28 @@ function Course.Spawn(c,position,velocity,dive)
  if dive then c.DivePacks+=1 else c.AscentPacks+=1 end
  for i,row in Course.Plan(position,velocity,c.Gravity,c.Level,dive,c.Motion) do
   if row.Position.Y<9 then continue end
+  local inGate=false
+  for _,gate in Gates do if row.Position.Y+40>=gate.Bottom and row.Position.Y-40<=gate.Top then inGate=true;break end end
+  if inGate then continue end
   local up=if dive or math.abs(row.Direction.Unit:Dot(Vector3.yAxis))>.95 then Vector3.new(0,0,-1) else Vector3.yAxis
   row.Frame=CFrame.lookAt(row.Position,row.Position+row.Direction,up)
   local m=Instance.new("Model");m.Name=if dive then "다이브 파괴 묶음" else "연속 파괴 묶음";m.ModelStreamingMode=Enum.ModelStreamingMode.Persistent
   m:SetAttribute("RunId",c.Id);m:SetAttribute("ChainIndex",i);m:SetAttribute("ChainLength",c.Tier.Count)
   m.PrimaryPart=makePart(m,"HitBox",row.Size,row.Frame,Color3.fromRGB(255,218,99));m.PrimaryPart.Transparency=1
   local color=if dive then Color3.fromRGB(102,229,255) else Color3.fromRGB(255,205,105)
+  local seed=c.Id*17+(dive and c.DivePacks or c.AscentPacks)*13+i
+  row.Color=Visual.Color(row.Position.Y,seed)
+  row.VisualKind=Visual.Style
   for x=-1,1 do for y=-1,1,2 do
-   makePart(m,"BreakBrick",Vector3.new(30,27,6),row.Frame*CFrame.new(x*32,y*15,0),if x==0 then color else Color3.fromRGB(255,237,184))
+   local tilt=not dive and Visual.Style=="Butter" and math.rad(((seed+x*3+y)%3-1)*14)or 0
+   local size=if dive then Vector3.new(118,138,24)elseif Visual.Style=="Butter"then Vector3.new(30,13.5,13.5)else Vector3.new(30,27,6)
+   local p=makePart(m,Visual.Style=="Butter"and "BreakButter"or "BreakBrick",size,row.Frame*CFrame.new(x*(dive and 120 or 32),y*(dive and 70 or 15),0)*CFrame.Angles(0,0,tilt),row.Color)
+   if Visual.Style=="Butter"then
+    local mesh=Instance.new("SpecialMesh");mesh.MeshType=Enum.MeshType.FileMesh;mesh.MeshId=Visual.Mesh
+    mesh.Scale=Vector3.new(p.Size.X/Visual.MeshSize[1],p.Size.Y/Visual.MeshSize[2],p.Size.Z/Visual.MeshSize[3]);mesh.Parent=p
+    local face=Instance.new("Decal");face.Texture=Visual.Face;face.Face=Enum.NormalId.Back;face.Parent=p
+    -- Geometry is copied; none of the asset's imported scripts run.
+   end
   end end
   local core=makePart(m,"ChainCore",Vector3.new(8,8,8),row.Frame*CFrame.new(0,0,-5),color);core.Material=Enum.Material.Neon
   m.Parent=c.Folder;row.Model=m;row.Index=i;row.Dive=dive;table.insert(c.Rows,row)
@@ -68,9 +85,9 @@ end
 function Course.Update(c,position,velocity,elapsed,descent)
  if c.Motion then c.Motion.Elapsed=elapsed end
  if descent then
-  if not c.DiveStarted then c.DiveStarted=position.Y;c.NextDive=position.Y;end
+  if not c.DiveStarted then c.DiveStarted=position.Y;c.NextDive=position.Y;c.DiveOrigin=position end
   if c.DivePacks<c.Tier.Packs and position.Y<=c.NextDive then
-   Course.Spawn(c,position,velocity,true)
+   Course.Spawn(c,Vector3.new(c.DiveOrigin.X,position.Y,c.DiveOrigin.Z),velocity,true)
    c.NextDive=c.DiveStarted*(if c.DivePacks==1 then .55 else .25)
   end
  elseif c.Motion and c.AscentPacks==0 then
@@ -94,8 +111,8 @@ function Course.Sample(c,from,to,emit)
  for _,row in c.Rows do
   if not row.Hit and swept(row,from,to) then
    row.Hit=true;score+=row.Score;hits+=1;c.Count+=1
-   for _,p in row.Model:GetChildren() do if p:IsA("BasePart") then p.Transparency=1 end end
-   emit({Position=row.Position,Size=Vector3.new(30,27,6),Color=if row.Dive then Color3.fromRGB(102,229,255) else Color3.fromRGB(255,205,105),
+   for _,p in row.Model:GetDescendants() do if p:IsA("BasePart")or p:IsA("Decal")then p.Transparency=1 end end
+   emit({Position=row.Position,Size=Vector3.new(30,27,6),Color=row.Color or Color3.fromRGB(255,205,105),VisualKind=row.VisualKind,
     MaterialTag="Ruin",Index=row.Index,Award=row.Score,ChainLength=c.Tier.Count,RunId=c.Id,Character=c.Player.Character,CourseHit=true})
   end
  end

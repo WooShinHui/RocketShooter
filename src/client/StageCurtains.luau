@@ -1,40 +1,72 @@
--- Local, noninteractive cloud ceilings. Never enter the server reward/hazard path.
-local Curtains={};local started=false
-function Curtains.Start()
- if started then return end;started=true
- local player=game:GetService("Players").LocalPlayer
- local config=require(game:GetService("ReplicatedStorage"):WaitForChild("CloudConfig"))
- if config.HeightPresentation.CloudCurtainsEnabled==false then return end
- local definitions=config.HeightPresentation.Biomes;local active={}
- local folder=Instance.new("Folder");folder.Name="StageCloudCurtains";folder.Parent=workspace
- local function make(index)
-  local model=Instance.new("Model");model.Name="구름 경계 · "..definitions[index].Name;model:SetAttribute("SkyKind","Decoration")
-  local function part(size,offset)
-   local p=Instance.new("Part");p.Name="StageCloud";p.Size=size;p.CFrame=CFrame.new(offset);p.Material=Enum.Material.SmoothPlastic
-   p.Color=Color3.fromRGB(230,240,255);p.Anchored=true;p.CanCollide=false;p.CanTouch=false;p.CanQuery=false;p.CastShadow=false;p.Parent=model;return p
+-- Hollow local chambers and personal warnings attached to their entry, not the avatar.
+local Players=game:GetService("Players");local Run=game:GetService("RunService")
+local C={};local started=false;local levels,currentLevel,descending
+local active={}
+function C.SetRecommendations(required,current,diving)levels=required;currentLevel=current;descending=diving end
+function C.WarningOnScreen()
+ local camera=workspace.CurrentCamera;if not camera then return false end
+ for _,entry in active do local sign=entry.Sign
+  if sign and sign.Parent and sign.Enabled and sign.Adornee and sign.Adornee.Parent then
+   local _,visible=camera:WorldToViewportPoint(sign.Adornee.Position);if visible then return true end
   end
-  model.PrimaryPart=part(Vector3.new(2048,4,2048),Vector3.zero)
-  for x=-2,2 do for z=-2,2 do local p=part(Vector3.new(540,16,540),Vector3.new(x*380,0,z*380));p.Shape=Enum.PartType.Ball end end
-  model.Parent=folder;return model
  end
- local elapsed=0
- game:GetService("RunService").Heartbeat:Connect(function(dt)
-  elapsed+=dt;if elapsed<.12 then return end;elapsed=0
-  local root=player.Character and player.Character:FindFirstChild("HumanoidRootPart");if not root then return end
-  local wanted={};local above
-  for i=2,#definitions do if root.Position.Y<definitions[i].Min then above=i;break end end
-  if above then wanted[above]=true;if above>2 then wanted[above-1]=true end else wanted[#definitions]=true end
-  for index in wanted do
-   local m=active[index];if not m then m=make(index);active[index]=m end
-   m:PivotTo(CFrame.new(math.floor(root.Position.X/512)*512,definitions[index].Min,math.floor(root.Position.Z/512)*512))
-   local height=definitions[index].Min;local camera=workspace.CurrentCamera
-   local cameraY=camera and camera.CFrame.Position.Y or root.Position.Y
-   local distance=math.min(math.abs(root.Position.Y-height),math.abs(cameraY-height))
-   local transparency=.85*math.clamp(1-distance/32,0,1)
-   if (root.Position.Y-height)*(cameraY-height)<0 then transparency=math.max(transparency,.9)end
-   for _,p in m:GetDescendants()do if p:IsA("BasePart")then p.Transparency=transparency end end
+ return false
+end
+local function remove(entry)
+ if entry.Sign then entry.Sign:Destroy()end
+ if entry.Model then entry.Model:Destroy()end
+end
+local function clear()for i,entry in active do remove(entry);active[i]=nil end end
+function C.Start()
+ if started then return end;started=true
+ local player=Players.LocalPlayer
+ local gates=require(game:GetService("ReplicatedStorage"):WaitForChild("CloudConfig")).HeightPresentation.Gates
+ local folder=Instance.new("Folder");folder.Name="StageCloudBoxes";folder.Parent=workspace
+ local function makeSign(entry)
+  if entry.Sign then entry.Sign:Destroy()end
+  local sign=Instance.new("SurfaceGui");sign.Name="GateEntryRequirement";sign.ResetOnSpawn=false;sign.Adornee=entry.Anchor;sign.Face=Enum.NormalId.Bottom;sign.SizingMode=Enum.SurfaceGuiSizingMode.FixedSize;sign.CanvasSize=Vector2.new(1024,1024);sign.AlwaysOnTop=true;sign.LightInfluence=0;sign.Enabled=false
+  local text=Instance.new("TextLabel");text.Name="Requirement";text.Size=UDim2.fromScale(.8,.24);text.Position=UDim2.fromScale(.1,.38);text.BackgroundTransparency=1;text.Font=Enum.Font.GothamBlack;text.TextColor3=Color3.fromRGB(255,38,54);text.TextStrokeColor3=Color3.fromRGB(40,5,8);text.TextStrokeTransparency=0;text.RichText=false;text.TextScaled=true;text.TextWrapped=true;text.TextSize=34;text.Parent=sign
+  entry.Sign,entry.Text=sign,text;entry.Reference.Value=sign
+  sign.Parent=entry.Anchor -- Publish only after the label exists; references survive child-name changes.
+ end
+ local function make(index)
+  local m=Instance.new("Model");m.Name="CloudGate"..index;m:SetAttribute("SkyKind","Decoration")
+  local parts={}
+  for _,name in {"Floor","Ceiling","Left","Right","Front","Back"}do
+   local p=Instance.new("Part");p.Name=name;p.Material=Enum.Material.SmoothPlastic;p.Color=Color3.fromRGB(246,249,255);p.Anchored=true;p.CanCollide=false;p.CanTouch=false;p.CanQuery=false;p.CastShadow=false;p.Parent=m;table.insert(parts,p)
   end
-  for index,m in active do if not wanted[index] then m:Destroy();active[index]=nil end end
+  local anchor=m.Floor -- The actual cloud-box underside, with no separate sign geometry.
+  local ref=Instance.new("ObjectValue");ref.Name="EntrySignReference";ref.Parent=m.Floor
+  local entry={Model=m,Anchor=anchor,Reference=ref,Parts=parts};makeSign(entry);m.Parent=folder;return entry
+ end
+ player.CharacterRemoving:Connect(clear)
+ local elapsed=0
+ Run.Heartbeat:Connect(function(dt)
+  elapsed+=dt;if elapsed<.08 then return end;elapsed=0
+  local root=player.Character and player.Character:FindFirstChild("HumanoidRootPart");if not root then clear();return end
+  local camera=workspace.CurrentCamera;local cy=camera and camera.CFrame.Position.Y or root.Position.Y
+  local wanted={}
+  for i,g in gates do if root.Position.Y>=g.Bottom-700 and root.Position.Y<=g.Top+700 then
+   wanted[i]=true;local entry=active[i];if not entry then entry=make(i);active[i]=entry end
+   if not entry.Sign.Parent or entry.Text.Parent~=entry.Sign then makeSign(entry)end
+   local sign,text=entry.Sign,entry.Text
+   sign.Enabled=levels~=nil and not descending and player:GetAttribute("FlightState")=="Flying"and root.Position.Y<g.Bottom-6
+   local size=70;text.TextSize=size
+   text.Text=string.format("권장 레벨 %d!",levels and levels[i]or g.Level)
+   local x,z=root.Position.X,root.Position.Z
+   local height=math.min(2048,g.Top-g.Bottom);local y=math.clamp(root.Position.Y,g.Bottom+height/2,g.Top-height/2)
+   for _,p in entry.Parts do
+    if p.Name=="Floor"or p.Name=="Ceiling"then
+     local sy=p.Name=="Floor"and g.Bottom or g.Top;p.Size=Vector3.new(512,8,512);p.Position=Vector3.new(x,sy,z)
+     local distance=math.min(math.abs(root.Position.Y-sy),math.abs(cy-sy));p.Transparency=.96*math.clamp(1-distance/30,0,1)
+     if (root.Position.Y-sy)*(cy-sy)<0 then p.Transparency=.98 end
+    else
+     local sx=p.Name=="Left"and -256 or p.Name=="Right"and 256 or 0;local sz=p.Name=="Front"and -256 or p.Name=="Back"and 256 or 0
+     p.Size=sx~=0 and Vector3.new(8,height,512)or Vector3.new(512,height,8);p.Position=Vector3.new(x+sx,y,z+sz);p.Transparency=0
+    end
+   end
+  end end
+  for i,entry in active do if not wanted[i]then remove(entry);active[i]=nil end end
  end)
 end
-return Curtains
+return C

@@ -6,6 +6,7 @@ if not flagModule or not flagModule:IsA("ModuleScript") then
 end
 if not require(flagModule).Enabled then return end
 
+local Butter=require(ReplicatedStorage:WaitForChild("CourseVisualConfig"))
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -254,9 +255,13 @@ local function spawnFragments(data, first, intensity)
 	for index = 1, first and 9 or 7 do
 		while #fragments >= FRAGMENT_CAP do table.remove(fragments, 1).part:Destroy() end
 		local shard = visualPart("DestructionSpikeFragment", data.Color, Enum.Material[profile.Material],
-			index % 3 == 0 and "WedgePart" or "Part")
+			(data.VisualKind=="Butter"or data.VisualKind=="Dumpling")and "Part"or (index % 3 == 0 and "WedgePart" or "Part"))
 		local size = scale * profile.FragmentScale * (index <= 2 and random:NextNumber(0.9, 1.4) or random:NextNumber(0.25, 0.7))
-		shard.Size = Vector3.new(size, size * random:NextNumber(0.35, 0.9), size * random:NextNumber(0.6, 1.3))
+		if data.VisualKind=="Butter"or data.VisualKind=="Dumpling"then
+   local d=data.VisualKind=="Dumpling"and Butter.Dumpling or Butter
+   local mesh=Instance.new("SpecialMesh");mesh.MeshType=Enum.MeshType.FileMesh;mesh.MeshId=d.Mesh;mesh.Scale=Vector3.one*(scale/(data.VisualKind=="Dumpling"and 638 or 14));mesh.Parent=shard
+  end
+  shard.Size = Vector3.new(size, size * random:NextNumber(0.35, 0.9), size * random:NextNumber(0.6, 1.3))
 		if data.MaterialTag == "FloatingIsland" and index % 3 == 0 then
 			shard.Color, shard.Material = Color3.fromRGB(82, 139, 66), Enum.Material.Grass
 			shard.Size = Vector3.new(size * 1.8, 0.08, size)
@@ -342,8 +347,18 @@ local eventConnection = event.OnClientEvent:Connect(function(data)
 	if data.Character and data.Character~=player.Character then return end
     if data.RunId and data.RunId~=player:GetAttribute("SkyRunSerial") then return end
     if data.CourseHit or data.Pierce or data.PartyChain or (not data.PartyMember and type(data.Award)=="number" and data.Award>0) then
-        noticeSerial+=1;local serial=noticeSerial;chainLabel.Visible=true
-        chainLabel.Text=if data.Pierce then "적을 뚫었습니다! +"..tostring(data.Award) elseif data.PartyChain then tostring(data.PartyChain).." 연쇄! +"..tostring(data.ChainAward) elseif data.CourseHit then tostring(data.Index).." 연쇄! +"..tostring(data.Award) else "파괴 +"..tostring(data.Award)
+        local flightGui=player.PlayerGui:FindFirstChild("RocketFlightGui")
+        local meter=flightGui and flightGui:FindFirstChild("DestructionRewards")
+        if meter and meter.Visible then chainLabel.Position=UDim2.fromOffset(gui.AbsoluteSize.X*.5,meter.AbsolutePosition.Y+meter.AbsoluteSize.Y+34-gui.AbsolutePosition.Y) end
+        local diveGui=player.PlayerGui:FindFirstChild("DiveBreakGuide")
+        local guide=diveGui and diveGui:FindFirstChild("NextLayer")
+        local viewport=workspace.CurrentCamera.ViewportSize;local compact=viewport.Y<500 or viewport.X<600
+        chainLabel.TextSize=compact and 17 or 30;chainLabel.Size=compact and UDim2.fromOffset(math.min(300,viewport.X-160),28)or UDim2.new(.9,0,0,58)
+        local readout=flightGui and flightGui:FindFirstChild("CompactFlightReadout")
+        if compact and readout and readout.Visible then chainLabel.Position=UDim2.fromOffset(gui.AbsoluteSize.X*.5,readout.AbsolutePosition.Y+readout.AbsoluteSize.Y+20-gui.AbsolutePosition.Y)end
+        if guide and guide.Visible then chainLabel.Position=UDim2.fromOffset(gui.AbsoluteSize.X*.5,guide.AbsolutePosition.Y+guide.AbsoluteSize.Y+(compact and 20 or 34)-gui.AbsolutePosition.Y)end
+        noticeSerial+=1;local serial=noticeSerial;chainLabel.Visible=not require(script.Parent.StageCurtains).WarningOnScreen()
+        chainLabel.Text=(if data.DiveRing then "하강 링 "..tostring(data.Index).." 연속! +"..tostring(data.Award) elseif data.DiveEnemy then "브레인롯 관통! +"..tostring(data.Award) elseif data.DiveZone then (data.RewardUnits==3 and "보너스 파괴! +" or "하강 파괴! +")..tostring(data.Award) elseif data.Pierce then "적을 뚫었습니다! +"..tostring(data.Award) elseif data.PartyChain then tostring(data.PartyChain).." 연쇄! +"..tostring(data.ChainAward) elseif data.CourseHit then tostring(data.Index).." 연쇄! +"..tostring(data.Award) else "파괴 +"..tostring(data.Award)).."점"
         task.delay(.8,function() if serial==noticeSerial then chainLabel.Visible=false end end)
     end
     local now = os.clock()

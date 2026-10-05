@@ -31,7 +31,7 @@ do
   local region=CloudConfig.HeightPresentation.Biomes[index]
   p.Character.HumanoidRootPart.Position=env.Vector3.new(0,region.Min-4,0);env.step(.1)
   check(env.lighting:GetAttribute("AltitudeBiome")==index,"regional boundary resists altitude jitter")
-  p.Character.HumanoidRootPart.Position=env.Vector3.new(0,region.Min-10,0);env.step(.1)
+  p.Character.HumanoidRootPart.Position=env.Vector3.new(0,CloudConfig.HeightPresentation.Gates[index-1].Bottom-1,0);env.step(.1)
   check(env.lighting:GetAttribute("AltitudeBiome")==index-1,"descending restores the previous region")
  end
  sky.Reset();check(env.lighting:GetAttribute("AltitudeBiome")==1,"return resets regional presentation")
@@ -54,10 +54,10 @@ do
  for i=#bands,2,-1 do
   p.Character.HumanoidRootPart.Position=env.Vector3.new(0,bands[i].Min-4,0);env.step(.1)
   check(env.lighting:GetAttribute("AltitudeSky")==bands[i].Name,"sky boundary hysteresis prevents flicker")
-  p.Character.HumanoidRootPart.Position=env.Vector3.new(0,bands[i].Min-9,0);env.step(.1)
+  p.Character.HumanoidRootPart.Position=env.Vector3.new(0,CloudConfig.HeightPresentation.Gates[i-1].Bottom-1,0);env.step(.1)
   check(env.lighting:GetAttribute("AltitudeSky")==bands[i-1].Name,"descent restores previous sky")
  end
- p.Character.HumanoidRootPart.Position=env.Vector3.new(0,200000,0);env.step(.1)
+ p.Character.HumanoidRootPart.Position=env.Vector3.new(0,CloudConfig.HeightPresentation.Gates[#CloudConfig.HeightPresentation.Gates].Top+60000,0);env.step(.1)
  check(env.lighting:GetAttribute("AltitudeSky")==bands[#bands].Name,"large altitude jump selects final space sky")
  p:SetAttribute("FlightState","Idle");sky.Reset()
  check(env.lighting:GetAttribute("AltitudeSky")==bands[1].Name,"return resets sky to mountains")

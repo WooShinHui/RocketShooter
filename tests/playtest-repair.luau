@@ -43,7 +43,7 @@ do
 	local getService = env.game.GetService
 	function env.game:GetService(name)
 		if name == "TweenService" then return {Create = function(_, object, _, properties)
-			return {Cancel = function() end, Play = function() for key, value in properties do object[key] = value end end}
+			local done=event();return {Completed=done,Cancel=function()done:Fire()end,Play=function()for key,value in properties do object[key]=value end;done:Fire()end}
 		end} end
 		return getService(self, name)
 	end
@@ -58,11 +58,11 @@ do
 	check(env.lighting:GetAttribute("AltitudeSky") == "Realistic Sky", "late legacy Ground template cannot override selected mountain sky")
 	player:SetAttribute("FlightState", "Flying")
 	local function altitude(y) player.Character.HumanoidRootPart.Position = env.Vector3.new(0, y, 0); env.step(0.1) end
-	altitude(270); check(env.lighting:GetAttribute("AltitudeLayer") == "CLOUD", "ascending reaches the raised first cloud boundary")
-	altitude(3600); check(env.lighting:GetAttribute("AltitudeLayer") == "HIGH_ALTITUDE", "ascending reaches High Altitude")
-	altitude(100050); check(env.lighting:GetAttribute("AltitudeLayer") == "SPACE" and env.lighting:GetAttribute("AltitudeSky") == "Space Sky HD", "HD space sky activates at 100km")
-	altitude(99996); check(env.lighting:GetAttribute("AltitudeLayer") == "SPACE", "descending retains existing hysteresis")
-	altitude(99990); check(env.lighting:GetAttribute("AltitudeLayer") == "HIGH_ALTITUDE" and env.lighting:GetAttribute("AltitudeSky") == "Sky", "descending below HD restores first space sky")
+	altitude(680); check(env.lighting:GetAttribute("AltitudeLayer") == "CLOUD", "ascending reaches the raised first cloud boundary")
+	altitude(CloudConfig.HeightPresentation.Gates[3].Top+100); check(env.lighting:GetAttribute("AltitudeLayer") == "HIGH_ALTITUDE", "ascending reaches High Altitude")
+	altitude(CloudConfig.HeightPresentation.Gates[7].Top+50); check(env.lighting:GetAttribute("AltitudeLayer") == "SPACE" and env.lighting:GetAttribute("AltitudeSky") == "Space Sky HD", "HD space sky activates at 100km")
+	altitude(CloudConfig.HeightPresentation.Enter[3]-4); check(env.lighting:GetAttribute("AltitudeLayer") == "SPACE", "descending retains existing hysteresis")
+	altitude(CloudConfig.HeightPresentation.Gates[7].Bottom-10); check(env.lighting:GetAttribute("AltitudeLayer") == "HIGH_ALTITUDE" and env.lighting:GetAttribute("AltitudeSky") == "Sky", "descending below HD restores first space sky")
 	player:SetAttribute("FlightState", "Result"); signals.FlightState:Fire()
 	check(env.lighting:GetAttribute("AltitudeLayer") == "GROUND", "result/return resets Ground immediately")
 end

@@ -17,11 +17,14 @@ local ClickerModule=game:GetService("ReplicatedStorage"):FindFirstChild("Clicker
 local Clicker=ClickerModule and require(ClickerModule)
 local SkinModule=RocketMode and game:GetService("ReplicatedStorage"):FindFirstChild("RocketSkinCatalog")
 local Skins=SkinModule and require(SkinModule)
+local TrailModule=RocketMode and game:GetService("ReplicatedStorage"):FindFirstChild("RocketTrailCatalog")
+local Trails=TrailModule and require(TrailModule)
 local Data = {}
 local profiles = {}
 local defaults = {Gold = 0, Trophies = 0, PowerLvl = 1, BoostLvl = 1, MaxDistance = 0, MaxAltitude = 0,
 	TrainingLevel = 0, TrainingXP = 0, Rebirths = 0, TrainingTier = 1}
 if RocketMode then defaults.EconomyVersion=0;defaults.XPGearLvl=1;if Skins then defaults.RocketSkinMask=1;defaults.RocketSkinEquipped=1 end end
+if Trails then defaults.RocketTrailMask=1;defaults.RocketTrailEquipped=1 end
 local started = false
 local closing = false
 
@@ -100,6 +103,19 @@ function Data.GetTrainingPower(player)
 	return Growth.PowerBonus(s.TrainingLevel.Value,s.Rebirths.Value)
 end
 
+local Equipment=require(game:GetService("ReplicatedStorage"):WaitForChild("EquipmentPower"))
+-- Equipment is sampled once at launch; owned items follow later training and rebirth.
+function Data.LaunchVertical(player,base,starter)
+ if not Data.IsReady(player)then return base end
+ local s=profiles[player].stats
+ return Equipment.Vertical(base,starter,Skins.Items[s.RocketSkinEquipped.Value],Trails.Items[s.RocketTrailEquipped.Value])
+end
+-- Only server collision paths call this; no client reward/count remote exists.
+function Data.AwardDestructionTrophies(player,gain)
+ if not RocketMode or not Data.IsReady(player)or player:GetAttribute("FlightState")~="Flying"or not valid(gain,1)or gain>40000000 then return 0 end
+ local v=profiles[player].stats.Trophies
+ local credited=math.min(gain,2^53-1-v.Value);v.Value+=credited;return credited
+end
 function Data.TrophyMultiplier(player)
 	if not Growth or not Data.IsReady(player) then return 1 end
 	local index=player:GetAttribute("TrainingBuffIndex") or 1
@@ -220,6 +236,19 @@ function Data.SelectRocketSkin(player,index)
  return true,item.Name.." 장착 완료!"
 end
 
+function Data.SelectRocketTrail(player,index)
+ if not Trails or not idle(player)then return false,"귀환 후 장착할 수 있습니다"end
+ if not valid(index,1)or not Trails.Items[index]then return false,"잘못된 트레일입니다"end
+ local profile=profiles[player];local s=profile.stats;local item=Trails.Items[index];local now=os.clock()
+ if now-(profile.lastTrailChange or -math.huge)<.2 then return false,"잠시 후 다시 선택하세요"end
+ profile.lastTrailChange=now
+ if not Trails.Owns(s.RocketTrailMask.Value,index)then
+  if s.Trophies.Value<item.Cost then return false,"트로피가 부족합니다"end
+  s.Trophies.Value-=item.Cost;s.RocketTrailMask.Value=Trails.Grant(s.RocketTrailMask.Value,index)
+ end
+ s.RocketTrailEquipped.Value=index;player:SetAttribute("RocketTrail",item.Id)
+ return true,item.Name.." 장착 완료!"
+end
 function Data.BuyTrainingTier(player,expected)
 	if not Growth or not idle(player) then return false,"귀환 후 구매할 수 있습니다" end
 	local s=profiles[player].stats;local index=s.TrainingTier.Value+1
@@ -332,6 +361,7 @@ local function load(player)
          values.RocketSkinMask=Skins.Milestones(values.RocketSkinMask,values.Rebirths)
         end
     end
+    if Trails and not Trails.Valid(values.RocketTrailMask,values.RocketTrailEquipped)then player:Kick("트레일 저장 정보를 확인해야 합니다");return end
     if Growth and (not valid(Growth.RequiredXP(values.TrainingLevel),1) or values.Rebirths>Growth.MaxRebirths
 		or values.TrainingTier>#Growth.Tiers or values.TrainingXP>=math.max(Growth.RequiredXP(values.TrainingLevel),40+12*values.TrainingLevel)) then
 		warn("[PlayerData] Invalid training data; save disabled",player.UserId)
@@ -356,7 +386,7 @@ local function load(player)
 	for name, value in pairs(values) do
 		local item = Instance.new("IntValue")
 		item.Name,item.Value=name,value
-        item.Parent=if RocketMode and (name=="Gold" or name=="PowerLvl" or name=="BoostLvl" or name=="EconomyVersion" or name=="RocketSkinMask" or name=="RocketSkinEquipped") then private else stats
+        item.Parent=if RocketMode and (name=="Gold" or name=="PowerLvl" or name=="BoostLvl" or name=="EconomyVersion" or name=="RocketSkinMask" or name=="RocketSkinEquipped" or name=="RocketTrailMask" or name=="RocketTrailEquipped") then private else stats
         byName[name]=item
 	end
 	profile.stats, profile.persisted = byName, table.clone(saved or {})
@@ -364,6 +394,7 @@ local function load(player)
 	profile.lastPassive=os.clock()
 	profile.ready = true
  if Skins then player:SetAttribute("RocketStyle",Skins.Items[values.RocketSkinEquipped].Id) end
+ if Trails then player:SetAttribute("RocketTrail",Trails.Items[values.RocketTrailEquipped].Id) end
 	player:SetAttribute("DataReady", true)
 end
 

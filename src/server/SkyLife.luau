@@ -3,6 +3,12 @@ local Life={};local movers={};local started=false;local remote
 local Players=game:GetService("Players")
 local Visuals=require(script.Parent.BrainrotVisuals)
 local Patrol=require(script.Parent.SkyPatrol)
+local Butter=require(game:GetService("ReplicatedStorage"):WaitForChild("CourseVisualConfig"))
+local gates=require(game:GetService("ReplicatedStorage"):WaitForChild("CloudConfig")).HeightPresentation.Gates
+local function inGate(y,radius)
+ for _,g in gates do if y+(radius or 0)>=g.Bottom and y-(radius or 0)<=g.Top then return true end end
+ return false
+end
 local biomes=require(game:GetService("ReplicatedStorage"):WaitForChild("CloudConfig",15)).HeightPresentation.Biomes
 local bands={
  {Min=32,Max=145,Count=8,Reach=220,Spread=90,Score=15,Names={"만두 말랑이","왁뿌볼"},Color=Color3.fromRGB(255,225,123)},
@@ -21,6 +27,10 @@ function Life.StreamSectionRange(altitude,verticalSpeed)
 end
 local function part(m,name,pos,size,color,shape)
  local p=Instance.new("Part");p.Name=name;p.Size=size;p.Position=pos;p.Color=color;p.Shape=shape or Enum.PartType.Ball
+ if name=="Brick"and Butter.Style=="Butter"then
+  p.Name="Butter";local mesh=Instance.new("SpecialMesh");mesh.MeshType=Enum.MeshType.FileMesh;mesh.MeshId=Butter.Mesh
+  mesh.Scale=Vector3.new(size.X/Butter.MeshSize[1],size.Y/Butter.MeshSize[2],size.Z/Butter.MeshSize[3]);mesh.Parent=p
+ end
  p.Material=Enum.Material.SmoothPlastic;p.Anchored=true;p.CanCollide=false;p.CanTouch=false;p.CanQuery=false;p.Parent=m;return p
 end
 local function badge(m,text,color,radius)
@@ -30,7 +40,7 @@ end
 local function hide(m,hidden)
  if not hidden and m:GetAttribute("PartyEndsAt") and workspace:GetServerTimeNow()>=m:GetAttribute("PartyEndsAt") then hidden=true end
  for _,p in m:GetDescendants() do
-  if p:IsA("BasePart") then p.Transparency=if hidden or p:GetAttribute("CollisionProxy") then 1 else 0 elseif p:IsA("BillboardGui") then p.Enabled=not hidden end
+  if p:IsA("BasePart") then p.Transparency=if hidden or p:GetAttribute("CollisionProxy") then 1 else 0 elseif p:IsA("Decal")then p.Transparency=hidden and 1 or 0 elseif p:IsA("BillboardGui") then p.Enabled=not hidden end
  end
 end
 function Life.Start(frame)
@@ -55,10 +65,12 @@ function Life.Start(frame)
    if nearLaunch then pos=at(random:NextNumber(10,80),random:NextNumber(-45,45),y) end
    if nearLaunch then name="만두 말랑이" end
    local radius=if enemy then 8 else random:NextNumber(17,22)
+   if inGate(y,radius+25)then continue end
    local color=if enemy then Color3.fromRGB(55,25,40) elseif string.find(name,"왁뿌") then Color3.fromRGB(240,97,107) elseif string.find(name,"페비") then Color3.fromRGB(255,175,73) else band.Color
    local m=Instance.new("Model");m.Name=name;m:SetAttribute("SkyKind",if enemy then "Enemy" else "Bonus");m:SetAttribute("AltitudeBand",b)
    m:SetAttribute("HitRadius",radius);m:SetAttribute("HazardRadius",if enemy then radius else nil);m:SetAttribute("Score",band.Score);m:SetAttribute("TargetId",if b>=8 then "Altitude:"..tostring(b-8)..":"..i else b*1000+i)
    m:SetAttribute("MinAltitude",band.Min)
+   if string.find(name,"만두")then color=Butter.Color(y,i)end
    m.PrimaryPart=part(m,"Body",pos,Vector3.one*radius*2,color)
    for _,s in {-1,1} do
     part(m,"Eye",pos+Vector3.new(s*radius*.38,radius*.15,-radius*.85),Vector3.one*radius*.35,Color3.new(1,1,1))
@@ -96,6 +108,14 @@ function Life.Start(frame)
     local star=part(m,"BonusStar",pos+Vector3.new(0,radius+3,0),Vector3.new(4,4,1.2),Color3.fromRGB(255,225,66),Enum.PartType.Block)
     star.CFrame=star.CFrame*CFrame.Angles(0,0,math.pi/4);star.Material=Enum.Material.Neon
    end
+   if string.find(name,"만두")then
+    for _,child in m:GetChildren()do if child:IsA("BasePart")and child~=m.PrimaryPart then child:Destroy()end end
+    local d=Butter.Dumpling;local body=m.PrimaryPart;local scale=radius*2/d.MeshSize[1]
+    body.Shape=Enum.PartType.Block;body.Size=Vector3.new(d.MeshSize[1],d.MeshSize[2],d.MeshSize[3])*scale;body.Color=color
+    local mesh=Instance.new("SpecialMesh");mesh.MeshType=Enum.MeshType.FileMesh;mesh.MeshId=d.Mesh;mesh.Scale=Vector3.one*scale;mesh.Parent=body
+    local face=Instance.new("Decal");face.Texture=d.Face;face.Face=Enum.NormalId.Back;face.Parent=body
+    m:SetAttribute("VisualKind","Dumpling")
+   end
    badge(m,if enemy then "⚠" else "+"..band.Score.."점",if enemy then Color3.fromRGB(255,98,112) else Color3.fromRGB(255,238,105),radius)
    m.Parent=folder;table.insert(movers,{Model=m,Origin=pos,Center=pos,Phase=random:NextNumber(0,6.28),Enemy=enemy,AcquiredAt=0})
   end
@@ -106,6 +126,7 @@ function Life.Start(frame)
    local lane=(i-1)%3;local f=if lane==0 then 30+y*.025 elseif lane==1 then 35+y*.08 else 50+y*.13
    if band.AnchorForward then f=band.AnchorForward+(lane-1)*110 end
    local pos=at(f+95,(-1)^i*115,y)
+   if inGate(pos.Y-origin.Y,70)then continue end
    local m=Instance.new("Model");m.Name="하늘섬";m:SetAttribute("SkyKind","Island");m:SetAttribute("AltitudeBand",b);m:SetAttribute("HitRadius",21);m:SetAttribute("HitBoxSize",Vector3.new(120,64,90));m:SetAttribute("Score",band.Score*4);m:SetAttribute("TargetId",if b>=8 then "AltitudeIsland:"..tostring(b-8)..":"..i else b*1000+100+i)
    m.PrimaryPart=part(m,"Body",pos,Vector3.new(120,64,90),Color3.fromRGB(111,111,123),Enum.PartType.Block)
    m.PrimaryPart.Transparency=1;m.PrimaryPart:SetAttribute("CollisionProxy",true)
@@ -114,12 +135,12 @@ function Life.Start(frame)
    local candy={Color3.fromRGB(table.unpack(definition.Color)),Color3.fromRGB(table.unpack(definition.Rock)),Color3.fromRGB(235,244,255)}
    m:SetAttribute("Biome",definition.Kind)
    for row=0,2 do for column=0,5 do for depth=0,1 do
-    local p=part(m,"Brick",pos+Vector3.new((column-2.5)*20,(row-1)*21,(depth-.5)*44),Vector3.new(17,17,38),candy[(row+column+b)%3+1],Enum.PartType.Block)
+    local p=part(m,"Brick",pos+Vector3.new((column-2.5)*20,(row-1)*21,(depth-.5)*44),Vector3.new(17,17,38),Butter.Color(y,row+column+depth+b+1),Enum.PartType.Block)
     p.Material=Enum.Material.SmoothPlastic
    end end end
    for column=0,5 do part(m,"ToyStud",pos+Vector3.new((column-2.5)*20,32,0),Vector3.new(9,6,9),candy[(column+b)%3+1]) end
    part(m,"BreakCore",pos+Vector3.new(0,-32,0),Vector3.new(22,7,22),Color3.fromRGB(255,241,92)).Material=Enum.Material.Neon
-   m.Name="하늘 보너스 블록"
+   m.Name=Butter.Style=="Butter"and "하늘 버터 보너스"or "하늘 보너스 블록";m:SetAttribute("VisualKind",Butter.Style)
    badge(m,"+"..(band.Score*4).."점",Color3.fromRGB(255,241,92),36);m.Parent=folder
   end
  end
@@ -169,9 +190,11 @@ function Life.Start(frame)
      center=root.Position+frame.Forward*24+frame.Right*(if wave%2==0 then -18 else 18)+Vector3.new(0,if root.AssemblyLinearVelocity.Y>0 then 60 else -35,0)
     end
    end
+   for _,gate in gates do if center.Y-origin.Y+60>=gate.Bottom and center.Y-origin.Y-60<=gate.Top then center=Vector3.new(center.X,origin.Y+gate.Bottom-100,center.Z);break end end
    for i,o in party do
     local angle=(i-1)*math.pi/3
     o.Origin=center+Vector3.new(math.cos(angle)*9,math.sin(angle)*7,(i%3-1)*6);o.Center=o.Origin
+    o.Model.PrimaryPart.Color=Butter.Color(o.Origin.Y-origin.Y,i+wave)
     o.Model:SetAttribute("TargetId",100000+wave*10+i);o.Model:SetAttribute("AvailableAt",0);o.Model:SetAttribute("PartyEndsAt",partyEnd)
     hide(o.Model,false)
    end
@@ -267,7 +290,7 @@ function Life.Hit(from,to)
  end
  return nil
 end
-function Life.Collect(player,from,to,visited)
+function Life.Collect(player,from,to,visited,onDestroyed)
  local folder=workspace:FindFirstChild("SkyLife");if not folder then return 0 end
  local now=workspace:GetServerTimeNow();local score=0
  local partyHit=false
@@ -288,6 +311,7 @@ function Life.Collect(player,from,to,visited)
   if not r or (not (partyHit and m:GetAttribute("PartyGroup")) and not touches(m,from,to,r)) then continue end
   visited[id]=true;local award=m:GetAttribute("Score") or 0;score+=award;m:SetAttribute("AvailableAt",now+12)
   local cells={};for _,p in m:GetChildren() do if p:IsA("BasePart") and not p:GetAttribute("CollisionProxy") then table.insert(cells,{Position=p.Position,Size=p.Size,Color=p.Color}) end end
+  if onDestroyed then onDestroyed(m:GetPivot().Position)end
   hide(m,true);local running=(player:GetAttribute("DestructionRunScore") or 0)+score
   local character=player.Character;local runToken=visited
   local announceParty=partyHit and m:GetAttribute("PartyGroup") and not partyNotice
@@ -295,7 +319,7 @@ function Life.Collect(player,from,to,visited)
   for i,cell in cells do
    task.delay((i-1)*.018,function()
     if player.Parent==Players and player.Character==character and player:GetAttribute("FlightState")=="Flying" and player:GetAttribute("SkyRunSerial")==runToken.serial then
-     remote:FireClient(player,{Position=cell.Position,Size=cell.Size,Color=cell.Color,MaterialTag=if kind=="Island" then "FloatingIsland" else "Slime",Index=i,RunScore=running,Award=if i==1 then award else 0,PartyMember=partyHit and m:GetAttribute("PartyGroup")~=nil,PartyChain=if i==1 and announceParty then partyCount else nil,ChainAward=if i==1 and announceParty then partyAward else nil})
+     remote:FireClient(player,{Position=cell.Position,Size=cell.Size,Color=cell.Color,VisualKind=m:GetAttribute("VisualKind"),MaterialTag=if kind=="Island" then "FloatingIsland" else "Slime",Index=i,RunScore=running,Award=if i==1 then award else 0,PartyMember=partyHit and m:GetAttribute("PartyGroup")~=nil,PartyChain=if i==1 and announceParty then partyCount else nil,ChainAward=if i==1 and announceParty then partyAward else nil})
     end
    end)
   end

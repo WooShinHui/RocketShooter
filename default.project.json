@@ -45,6 +45,30 @@
       },
       "RocketSkinCatalog": {
         "$path": "src/shared/RocketSkinCatalog.luau"
+      },
+      "UIIcons": {
+        "$path": "src/shared/UIIcons.luau"
+      },
+      "DestructionRewardConfig": {
+        "$path": "src/shared/DestructionRewardConfig.luau"
+      },
+      "RocketTrailCatalog": {
+        "$path": "src/shared/RocketTrailCatalog.luau"
+      },
+      "EquipmentPower": {
+        "$path": "src/shared/EquipmentPower.luau"
+      },
+      "CloudGateRules": {
+        "$path": "src/shared/CloudGateRules.luau"
+      },
+      "CourseVisualConfig": {
+        "$path": "src/shared/CourseVisualConfig.luau"
+      },
+      "GateRequirements": {
+        "$path": "src/shared/GateRequirements.luau"
+      },
+      "GateEncounterConfig": {
+        "$path": "src/shared/GateEncounterConfig.luau"
       }
     },
     "ServerScriptService": {

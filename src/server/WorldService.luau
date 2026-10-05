@@ -92,11 +92,11 @@ function World.HazardHit(from,to)
 end
 
 function World.BreakSkyEnemy(player,model,visited)
- return SkyLife and SkyLife.BreakEnemy(player,model,visited) or 0
+ if SkyLife then return SkyLife.BreakEnemy(player,model,visited)end;return 0
 end
 
-function World.CollectSky(player,from,to,visited)
-	return SkyLife and SkyLife.Collect(player,from,to,visited) or 0
+function World.CollectSky(player,from,to,visited,onDestroyed)
+	if SkyLife then return SkyLife.Collect(player,from,to,visited,onDestroyed)end;return 0
 end
 
 function World.GroundY()

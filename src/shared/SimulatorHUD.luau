@@ -7,6 +7,7 @@ local HUD = { Version = "reference-01-clarity-v2", Colors = {
 	Ink = Color3.fromRGB(20, 31, 50), White = Color3.fromRGB(255, 255, 255),
 } }
 local C = HUD.Colors
+local Icons=require(script.Parent:WaitForChild("UIIcons"))
 
 function HUD.text(label, size, color)
 	label.Font = Enum.Font.GothamBlack
@@ -84,9 +85,11 @@ function HUD.currency(gui)
  if not gui then return end;HUD.screen(gui,20)
  local label=gui:FindFirstChild("Balances");if not label then return end
  HUD.text(label,32,C.Yellow);label.TextXAlignment=Enum.TextXAlignment.Left
- label.AnchorPoint=Vector2.zero;label.Size=UDim2.fromOffset(280,44)
+ label.AnchorPoint=Vector2.zero;label.Size=UDim2.fromOffset(232,44)
+ local icon=Icons.Image(gui,"Trophy",UDim2.fromOffset(12,52),UDim2.fromOffset(40,40))
+ label.TextSize=27
  HUD.fit(label,280,100,function(viewport)
-  label.Position=UDim2.fromOffset(12,HUD.leftDockTop(viewport)-52)
+  label.Position=UDim2.fromOffset(58,HUD.leftDockTop(viewport)-52);icon.Position=UDim2.fromOffset(12,HUD.leftDockTop(viewport)-50)
  end)
 end
 

@@ -2,61 +2,109 @@ local Players=game:GetService("Players");local RS=game:GetService("ReplicatedSto
 if not require(RS:WaitForChild("RocketModeConfig")).Enabled then return end
 local p=Players.LocalPlayer;local private=p:WaitForChild("ProgressStats",20);local stats=p:WaitForChild("leaderstats",20)
 if not private or not stats then return end
-local mask=private:WaitForChild("RocketSkinMask",20);local equipped=private:WaitForChild("RocketSkinEquipped",20)
-if not mask or not equipped then return end
-local C=require(RS:WaitForChild("RocketSkinCatalog"));local Styles=require(RS:WaitForChild("RocketStyles"))
-local HUD=require(RS:WaitForChild("SimulatorHUD"));local remote=RS:WaitForChild("SelectRocketSkin")
-local gui=Instance.new("ScreenGui");gui.Name="RocketSkinGui";gui.ResetOnSpawn=false;HUD.screen(gui,50);gui.Parent=p.PlayerGui
-local function text(parent,name,position,size,value,font)
- local v=Instance.new("TextLabel");v.Name=name;v.Position=position;v.Size=size;v.Text=value;HUD.text(v,font or 22);v.TextWrapped=true;v.Parent=parent;return v
+local Skins=require(RS:WaitForChild("RocketSkinCatalog"));local Trails=require(RS:WaitForChild("RocketTrailCatalog"))
+local Equipment=require(RS:WaitForChild("EquipmentPower"))
+local Icons=require(RS:WaitForChild("UIIcons"));local HUD=require(RS:WaitForChild("SimulatorHUD"))
+local skinMask=private:WaitForChild("RocketSkinMask");local skinEquip=private:WaitForChild("RocketSkinEquipped")
+local trailMask=private:WaitForChild("RocketTrailMask");local trailEquip=private:WaitForChild("RocketTrailEquipped")
+local skinRemote=RS:WaitForChild("SelectRocketSkin");local trailRemote=RS:WaitForChild("SelectRocketTrail")
+local gui=Instance.new("ScreenGui");gui.Name="RocketSkinGui";gui.ResetOnSpawn=false;HUD.screen(gui,60);gui.Parent=p.PlayerGui
+local function text(parent,name,x,y,w,h,value,size,color)
+ local v=Instance.new("TextLabel");v.Name=name;v.Position=UDim2.fromOffset(x,y);v.Size=UDim2.fromOffset(w,h);v.Text=value;HUD.text(v,size or 20,color);v.TextStrokeTransparency=.65;v.TextXAlignment=Enum.TextXAlignment.Left;v.TextWrapped=true;v.Parent=parent;return v
 end
-local shade=Instance.new("TextButton");shade.Name="Shade";shade.Text="";shade.BackgroundColor3=HUD.Colors.Ink;shade.BackgroundTransparency=.35;shade.Size=UDim2.fromScale(1,1);shade.Parent=gui
-local panel=Instance.new("Frame");panel.Name="Shop";panel.AnchorPoint=Vector2.new(.5,.5);panel.Position=UDim2.fromScale(.5,.5);panel.Size=UDim2.fromOffset(540,500);HUD.surface(panel,HUD.Colors.Blue);panel.Parent=gui
-text(panel,"Title",UDim2.fromOffset(20,8),UDim2.fromOffset(410,50),"🚀 로켓 스킨",30)
-local close=Instance.new("TextButton");close.Name="Close";close.Position=UDim2.fromOffset(464,10);close.Size=UDim2.fromOffset(60,48);close.Text="×";HUD.button(close,HUD.Colors.Coral);close.TextSize=34;close.Parent=panel
-local balance=text(panel,"Balance",UDim2.fromOffset(20,58),UDim2.fromOffset(500,30),"",22)
-local list=Instance.new("ScrollingFrame");list.Name="Skins";list.BackgroundTransparency=1;list.BorderSizePixel=0;list.Position=UDim2.fromOffset(16,98);list.Size=UDim2.fromOffset(508,346);list.CanvasSize=UDim2.fromOffset(0,#C.Items*92);list.ScrollBarThickness=6;list.Parent=panel
-local message=text(panel,"Message",UDim2.fromOffset(16,450),UDim2.fromOffset(508,36),"외형 전용 · 추진력은 동일",20)
+local function button(parent,name,x,y,w,h,value,color)
+ local v=Instance.new("TextButton");v.Name=name;v.Position=UDim2.fromOffset(x,y);v.Size=UDim2.fromOffset(w,h);v.Text=value;HUD.button(v,color);v.TextSize=20;v.Parent=parent;return v
+end
+local shade=Instance.new("TextButton");shade.Name="Shade";shade.Text="";shade.BackgroundColor3=HUD.Colors.Ink;shade.BackgroundTransparency=.25;shade.Size=UDim2.fromScale(1,1);shade.Parent=gui
+local panel=Instance.new("Frame");panel.Name="Shop";panel.AnchorPoint=Vector2.new(.5,.5);panel.Position=UDim2.fromScale(.5,.5);panel.Size=UDim2.fromOffset(560,530);HUD.surface(panel,Color3.fromRGB(30,48,73));panel.Parent=gui
+Icons.Image(panel,"Rocket",UDim2.fromOffset(18,14),UDim2.fromOffset(36,36));text(panel,"Title",64,8,380,46,"로켓 장비",28)
+local close=button(panel,"Close",494,10,50,42,"×",HUD.Colors.Coral)
+Icons.Image(panel,"Trophy",UDim2.fromOffset(18,61),UDim2.fromOffset(28,28));local balance=text(panel,"Balance",54,58,485,32,"",20,HUD.Colors.Yellow)
+local tabs={Rockets=button(panel,"Rockets",16,102,260,46,"로켓",HUD.Colors.Yellow),Trails=button(panel,"Trails",284,102,260,46,"트레일",HUD.Colors.Blue)}
+Icons.Image(tabs.Rockets,"Rocket",UDim2.fromOffset(14,7),UDim2.fromOffset(32,32));Icons.Image(tabs.Trails,"Trail",UDim2.fromOffset(14,7),UDim2.fromOffset(32,32))
+local list=Instance.new("ScrollingFrame");list.Name="Equipment";list.BackgroundTransparency=1;list.BorderSizePixel=0;list.Position=UDim2.fromOffset(16,160);list.Size=UDim2.fromOffset(528,306);list.ScrollBarThickness=6;list.CanvasSize=UDim2.fromOffset(0,0);list.Parent=panel
+local message=text(panel,"Message",18,482,524,36,"",18)
 local previews=RS:WaitForChild("RocketSkinPreviews",15)
-local views={};local pending=false
+local views={Rockets={},Trails={}};local page="Rockets";local pending=false
 local function update()
- balance.Text="🏆 트로피 "..stats.Trophies.Value
- for i,item in C.Items do
-  local v=views[i];local owned=C.Owns(mask.Value,i);local selected=equipped.Value==i
-  v.Requirement.Text=if owned then "보유" else (if item.Rebirths>0 then "환생 "..item.Rebirths.."회 · " else "").."🏆 "..item.Cost
-  local meets=stats.Rebirths.Value>=item.Rebirths and stats.Trophies.Value>=item.Cost
-  v.Action.Text=if selected then "장착 중" elseif owned then "장착" elseif meets then "해금" else "잠김"
-  v.Action.BackgroundColor3=if selected then HUD.Colors.Yellow elseif owned or meets then HUD.Colors.Green else Color3.fromRGB(100,116,139)
+ local flat,growth=Equipment.Bonuses(Skins.Items[skinEquip.Value],Trails.Items[trailEquip.Value])
+ balance.Text=string.format("%d · 추력 +%d / 성장 +%d%%",stats.Trophies.Value,flat,math.floor(growth*100+.5))
+ for kind,rows in views do
+  local catalog=kind=="Rockets"and Skins or Trails;local mask=kind=="Rockets"and skinMask.Value or trailMask.Value;local selected=kind=="Rockets"and skinEquip.Value or trailEquip.Value
+  for i,v in rows do
+   local item=catalog.Items[i];local owned=catalog.Owns(mask,i);local meets=stats.Trophies.Value>=item.Cost and stats.Rebirths.Value>=(item.Rebirths or 0)
+   v.Card.Visible=kind==page
+   v.Condition.Text=Equipment.Description(item)..(owned and " · 보유"or "\n"..item.Cost.." 트로피"..(item.Rebirths and item.Rebirths>0 and " · 환생 "..item.Rebirths or ""))
+   v.Action.Text=if selected==i then "장착 중"elseif owned then "장착"elseif meets then "구매"else "잠김"
+   v.Action.BackgroundColor3=if selected==i then HUD.Colors.Yellow elseif owned or meets then HUD.Colors.Green else Color3.fromRGB(99,116,137)
+   v.Card.BackgroundColor3=if selected==i then Color3.fromRGB(57,68,69)else Color3.fromRGB(20,31,50)
+  end
  end
+ for kind,b in tabs do b.BackgroundColor3=kind==page and HUD.Colors.Yellow or HUD.Colors.Blue end
+ list.CanvasSize=UDim2.fromOffset(0,#(page=="Rockets"and Skins or Trails).Items*102)
 end
-for i,item in C.Items do
- local card=Instance.new("Frame");card.Name=item.Id;card.Position=UDim2.fromOffset(0,(i-1)*92);card.Size=UDim2.fromOffset(496,84);HUD.surface(card,HUD.Colors.Ink);card.Parent=list
- if previews and previews:FindFirstChild(item.Id) then
-  local viewport=Instance.new("ViewportFrame");viewport.Name="Preview";viewport.BackgroundTransparency=1;viewport.Position=UDim2.fromOffset(4,2);viewport.Size=UDim2.fromOffset(78,78);viewport.Ambient=Color3.fromRGB(210,210,210);viewport.LightColor=Color3.new(1,1,1);viewport.Parent=card
-  local model=previews[item.Id]:Clone();model.Parent=viewport
+for kind,catalog in {Rockets=Skins,Trails=Trails}do
+ for i,item in catalog.Items do
+  local card=Instance.new("Frame");card.Name=kind..item.Id;card.Position=UDim2.fromOffset(0,(i-1)*102);card.Size=UDim2.fromOffset(516,94);HUD.surface(card,HUD.Colors.Ink);card.Parent=list
+  local viewport=Instance.new("ViewportFrame");viewport.Name="Preview";viewport.BackgroundTransparency=1;viewport.Position=UDim2.fromOffset(4,4);viewport.Size=UDim2.fromOffset(86,86);viewport.Ambient=Color3.fromRGB(230,230,230);viewport.LightColor=Color3.new(1,1,1);viewport.Parent=card
   local camera=Instance.new("Camera");camera.FieldOfView=42;camera.CFrame=CFrame.lookAt(Vector3.new(5,3,10),Vector3.new(0,.4,1.5));camera.Parent=viewport;viewport.CurrentCamera=camera
- else
-  text(card,"Icon",UDim2.fromOffset(4,2),UDim2.fromOffset(78,78),item.Icon,44).TextColor3=Styles[item.Id].Accent
+  if kind=="Rockets"and previews and previews:FindFirstChild(item.Id)then previews[item.Id]:Clone().Parent=viewport
+  elseif kind=="Trails"then
+   viewport:Destroy()
+   local sample=Instance.new("Frame");sample.Name="TrailPreview";sample.Position=UDim2.fromOffset(14,18);sample.Size=UDim2.fromOffset(64,58);sample.BackgroundColor3=Color3.new(1,1,1);sample.BorderSizePixel=0;sample.Parent=card
+   local corner=Instance.new("UICorner");corner.CornerRadius=UDim.new(0,14);corner.Parent=sample
+   local gradient=Instance.new("UIGradient");gradient.Color=Trails.Sequence(item);gradient.Rotation=45;gradient.Parent=sample
+   Icons.Image(sample,"Trail",UDim2.fromOffset(8,5),UDim2.fromOffset(48,48))
+  else viewport:Destroy();Icons.Image(card,"Rocket",UDim2.fromOffset(12,12),UDim2.fromOffset(64,64))end
+  text(card,"Name",98,7,284,30,item.Name,23)
+  local condition=text(card,"Requirement",98,39,278,48,"",17,HUD.Colors.Yellow)
+  local action=button(card,"Action",388,22,114,50,"",HUD.Colors.Green)
+  views[kind][i]={Card=card,Condition=condition,Action=action}
+  action.Activated:Connect(function()
+   if pending then return end;pending=true
+   local remote=kind=="Rockets"and skinRemote or trailRemote
+   local ok,success,result=pcall(function()return remote:InvokeServer(i)end)
+   message.Text=if ok then result or ""else "잠시 후 다시 시도하세요"
+   pending=false;update()
+  end)
  end
- text(card,"Name",UDim2.fromOffset(86,2),UDim2.fromOffset(256,38),item.Name,24)
- local condition=text(card,"Requirement",UDim2.fromOffset(86,42),UDim2.fromOffset(256,34),"",19)
- local action=Instance.new("TextButton");action.Name="Action";action.Position=UDim2.fromOffset(352,16);action.Size=UDim2.fromOffset(128,52);HUD.button(action,HUD.Colors.Green);action.Parent=card
- views[i]={Requirement=condition,Action=action}
- action.Activated:Connect(function()
-  if pending then return end;pending=true
-  local ok,success,result=pcall(function() return remote:InvokeServer(i) end)
-  message.Text=if ok then result or "" else "잠시 후 다시 시도하세요"
-  pending=false;update()
- end)
 end
+local function choose(kind)
+ page=kind;list.CanvasPosition=Vector2.zero;message.Text=kind=="Rockets"and "장착한 로켓의 보너스가 다음 발사에 적용돼요"or "추진력 보너스 + 상승 중 로켓 분사 궤적";update()
+end
+for kind,b in tabs do b.Activated:Connect(function()p:SetAttribute("RocketEquipmentTab",kind);choose(kind)end)end
 local function setOpen(open)
- panel.Visible=open;shade.Visible=open
- p:SetAttribute("ProgressionModalOpen",open)
- if open then update() end
+ panel.Visible=open;shade.Visible=open;p:SetAttribute("ProgressionModalOpen",open)
+ if open then choose(p:GetAttribute("RocketEquipmentTab")=="Trails"and "Trails"or "Rockets")end
 end
-local function dismiss() p:SetAttribute("RocketSkinShopOpen",false) end
+local function dismiss()p:SetAttribute("RocketSkinShopOpen",false)end
 close.Activated:Connect(dismiss);shade.Activated:Connect(dismiss)
-p:GetAttributeChangedSignal("RocketSkinShopOpen"):Connect(function() setOpen(p:GetAttribute("RocketSkinShopOpen")==true) end)
-p:GetAttributeChangedSignal("FlightState"):Connect(function() if p:GetAttribute("FlightState")=="Flying" then dismiss() end end)
-for _,v in {mask,equipped,stats.Trophies,stats.Rebirths} do v.Changed:Connect(update) end
-HUD.fit(panel,540,500);setOpen(false);update()
+p:GetAttributeChangedSignal("RocketSkinShopOpen"):Connect(function()setOpen(p:GetAttribute("RocketSkinShopOpen")==true)end)
+p:GetAttributeChangedSignal("RocketEquipmentTab"):Connect(function()choose(p:GetAttribute("RocketEquipmentTab")=="Trails"and "Trails"or "Rockets")end)
+p:GetAttributeChangedSignal("FlightState"):Connect(function()if p:GetAttribute("FlightState")~="Idle"then dismiss()end end)
+for _,v in {skinMask,skinEquip,trailMask,trailEquip,stats.Trophies,stats.Rebirths}do v.Changed:Connect(update)end
+HUD.fit(panel,560,530,function(viewport)
+ panel.SimulatorScale.Scale=1
+ local safe=gui.AbsoluteSize;local w=math.min(560,math.max(280,safe.X-24));local h=math.min(530,math.max(230,safe.Y-24))
+ local narrow=w<480;local compact=h<450
+ panel.Size=UDim2.fromOffset(w,h);close.Position=UDim2.fromOffset(w-66,10);close.Size=UDim2.fromOffset(50,44);close.TextSize=30
+ panel.Title.Size=UDim2.fromOffset(w-140,46);balance.Size=UDim2.fromOffset(w-72,32);balance.TextSize=narrow and 17 or 20
+ panel.Title.Position=UDim2.fromOffset(64,8);panel.Title.Size=UDim2.fromOffset(w-140,compact and 32 or 46);panel.Title.TextSize=compact and 24 or 28
+ balance.Position=UDim2.fromOffset(54,compact and 42 or 58);balance.Size=UDim2.fromOffset(w-72,compact and 26 or 32)
+ panel.TrophyIcon.Position=UDim2.fromOffset(18,compact and 41 or 61)
+ local tabY=compact and 70 or 102;local top=tabY+58;local tabW=(w-40)/2
+ tabs.Rockets.Position=UDim2.fromOffset(16,tabY);tabs.Rockets.Size=UDim2.fromOffset(tabW,46)
+ tabs.Trails.Position=UDim2.fromOffset(w/2+4,tabY);tabs.Trails.Size=UDim2.fromOffset(tabW,46)
+ list.Position=UDim2.fromOffset(16,top);list.Size=UDim2.fromOffset(w-32,h-top-(compact and 42 or 62))
+ message.Position=UDim2.fromOffset(18,h-(compact and 36 or 48));message.Size=UDim2.fromOffset(w-36,compact and 28 or 36);message.TextSize=narrow and 16 or 18
+ for _,rows in views do for _,v in rows do
+  local cw=w-44;local x=narrow and 78 or 98;local actionW=narrow and 98 or 114;local actionX=cw-actionW-12
+  v.Card.Size=UDim2.fromOffset(cw,94)
+  local title=v.Card.Name;local nameLabel=v.Card:FindFirstChild("Name")
+  nameLabel.Position=UDim2.fromOffset(x,7);nameLabel.Size=UDim2.fromOffset(actionX-x-6,30);nameLabel.TextSize=narrow and 18 or 23
+  v.Condition.Position=UDim2.fromOffset(x,39);v.Condition.Size=UDim2.fromOffset(actionX-x-6,48);v.Condition.TextSize=narrow and 14 or 17
+  v.Action.Position=UDim2.fromOffset(actionX,22);v.Action.Size=UDim2.fromOffset(actionW,50);v.Action.TextSize=narrow and 18 or 20
+  local preview=v.Card:FindFirstChild("Preview");if preview then preview.Size=UDim2.fromOffset(narrow and 66 or 86,narrow and 86 or 86)end
+  local swatch=v.Card:FindFirstChild("TrailPreview");if swatch then swatch.Position=UDim2.fromOffset(narrow and 6 or 14,18)end
+ end end
+end);setOpen(false);update()

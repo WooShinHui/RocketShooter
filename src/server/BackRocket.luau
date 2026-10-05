@@ -1,10 +1,12 @@
 local Styles=require(game:GetService("ReplicatedStorage"):WaitForChild("RocketStyles"))
+local Trails=require(game:GetService("ReplicatedStorage"):WaitForChild("RocketTrailCatalog"))
 local Rocket={}
-function Rocket.Attach(character,styleId)
+function Rocket.Attach(character,styleId,trailId)
  local torso=character:FindFirstChild("UpperTorso")or character:FindFirstChild("Torso")
  if not torso or character:FindFirstChild("BackRocket")then return end
  local style=Styles[styleId]or Styles.Starter
- local m=Instance.new("Model");m.Name="BackRocket";m:SetAttribute("Style",Styles[styleId]and styleId or "Starter")
+ local trail=Trails.Find(trailId)
+ local m=Instance.new("Model");m.Name="BackRocket";m:SetAttribute("Trail",trail.Id);m:SetAttribute("Style",Styles[styleId]and styleId or "Starter")
  local function part(name,size,offset,color,shape)
   local p=Instance.new("Part");p.Name=name;p.Size=size;p.Color=color;p.Shape=shape or Enum.PartType.Block
   p.Material=Enum.Material.SmoothPlastic;p.CanCollide=false;p.CanTouch=false;p.CanQuery=false;p.Massless=true
@@ -46,6 +48,12 @@ function Rocket.Attach(character,styleId)
   local fire=Instance.new("ParticleEmitter");fire.Name="RocketFlame";fire.Texture="rbxasset://textures/particles/fire_main.dds";fire.Enabled=false;fire.Rate=120;fire.Lifetime=NumberRange.new(.12,.3);fire.Speed=NumberRange.new(10,20)
   fire.EmissionDirection=Enum.NormalId.Bottom;fire.SpreadAngle=Vector2.new(5,5);fire.LightEmission=1;fire.Color=ColorSequence.new(Color3.new(1,1,1),style.Flame);fire.Size=NumberSequence.new(1.1,0);fire.Parent=a
   local smoke=Instance.new("ParticleEmitter");smoke.Name="ExhaustSmoke";smoke.Texture="rbxasset://textures/particles/smoke_main.dds";smoke.Enabled=false;smoke.Rate=20;smoke.Lifetime=NumberRange.new(.35,.6);smoke.Speed=NumberRange.new(8,16);smoke.EmissionDirection=Enum.NormalId.Bottom;smoke.Color=ColorSequence.new(Color3.fromRGB(190,202,220));smoke.Size=NumberSequence.new(1.2,3);smoke.Transparency=NumberSequence.new(.7,1);smoke.Parent=a
+  if trail.Id~="None"then
+   local a0=Instance.new("Attachment");a0.Name="TrailEdge0";a0.Position=Vector3.new(-.25,0,-trail.Width/2);a0.Parent=nozzle
+   local a1=Instance.new("Attachment");a1.Name="TrailEdge1";a1.Position=Vector3.new(-.25,0,trail.Width/2);a1.Parent=nozzle
+   local ribbon=Instance.new("Trail");ribbon.Name="PurchasedExhaustTrail";ribbon.Attachment0=a0;ribbon.Attachment1=a1;ribbon.Enabled=false;ribbon.FaceCamera=true;ribbon.Lifetime=trail.Lifetime;ribbon.MaxLength=180;ribbon.MinLength=.1;ribbon.LightEmission=1;ribbon.Color=Trails.Sequence(trail);ribbon.Transparency=NumberSequence.new({NumberSequenceKeypoint.new(0,.12),NumberSequenceKeypoint.new(.65,.35),NumberSequenceKeypoint.new(1,1)});ribbon.WidthScale=NumberSequence.new(1,0);ribbon.Parent=nozzle
+   local sparks=Instance.new("ParticleEmitter");sparks.Name="TrailSparkles";sparks.Texture="rbxasset://textures/particles/sparkles_main.dds";sparks.Color=Trails.Sequence(trail);sparks.LightEmission=1;sparks.Lifetime=NumberRange.new(.15,.3);sparks.Rate=18;sparks.Speed=NumberRange.new(5,12);sparks.Size=NumberSequence.new(.3,0);sparks.Transparency=NumberSequence.new(.2,1);sparks.EmissionDirection=Enum.NormalId.Bottom;sparks.Enabled=false;sparks.Parent=a
+  end
   local light=Instance.new("PointLight");light.Name="EngineLight";light.Enabled=false;light.Color=style.Flame;light.Range=10;light.Parent=nozzle
  end
  m.Parent=character;Rocket.Set(character,false)
@@ -54,7 +62,8 @@ function Rocket.Pulse(character,throttle,phase,fuel)
  local m=character:FindFirstChild("BackRocket");if not m then return end
  throttle=math.clamp(throttle,0,1);character:SetAttribute("RocketPhase",phase);character:SetAttribute("RocketFuel",fuel);character:SetAttribute("RocketThrust",throttle)
  for _,p in m:GetDescendants()do
-  if p:IsA("ParticleEmitter")then p.Enabled=throttle>.01;if p.Name=="RocketFlame"then p.Rate=40+throttle*120;p.Speed=NumberRange.new(15+throttle*25,22+throttle*35)end
+  if p:IsA("ParticleEmitter")then p.Enabled=throttle>.01 and (p.Name~="TrailSparkles"or phase~="Diving");if p.Name=="RocketFlame"then p.Rate=40+throttle*120;p.Speed=NumberRange.new(15+throttle*25,22+throttle*35)end
+  elseif p:IsA("Trail")then p.Enabled=throttle>.01 and phase~="Diving";if not p.Enabled then p:Clear()end
   elseif p:IsA("Beam")then p.Enabled=throttle>.01;p.Width0=.4+throttle*.6
   elseif p:IsA("Attachment")and p.Name=="FlameTip"then p.CFrame=p.Parent.Exhaust.CFrame*CFrame.new(0,-(1+throttle*8),0)
   elseif p:IsA("PointLight")then p.Enabled=throttle>.01;p.Brightness=throttle*2

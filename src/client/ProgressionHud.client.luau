@@ -5,6 +5,7 @@ local C=require(RS:WaitForChild("ProgressionConfig",15));local HUD=require(RS:Wa
 local rebirth=RS:WaitForChild("RequestRebirth",15);local buy=RS:WaitForChild("BuyTrainingTier",15)
 local buyItem=RS:WaitForChild("BuyXPItem",15)
 local click=RS:WaitForChild("ClickTraining",15);local auto=RS:WaitForChild("ToggleAutoClick",15)
+local Icons=require(RS:WaitForChild("UIIcons"))
 local Audio=require(script.Parent.Audio);local purple=Color3.fromRGB(171,98,245)
 local gui=Instance.new("ScreenGui");gui.Name="ProgressionGui";gui.ResetOnSpawn=false;HUD.screen(gui,40);gui.Parent=player.PlayerGui
 local function label(parent,name,x,y,w,h,text,size,color)
@@ -17,11 +18,11 @@ local function button(parent,name,x,y,w,h,text,color,size)
  local v=Instance.new("TextButton");v.Name=name;v.Position=UDim2.fromOffset(x,y);v.Size=UDim2.fromOffset(w,h);v.Text=text;HUD.button(v,color);v.TextSize=size or 26;v.Parent=parent;return v
 end
 local dock=Instance.new("Frame");dock.Name="GrowthDock";dock.BackgroundTransparency=1;dock.Size=UDim2.fromOffset(212,420);dock.Parent=gui
-local open=button(dock,"OpenRebirth",0,0,96,100,"🔄",purple,54)
+local open=button(dock,"OpenRebirth",0,0,96,100,"",purple,54);Icons.Image(open,"Rebirth",UDim2.fromOffset(20,8),UDim2.fromOffset(56,56))
 local training=button(dock,"OpenTraining",112,0,96,100,"🚽",HUD.Colors.Blue,48)
 label(open,"Caption",0,74,96,26,"환생",16);label(training,"Caption",0,74,96,26,"수련",16)
-local gift=button(dock,"OpenCommunity",0,114,96,100,"🎁",HUD.Colors.Yellow,48)
-local toggle=button(dock,"AutoClick",112,114,96,100,"⚡",HUD.Colors.Green,40)
+local gift=button(dock,"OpenCommunity",0,114,96,100,"",HUD.Colors.Yellow,48);Icons.Image(gift,"Gift",UDim2.fromOffset(20,8),UDim2.fromOffset(56,56))
+local toggle=button(dock,"AutoClick",112,114,96,100,"",HUD.Colors.Green,40);Icons.Image(toggle,"Upgrade",UDim2.fromOffset(20,8),UDim2.fromOffset(56,56))
 label(gift,"Caption",0,74,96,26,"선물",16);local autoCaption=label(toggle,"Caption",0,74,96,26,"자동 수련",13)
 local level=label(dock,"Level",0,183,172,28,"",22,HUD.Colors.Yellow)
 local xpbar=box(dock,"XPBar",0,216,172,16,HUD.Colors.Ink)
@@ -31,9 +32,13 @@ local nextGoal=label(dock,"NextGoal",0,263,208,60,"",19,HUD.Colors.Yellow)
 local growthPower=label(dock,"GrowthPower",0,311,172,30,"",17)
 local passiveRate=label(dock,"PassiveRate",0,344,172,32,"",14,HUD.Colors.Green)
 for _,v in {level,xpbar,xpText,growthPower,passiveRate}do v.Visible=false end
-nextGoal.Position=UDim2.fromOffset(0,288)
-local skins=button(dock,"OpenSkins",0,228,208,48,"🚀 로켓 스킨",purple,24)
-skins.Activated:Connect(function() if player:GetAttribute("FlightState")~="Flying" then player:SetAttribute("RocketSkinShopOpen",true) end end)
+nextGoal.Position=UDim2.fromOffset(0,342)
+local skins=button(dock,"OpenSkins",0,228,208,48,"",purple,24)
+Icons.Image(skins,"Rocket",UDim2.fromOffset(10,6),UDim2.fromOffset(36,36));label(skins,"Caption",52,0,150,48,"로켓",22)
+local trails=button(dock,"OpenTrails",0,284,208,48,"",HUD.Colors.Blue,24)
+Icons.Image(trails,"Trail",UDim2.fromOffset(10,6),UDim2.fromOffset(36,36));label(trails,"Caption",52,0,150,48,"트레일",22)
+trails.Activated:Connect(function()if player:GetAttribute("FlightState")~="Flying"then player:SetAttribute("RocketEquipmentTab","Trails");player:SetAttribute("RocketSkinShopOpen",true)end end)
+skins.Activated:Connect(function() if player:GetAttribute("FlightState")~="Flying" then player:SetAttribute("RocketEquipmentTab","Rockets");player:SetAttribute("RocketSkinShopOpen",true) end end)
 local shade=button(gui,"ModalShade",0,0,1,1,"",HUD.Colors.Ink);shade.Size=UDim2.fromScale(1,1);shade.BackgroundTransparency=.35;shade.ZIndex=10;shade.Visible=false
 local popup=box(gui,"RebirthPanel",0,0,500,460,HUD.Colors.Blue);popup.AnchorPoint=Vector2.new(.5,.5);popup.Position=UDim2.fromScale(.5,.5);popup.ZIndex=11;popup.Visible=false
 local title=label(popup,"Title",20,12,372,48,"🔄 환생",32)
@@ -70,7 +75,16 @@ label(communityPage,"ConnectionStatus",20,314,460,24,"커뮤니티 연결 준비
 local message=label(popup,"Message",20,434,460,22,"",14)
 HUD.fit(popup,500,460)
 HUD.fit(dock,212,420,function(v)
- dock.SimulatorScale.Scale=if v.X<700 or v.Y<500 then .78 else 1
+ local landscape=v.Y<500 and v.X>v.Y
+ dock.SimulatorScale.Scale=if landscape then .78 elseif v.X<700 then .78 else 1
+ nextGoal.Visible=not landscape
+ if landscape then
+  skins.Position=UDim2.fromOffset(0,228);skins.Size=UDim2.fromOffset(96,68);skins.Caption.Position=UDim2.fromOffset(0,42);skins.Caption.Size=UDim2.fromOffset(96,24);skins.Caption.TextSize=18;skins.RocketIcon.Position=UDim2.fromOffset(30,4)
+  trails.Position=UDim2.fromOffset(112,228);trails.Size=UDim2.fromOffset(96,68);trails.Caption.Position=UDim2.fromOffset(0,42);trails.Caption.Size=UDim2.fromOffset(96,24);trails.Caption.TextSize=18;trails.TrailIcon.Position=UDim2.fromOffset(30,4)
+ else
+  skins.Position=UDim2.fromOffset(0,228);skins.Size=UDim2.fromOffset(208,48);skins.Caption.Position=UDim2.fromOffset(52,0);skins.Caption.Size=UDim2.fromOffset(150,48);skins.Caption.TextSize=22;skins.RocketIcon.Position=UDim2.fromOffset(10,6)
+  trails.Position=UDim2.fromOffset(0,284);trails.Size=UDim2.fromOffset(208,48);trails.Caption.Position=UDim2.fromOffset(52,0);trails.Caption.Size=UDim2.fromOffset(150,48);trails.Caption.TextSize=22;trails.TrailIcon.Position=UDim2.fromOffset(10,6)
+ end
  dock.Position=UDim2.fromOffset(12,HUD.leftDockTop(v))
 end)
 local page="Rebirth";local pending=false
@@ -100,14 +114,14 @@ local function update()
  tierButton.BackgroundColor3=if meets then HUD.Colors.Green else Color3.fromRGB(110,125,142)
  tierButton:SetAttribute("RequiredLevel",nextTier and nextTier.Level);tierButton:SetAttribute("RequiredRebirths",nextTier and nextTier.Rebirths or 0)
  autoCaption.Text="XP 아이템"
- toggle.Text="🧤"
+ toggle.Text=""
  local item=C.XPItems[val("XPGearLvl")+1]
  op.Text=if item then string.format("%s · 경험치 x%s\n트로피 %d 구매",item.Name,item.Multiplier,item.Cost)else "최고 경험치 아이템 보유!"
  -- Tutorial (deferred): tap.Text="화면 클릭 +1 XP\n비행 중에도 클릭 가능"
  tap.Text="클릭 +1 XP"
  toggle.BackgroundColor3=if player:GetAttribute("AutoClickEnabled") then HUD.Colors.Green else Color3.fromRGB(96,123,145)
- local phase=player:GetAttribute("FlightState");dock.Visible=phase==nil or phase=="Idle"
- if not dock.Visible then popup.Visible=false;shade.Visible=false;player:SetAttribute("ProgressionModalOpen",false) end
+ local phase=player:GetAttribute("FlightState");dock.Visible=(phase==nil or phase=="Idle")and not player:GetAttribute("RocketSkinShopOpen")
+ if phase~=nil and phase~="Idle"then popup.Visible=false;shade.Visible=false;player:SetAttribute("ProgressionModalOpen",false) end
 end
 local function show(kind)
  player:SetAttribute("RocketSkinShopOpen",false)
@@ -116,7 +130,7 @@ local function show(kind)
  title.Text=if kind=="Rebirth" then "🔄 환생" elseif kind=="Training" then "🚽 변기 수련 / 해금" else "🎁 그룹 보상"
  popup.BackgroundColor3=if kind=="Community" then HUD.Colors.Yellow else HUD.Colors.Blue;update()
 end
-player:GetAttributeChangedSignal("RocketSkinShopOpen"):Connect(function() if player:GetAttribute("RocketSkinShopOpen") then popup.Visible=false;shade.Visible=false end end)
+player:GetAttributeChangedSignal("RocketSkinShopOpen"):Connect(function() if player:GetAttribute("RocketSkinShopOpen") then popup.Visible=false;shade.Visible=false end;update() end)
 open.Activated:Connect(function()show("Rebirth")end);training.Activated:Connect(function()show("Training")end);gift.Activated:Connect(function()show("Community")end)
 close.Activated:Connect(function()popup.Visible=false;shade.Visible=false;player:SetAttribute("ProgressionModalOpen",false) end)
 confirm.Activated:Connect(function()
@@ -139,5 +153,5 @@ op.Activated:Connect(function()
 end)
 tap.Activated:Connect(function()click:FireServer()end)
 for _,name in {"TrainingLevel","TrainingXP","Rebirths","TrainingTier","Trophies","XPGearLvl"} do local s=stats:WaitForChild(name,15);if s then s.Changed:Connect(update) end end
-for _,name in {"TrainingActive","FlightState","AutoClickEnabled","TrainingXPMultiplier"} do player:GetAttributeChangedSignal(name):Connect(update) end
+for _,name in {"TrainingActive","FlightState","AutoClickEnabled","TrainingXPMultiplier","ProgressionModalOpen"} do player:GetAttributeChangedSignal(name):Connect(update) end
 update()

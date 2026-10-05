@@ -44,3 +44,34 @@ do
  s.TrainingLevel.Value=40;check(data.Rebirth(p,1) and s.TrainingLevel.Value==0,"second rebirth unlocks at forty")
  check(data.Save(p) and env.saved.TrainingLevel==0,"rebirth level zero is valid persistent data")
 end
+
+do
+ local env=environment();local rules=newRocketRules(env);local V=env.Vector3
+ local slow,slowAccel=rules.DiveSteering(100,0,480,.2,120)
+ local fast,fastAccel=rules.DiveSteering(2400,0,480,.2,120)
+ local boosted=rules.DiveSteering(3600,0,480,.2,120)
+ check(slow==20 and fast==480 and boosted==480,"dive movement scales with fall speed and remains capped")
+ local current=V.new(0,0,0)
+ for _=1,4 do current+=rules.Step(current,V.new(fast,0,0),fastAccel,.05)end
+ check(current.X==480,"fast dive reaches useful lateral speed within 0.2 seconds")
+ for _=1,8 do current+=rules.Step(current,V.new(-fast,0,0),fastAccel,.05)end
+ check(current.X==-480,"fast dive reverses direction within 0.4 seconds")
+ for _=1,4 do current+=rules.Step(current,V.zero,fastAccel,.05)end
+ check(current.Magnitude==0,"release brakes dive sideways drift within 0.2 seconds")
+ local v,target=rules.DiveAim(2400,2400,true,false,1800,2400,.05)
+ check(v==2280 and target==2280,"aiming slows terminal fall progressively rather than snapping")
+ for _=1,5 do v,target=rules.DiveAim(v,2400,true,false,1800,2400,.05)end
+ check(v==1800 and target==1800,"normal dive aiming settles at a controllable fall ceiling")
+ v,target=rules.DiveAim(2400,3600,true,true,1800,2400,.05)
+ check(v==2400 and target==3600,"held F boost bypasses automatic aiming slowdown")
+ v,target=rules.DiveAim(2400,2400,false,false,1800,2400,.05)
+ check(v==2400 and target==2400,"neutral descent retains its original fall target")
+end
+
+do
+ local env=environment();local rules=newRocketRules(env)
+ for _,fall in {0,20,90,100,500,1000,1800,2400,3600}do
+  local speed=rules.DiveSteering(fall,0,480,.2,120)
+  check(speed==math.min(fall*.2,480),"lateral speed follows actual descent without a low-level minimum jump")
+ end
+end

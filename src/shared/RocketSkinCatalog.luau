@@ -1,10 +1,10 @@
--- Cosmetic ownership is a saved bit mask. IDs/order are permanent save keys.
+-- Rocket equipment ownership is a saved bit mask. IDs/order are permanent save keys.
 local C={Items={
- {Id="Starter",Name="스타터",Cost=0,Rebirths=0,Icon="🚀"},
- {Id="Ion",Name="이온",Cost=0,Rebirths=1,Icon="⚡"},
- {Id="Bat",Name="방망이 로켓",Cost=5,Rebirths=0,Icon="🏏"},
- {Id="Mala",Name="마라탕 로켓",Cost=15,Rebirths=1,Icon="🍜"},
- {Id="Nova",Name="노바",Cost=40,Rebirths=3,Icon="🌌"},
+ {Id="Starter",FlatThrust=0,GrowthBoost=0,Name="스타터",Cost=0,Rebirths=0,Icon="🚀"},
+ {Id="Ion",FlatThrust=8,GrowthBoost=0.03,Name="이온",Cost=0,Rebirths=1,Icon="⚡"},
+ {Id="Bat",FlatThrust=10,GrowthBoost=0.04,Name="방망이 로켓",Cost=5,Rebirths=0,Icon="🏏"},
+ {Id="Mala",FlatThrust=16,GrowthBoost=0.07,Name="마라탕 로켓",Cost=15,Rebirths=1,Icon="🍜"},
+ {Id="Nova",FlatThrust=25,GrowthBoost=0.1,Name="노바",Cost=40,Rebirths=3,Icon="🌌"},
 }}
 function C.Owns(mask,index) return bit32.band(mask,bit32.lshift(1,index-1))~=0 end
 function C.Valid(mask,index)

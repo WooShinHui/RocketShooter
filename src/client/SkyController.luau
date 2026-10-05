@@ -5,6 +5,7 @@ local RunService = game:GetService("RunService")
 local module = ReplicatedStorage:WaitForChild("CloudConfig", 15)
 assert(module and module:IsA("ModuleScript"), "[Sky] Missing CloudConfig ModuleScript; reconnect Rojo")
 local Config = require(module)
+local GateRules=require(ReplicatedStorage:WaitForChild("CloudGateRules"))
 local PresentationConfig = require(script.Parent.PresentationConfig)
 local Presentation = PresentationConfig.Sky
 local Sky = {}
@@ -17,6 +18,14 @@ local groundSky, spaceSky, activeSky
 local skyBandIndex = 1
 local activeSkyKey
 local lightingTween, atmosphereTween
+local veil,veilTween
+local function clearVeil()if veilTween then veilTween:Cancel();veilTween=nil end;if veil then veil.Visible=false;veil.BackgroundTransparency=1 end end
+local function revealSky()
+ if not veil then return end
+ clearVeil();veil.Visible=true;veil.BackgroundTransparency=0
+ local tween=game:GetService("TweenService"):Create(veil,TweenInfo.new(.65,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0,false,.12),{BackgroundTransparency=1});veilTween=tween
+ tween.Completed:Connect(function()if veilTween==tween then veilTween=nil;veil.Visible=false end end);tween:Play()
+end
 local originalAtmosphere
 local Preview = Config.HeightPresentation or PresentationConfig.DestructionPreview
 
@@ -46,6 +55,7 @@ local function switchPreviewSky(space)
 end
 
 local function applyPreview(stage, immediate, biome, band)
+ local previousBand=skyBandIndex
 	skyBandIndex = band or 1
 	biomeIndex = biome or 1
 	Lighting:SetAttribute("AltitudeBiome", biomeIndex)
@@ -54,6 +64,7 @@ local function applyPreview(stage, immediate, biome, band)
 	previewStage = stage
 	Lighting:SetAttribute("AltitudeLayer", stageNames[stage])
 	switchPreviewSky(stage == 4)
+ if immediate then clearVeil()elseif previousBand~=skyBandIndex then revealSky()end
  -- Sky textures define the background. Altitude does not tint, darken or fog them.
  local lighting={ClockTime=Presentation.ClockTime,Brightness=Config.Ground.Brightness,
   ExposureCompensation=Config.Ground.Exposure,Ambient=Color3.fromRGB(table.unpack(Config.Ground.Ambient)),
@@ -154,7 +165,15 @@ function Sky.Start()
 			end)
 		end
 	end
-	Sky.Reset() -- Bright Ground identity; no legacy automatic Space transition.
+	local cloudGui=Instance.new("ScreenGui");cloudGui.Name="CloudExitTransition";cloudGui.ResetOnSpawn=false;cloudGui.IgnoreGuiInset=true;cloudGui.DisplayOrder=40;cloudGui.Parent=player:WaitForChild("PlayerGui")
+ veil=Instance.new("Frame");veil.Name="CloudVeil";veil.Size=UDim2.fromScale(1,1);veil.BackgroundColor3=Color3.fromRGB(246,249,255);veil.BorderSizePixel=0;veil.BackgroundTransparency=1;veil.Visible=false;veil.Active=false;veil.Parent=cloudGui
+ if Preview.SkyBands then task.spawn(function()
+  local assets={};for _,band in Preview.SkyBands do local asset=Instance.new("Sky");for property,value in band.Properties do asset[property]=value end;table.insert(assets,asset)end
+  local failures=0;local ok=pcall(function()game:GetService("ContentProvider"):PreloadAsync(assets,function(_,status)if status~=Enum.AssetFetchStatus.Success then failures+=1 end end)end)
+  Lighting:SetAttribute("SkyPreloadFailures",failures);Lighting:SetAttribute("SkyPreloadComplete",ok)
+  for _,asset in assets do asset:Destroy()end
+ end)end
+ Sky.Reset() -- Bright Ground identity; no legacy automatic Space transition.
 	local gui = Instance.new("ScreenGui")
 	gui.Name, gui.ResetOnSpawn, gui.DisplayOrder = "DiscoveryGui", false, 10
 	label = Instance.new("TextLabel")
@@ -178,17 +197,23 @@ function Sky.Start()
 			if root and root:IsA("BasePart") then
 				-- LevelConfig's audited GroundY is 0; this is presentation-only altitude.
 				local altitude = root.Position.Y - Preview.GroundY
+                if veil and not veilTween then
+                 local cover=0;local speed=root.AssemblyLinearVelocity.Y
+                 for _,gate in Preview.Gates do if altitude>=gate.Bottom and altitude<gate.Top then
+                  local distance=speed>=0 and gate.Top-altitude or altitude-gate.Bottom
+                  local width=math.max(60,math.abs(speed)*.22);local t=math.clamp(1-distance/width,0,1);cover=t*t*(3-2*t);break
+                 end end
+                 veil.Visible=cover>0;veil.BackgroundTransparency=1-cover
+                end
 				local stage = previewStage
 				while stage < 4 and altitude >= Preview.Enter[stage] do stage += 1 end
 				while stage > 1 and altitude < Preview.Enter[stage - 1] - Preview.Hysteresis do stage -= 1 end
 				local biome=biomeIndex
                 local definitions=Preview.Biomes or {}
-                while biome<#definitions and altitude>=definitions[biome+1].Min do biome+=1 end
-                while biome>1 and altitude<definitions[biome].Min-Preview.Hysteresis do biome-=1 end
+                biome=math.min(#definitions,GateRules.Band(biome,Preview.Gates,altitude))
                 local band = skyBandIndex
                 local bands = Preview.SkyBands or {}
-                while band < #bands and altitude >= bands[band+1].Min do band += 1 end
-                while band > 1 and altitude < bands[band].Min - Preview.Hysteresis do band -= 1 end
+                band=GateRules.Band(band,Preview.Gates,altitude)
                 if stage ~= previewStage or biome ~= biomeIndex or band ~= skyBandIndex then
                  applyPreview(stage, false, biome, band)
                  if label and definitions[biome] then label.Text=definitions[biome].Name.."\n구름 경계를 통과했습니다!";label.Visible=true;noticeUntil=os.clock()+2.5 end

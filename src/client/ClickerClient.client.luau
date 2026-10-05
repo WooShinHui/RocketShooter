@@ -16,13 +16,18 @@ end)
 local function resize()
  local width=gui.AbsoluteSize.X;if width<=0 then return end
  UI.ResizeProgress(view,width,width<700 or gui.AbsoluteSize.Y<500)
+ local phase=player:GetAttribute("FlightState")
+ view.Frame.Visible=not player:GetAttribute("ProgressionModalOpen")and (not (width<700 or gui.AbsoluteSize.Y<500)or phase==nil or phase=="Idle")
 end
 gui:GetPropertyChangedSignal("AbsoluteSize"):Connect(resize);resize()
 local function value(name)local v=stats:FindFirstChild(name);return v and v.Value or 0 end
 local function update()
  local level,xp,rebirths=value("TrainingLevel"),value("TrainingXP"),value("Rebirths")
  local private=player:FindFirstChild("ProgressStats");local base=private and private:FindFirstChild("PowerLvl")
- local power=(base and base.Value or 1)+Growth.PowerBonus(level,rebirths)
+ local skins=require(RS:WaitForChild("RocketSkinCatalog"));local trails=require(RS:WaitForChild("RocketTrailCatalog"))
+ local skin=private and private:FindFirstChild("RocketSkinEquipped");local trail=private and private:FindFirstChild("RocketTrailEquipped")
+ local flat,growth=require(RS:WaitForChild("EquipmentPower")).Bonuses(skins.Items[skin and skin.Value or 1],trails.Items[trail and trail.Value or 1])
+ local power=tostring((base and base.Value or 1)+Growth.PowerBonus(level,rebirths)).." · 추력 +"..flat.." / 성장 +"..math.floor(growth*100+.5).."%"
  UI.UpdateProgress(view,level,xp,Growth.RequiredXP(level),power)
  local mode=player:GetAttribute("AutoClickMode")or "Off"
  UI.UpdateButton(free,mode=="Free");UI.UpdateButton(op,mode=="OP")
@@ -31,7 +36,10 @@ local function update()
  view.Hint.Text="";view.Hint.Visible=false
  local phase=player:GetAttribute("FlightState");dock.Visible=(phase==nil or phase=="Idle")and not player:GetAttribute("ProgressionModalOpen")
  view.Frame.Visible=not player:GetAttribute("ProgressionModalOpen")
+ resize()
 end
+local equipment=player:WaitForChild("ProgressStats")
+for _,name in {"RocketSkinEquipped","RocketTrailEquipped"}do equipment:WaitForChild(name).Changed:Connect(update)end
 local pending=false
 local function selectMode(mode)
  if pending then return end

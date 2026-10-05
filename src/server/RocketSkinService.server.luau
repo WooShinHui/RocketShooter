@@ -1,6 +1,7 @@
 local RS=game:GetService("ReplicatedStorage")
 if not require(RS:WaitForChild("RocketModeConfig")).Enabled then return end
 local Data=require(script.Parent.PlayerData)
+require(script.Parent.Remotes).Ensure().SelectRocketTrail.OnServerInvoke=function(player,index)return Data.SelectRocketTrail(player,index)end
 require(script.Parent.Remotes).Ensure().SelectRocketSkin.OnServerInvoke=function(player,index)
  return Data.SelectRocketSkin(player,index)
 end

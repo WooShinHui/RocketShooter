@@ -12,6 +12,17 @@ function Rules.DiveTarget(height,boost,current,normalLimit,boostLimit)
  -- Releasing acceleration retains momentum, always within the boosted ceiling.
  return math.max(math.min(current or 0,boostLimit),desired)
 end
+function Rules.DiveSteering(fallSpeed,minimum,maximum,ratio,acceleration)
+ local speed=math.clamp(math.abs(fallSpeed)*ratio,minimum,maximum)
+ return speed,math.max(acceleration,speed*5)
+end
+function Rules.DiveAim(current,target,steering,boost,limit,deceleration,dt)
+ if steering and not boost then
+  target=math.min(target,limit)
+  if current>target then current=math.max(target,current-deceleration*math.clamp(dt,0,.1));target=current end
+ end
+ return current,target
+end
 function Rules.FlightTimeout(height,burn,normalLimit)
  return math.max(110,burn+height/normalLimit+35)
 end
