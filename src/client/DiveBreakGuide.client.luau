@@ -19,8 +19,8 @@ Run.RenderStepped:Connect(function(dt)
  end
  if not folder then return end
  local targets={};local nearest
- for _,m in folder:GetChildren()do if m:IsA("Model")and m:GetAttribute("TargetKind")=="Block"and m.PrimaryPart and not m:GetAttribute("Broken")and not m:GetAttribute("Passed")and m.PrimaryPart.Position.Y<root.Position.Y+4 then
-  if not nearest or m.PrimaryPart.Position.Y>nearest then nearest=m.PrimaryPart.Position.Y end;table.insert(targets,m)
+ for _,m in folder:GetChildren()do if m:IsA("Model")and m:GetAttribute("TargetKind")=="Block"and m.PrimaryPart and not m:GetAttribute("Broken")and not m:GetAttribute("Passed")and (m:GetAttribute("WindowBottom")or m.PrimaryPart.Position.Y)<root.Position.Y+4 then
+  local top=m:GetAttribute("WindowTop")or m.PrimaryPart.Position.Y;if not nearest or top>nearest then nearest=top end;table.insert(targets,m)
  end end
  local ringNearest;for _,m in folder:GetChildren()do if m:GetAttribute("TargetKind")=="Ring"and m.PrimaryPart and not m:GetAttribute("Broken")and m.PrimaryPart.Position.Y<root.Position.Y+4 then
   if not ringNearest or m.PrimaryPart.Position.Y>ringNearest then ringNearest=m.PrimaryPart.Position.Y end
@@ -38,13 +38,13 @@ Run.RenderStepped:Connect(function(dt)
  if compact and readout and readout.Visible then top=readout.AbsolutePosition.Y+readout.AbsoluteSize.Y+6-gui.AbsolutePosition.Y end
  title.Position=UDim2.new(.5,0,0,top)
  local shown=0;local central,bonus,layer
- for _,m in targets do if math.abs(m.PrimaryPart.Position.Y-nearest)<1 then
+ for _,m in targets do if math.abs((m:GetAttribute("WindowTop")or m.PrimaryPart.Position.Y)-nearest)<1 then
   local lane=m:GetAttribute("Lane");layer=m:GetAttribute("LayerIndex");if lane==0 then central=m:GetAttribute("TrophyAmount")else bonus=m:GetAttribute("TrophyAmount")end
   shown+=1;local marker=markers[shown];if not marker then break end
-  local point,visible=camera:WorldToViewportPoint(m.PrimaryPart.Position)
+  local point,visible=camera:WorldToViewportPoint(Vector3.new(m.PrimaryPart.Position.X,math.clamp(root.Position.Y-100,m:GetAttribute("WindowBottom")or nearest,nearest),m.PrimaryPart.Position.Z))
   marker.Size=UDim2.fromOffset(compact and 86 or 116,compact and 26 or 38);marker.TextSize=compact and 12 or 17
   local low=math.min(top+(compact and 60 or 90),viewport.Y-(compact and 86 or 190))
-  marker.Visible=visible;marker.Position=UDim2.fromOffset(math.clamp(point.X,62,math.max(62,viewport.X-62)),math.clamp(point.Y,low,math.max(low,viewport.Y-190)));marker.Text=lane==0 and "중앙 · 안전"or "보너스 ×3";marker.TextColor3=lane==0 and Color3.fromRGB(102,229,255)or Color3.fromRGB(255,202,62)
+  marker.Visible=point.Z>0;marker.Position=UDim2.fromOffset(math.clamp(point.X,62,math.max(62,viewport.X-62)),math.clamp(point.Y,low,math.max(low,viewport.Y-190)));marker.Text=lane==0 and "중앙 ×1"or(point.X<viewport.X/2 and "◀ 보너스 ×3"or "보너스 ×3 ▶");marker.TextColor3=lane==0 and Color3.fromRGB(102,229,255)or Color3.fromRGB(255,202,62)
   if compact and visible and flightGui then
    local x,y=marker.Position.X.Offset,marker.Position.Y.Offset;local w,h=marker.Size.X.Offset,marker.Size.Y.Offset
    for _,name in {"Dive","Explode","Abort"}do local button=flightGui:FindFirstChild(name)
@@ -58,5 +58,5 @@ Run.RenderStepped:Connect(function(dt)
  end end
  title.Visible=true
  if ringOnly then title.Text=string.format(compact and "링 %d/%d · %dm 아래\n넓은 링 안으로!"or "하강 링 %d/%d · 다음 링까지 %dm\n넓은 링 안으로 연속 통과!",folder:GetAttribute("RingHits")or 0,folder:GetAttribute("RingTotal")or 0,math.max(0,math.floor(root.Position.Y-nearest)))
- else title.Text=string.format(compact and "파괴층 %d/3 · %dm 아래\n중앙 +%d · 보너스 +%d"or "대형 파괴층 %d/3 · 아래 %dm\n중앙 +%d / 보너스 +%d 트로피",layer or 1,math.max(0,math.floor(root.Position.Y-nearest)),central or 0,bonus or 0)end
+ else title.Text=string.format(compact and "하강 구간 %d · %dm 아래\n중앙 +%d · 보너스 +%d"or "하강 구간 %d · 아래 %dm\n중앙 +%d / 보너스 +%d 트로피",layer or 1,math.max(0,math.floor(root.Position.Y-nearest)),central or 0,bonus or 0)end
 end)

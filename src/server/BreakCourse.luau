@@ -95,6 +95,8 @@ function Course.Spawn(c,position,velocity,dive)
  return lowest
 end
 function Course.Update(c,position,velocity,elapsed,descent)
+ c.Descending=descent
+ if descent then return end -- Descent uses persistent lane windows, not thin chase walls.
  if c.Motion then c.Motion.Elapsed=elapsed end
  if descent then
   if not c.DiveStarted then c.DiveStarted=position.Y;c.NextDive=position.Y;c.DiveOrigin=position end
@@ -121,6 +123,7 @@ function Course.DiveTarget(c,position)
  return nearest,left
 end
 function Course.Sample(c,from,to,emit)
+ if c.Descending then return 0,0 end
  local score,hits=0,0
  for _,row in c.Rows do
   if not row.Hit and swept(row,from,to) then

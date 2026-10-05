@@ -40,5 +40,5 @@ do
  check(data.Save(p) and env.saved.RocketSkinMask==7 and env.saved.RocketSkinEquipped==3,"skin ownership and equipped choice persist in normal snapshot")
  env.time+=1;check(data.SelectRocketSkin(p,5) and p.leaderstats.Trophies.Value==55,"new milestone unlock allows trophy purchase")
  check(not data.SelectRocketSkin(p,0) and not data.SelectRocketSkin(p,0/0) and not data.SelectRocketSkin(p,"Bat"),"forged skin indices rejected")
- check(Skins.Valid(1,1) and not Skins.Valid(1,2) and not Skins.Valid(63,1) and not Skins.Valid(2,2),"saved masks require starter ownership and valid equipped skin")
+ check(Skins.Valid(1,1) and not Skins.Valid(1,2) and not Skins.Valid(2^#Skins.Items,1) and not Skins.Valid(2,2),"saved masks require starter ownership and valid equipped skin")
 end

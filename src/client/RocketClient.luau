@@ -130,8 +130,8 @@ function Controller.Start(remotes,objective)
   local run={id=id,character=character,humanoid=hum,previousCameraOffset=hum.CameraOffset,previousMinZoom=player.CameraMinZoomDistance,started=os.clock(),fov=camera.FieldOfView};active=run
   speedFX.Attach(root)
   run.groundY=settings and settings.GroundY or 0;run.expectedHeight=settings and settings.ExpectedHeight;run.launchLevel=settings and settings.LaunchLevel or 0;run.gateLevels=settings and settings.GateLevels or {};run.gatePowers=settings and settings.GatePowers or {};run.launchPower=settings and settings.LaunchPower or 0
-  player.CameraMinZoomDistance=math.min(24,player.CameraMaxZoomDistance)
-  hum.CameraOffset=Vector3.new(0,4,0)
+  player.CameraMinZoomDistance=.5 -- Keep the normal mouse/touch camera, including first person.
+   hum.CameraOffset=Vector3.zero
   local back=Vector3.new(camera.CFrame.Position.X-root.Position.X,0,camera.CFrame.Position.Z-root.Position.Z)
   back=if back.Magnitude>.01 then back.Unit else Vector3.new(0,0,1)
   local focus=root.Position+Vector3.new(0,5.5,0)

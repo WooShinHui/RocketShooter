@@ -6,13 +6,13 @@ do
  local function noop()end
  zone.Sample(z,V.new(0,500,0),V.new(0,400,0),true,course.Touches,noop)
  check(z.Rows[1].Model:GetAttribute("Broken")and not z.Rows[2].Model:GetAttribute("Broken"),"center hit leaves untouched side targets visible")
- zone.Sample(z,V.new(-230,500,0),V.new(-230,400,0),true,course.Touches,noop)
+ zone.Sample(z,V.new(-260,500,0),V.new(-230,400,0),true,course.Touches,noop)
  check(z.BonusHits==1,"a separately crossed side target still grants its own reward")
  local score=zone.Sample(z,V.new(-230,500,0),V.new(-230,400,0),true,course.Touches,noop)
  check(score==0,"same side target cannot pay twice")
  local turned=zone.Create(p,779,parent,60)
  zone.Update(turned,V.new(0,600,0),V.new(0,-90,0),true,V.new(0,0,-1))
- check(turned.Rows[3].Position.Z==-200 and turned.Rows[3].Position.X==0,"side targets align to the frozen camera right rather than world X")
+ check(turned.Rows[3].Position.Z==-260 and turned.Rows[3].Position.X==0,"side targets align to the frozen camera right rather than world X")
  zone.Update(turned,V.new(0,550,0),V.new(0,-90,0),true,V.new(1,0,0))
  check(turned.Basis.Z==-1,"looking around does not move an already spawned lane")
  local row=course.Plan(V.new(0,10000,0),V.new(0,-1200,0),196.2,190,true)[1]
@@ -29,7 +29,7 @@ do
  check(zone.Sample(extra,V.new(0,13000,0),V.new(0,0,0),true,course.Touches,noop)==0,"ring repeat does not duplicate awards")
  extra.Enemies=enemies;score=zone.Sample(extra,V.new(0,13000,0),V.new(0,0,0),true,course.Touches,function(d)check(d.DiveEnemy and d.Pierce,"cloud enemy emits harmless pierce feedback")end)
  check(extra.EnemyHits==6 and score==360,"descending player pierces two enemies in each of three clouds")
- local state={Active=1,Age=99,Slow=2};local result=GateRules.Step(state,CloudConfig.HeightPresentation.Gates,650,550,10,true,-1)
+ local state={Active=1,Passed=1,Age=99,Slow=2};local result=GateRules.Step(state,CloudConfig.HeightPresentation.Gates,650,550,10,true,-1)
  check(result=="Diving"and state.Age==0 and state.Slow==0,"descending inside cloud never catches or kills regardless of dwell")
  check(GateRules.Step(state,CloudConfig.HeightPresentation.Gates,550,450,10,true,-1)==nil and state.Active==nil,"descent clears cloud state below its floor")
 end

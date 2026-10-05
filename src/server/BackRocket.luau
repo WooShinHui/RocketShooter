@@ -1,5 +1,6 @@
 local Styles=require(game:GetService("ReplicatedStorage"):WaitForChild("RocketStyles"))
 local Trails=require(game:GetService("ReplicatedStorage"):WaitForChild("RocketTrailCatalog"))
+local Shapes=require(script.Parent.RocketShapes)
 local Rocket={}
 function Rocket.Attach(character,styleId,trailId)
  local torso=character:FindFirstChild("UpperTorso")or character:FindFirstChild("Torso")
@@ -16,6 +17,7 @@ function Rocket.Attach(character,styleId,trailId)
  end
  part("Harness",Vector3.new(1.9,1.8,.35),CFrame.new(0,0,.7),Color3.fromRGB(35,45,65))
  local core=part("EngineCore",Vector3.new(.35,1.3,.35),CFrame.new(0,0,1),style.Accent);core.Material=Enum.Material.Neon
+ local custom=Shapes.Build(part,style)
  if style.Kind=="Mala"then
   part("MalaPot",Vector3.new(1.2,3.9,3.9),CFrame.new(0,.35,1.7)*CFrame.Angles(0,0,math.pi/2),style.Body,Enum.PartType.Cylinder)
   part("PotRim",Vector3.new(.16,4.1,4.1),CFrame.new(0,.96,1.7)*CFrame.Angles(0,0,math.pi/2),Color3.fromRGB(50,53,59),Enum.PartType.Cylinder)
@@ -32,7 +34,7 @@ function Rocket.Attach(character,styleId,trailId)
    part("BatBarrel",Vector3.new(3.5,.95,.95),CFrame.new(x,1.05,1.25)*CFrame.Angles(0,0,math.pi/2),style.Body,Enum.PartType.Cylinder)
    part("BatCap",Vector3.one*.95,CFrame.new(x,2.78,1.25),style.Body,Enum.PartType.Ball)
    part("BatGrip",Vector3.new(1.6,.32,.32),CFrame.new(x,-1.5,1.25)*CFrame.Angles(0,0,math.pi/2),style.Accent,Enum.PartType.Cylinder)
-  elseif style.Kind~="Mala"then
+  elseif style.Kind~="Mala"and not custom then
   part("RocketBody",Vector3.new(3,1.05,1.05),CFrame.new(x,.15,1.25)*CFrame.Angles(0,0,math.pi/2),style.Body,Enum.PartType.Cylinder)
   part("NoseCone",Vector3.new(.95,1.3,.95),CFrame.new(x,1.85,1.25),style.Accent,Enum.PartType.Ball)
   part("Trim",Vector3.new(.22,1.12,1.12),CFrame.new(x,.8,1.25)*CFrame.Angles(0,0,math.pi/2),style.Accent,Enum.PartType.Cylinder)

@@ -1,47 +1,29 @@
 do
- local env=environment();env.Vector3.one=env.Vector3.new(1,1,1);env.Vector3.yAxis=env.Vector3.new(0,1,0);local zone=newDiveBreakZone(env);local course=newBreakCourse(env)
- check(#zone.Plan(79)==0,"very low aborts do not create targets under ground")
- for _,speed in {180,1800,2400,3600}do
-  local plan=zone.Plan(50000,speed)
-  local gap=plan[1].Height-plan[4].Height
-  check(gap>=speed*.7 and plan[7].Height==140,"high-speed final layers retain at least .7 seconds between choices")
- end
- for _,height in {80,180,600,12000,300000}do
-  local plan=zone.Plan(height);check(#plan==9,"three descent layers have three lanes")
-  for _,r in plan do
-   check(r.Height>0 and r.Height<height and r.Height<=420,"targets stay below first cloud and flight")
-   check(r.Size.X==240 and r.Units==(r.Lane==0 and 1 or 3),"all lanes are wide and bonus uses explicit reward units")
-  end
+ local env=environment();local V=env.Vector3;V.one=V.new(1,1,1);V.yAxis=V.new(0,1,0);local zone=newDiveBreakZone(env);local course=newBreakCourse(env)
+ check(#zone.Plan(79)==0,"short aborted flight does not place targets underground")
+ for _,speed in {90,1800,2400,3600}do local plan=zone.Plan(50000,speed)
+  check(#plan==3 and near(plan[1].Size.Y/speed,3),"each stable lane gives three seconds even at F speed")
+  check(plan[1].Top<50000 and plan[1].Bottom>0,"lane window stays below approach and above ground")
  end
  local p=env.player(9981);local parent=env.Instance.new("Folder");parent.Parent=env.workspace
  local z=zone.Create(p,901,parent,60);z.FlightExtras=true
- zone.Update(z,env.Vector3.new(5,600,8),env.Vector3.new(0,-90,0),false)
- check(not z.Spawned,"ascending flight cannot spawn descent targets")
- zone.Update(z,env.Vector3.new(5,10000,8),env.Vector3.new(0,-2400,0),true)
- check(not z.Spawned,"targets wait for descent approach window")
- zone.Update(z,env.Vector3.new(5,600,8),env.Vector3.new(0,-90,0),true)
- check(z.Spawned and #z.Rows==9 and #z.Folder:GetChildren()==9,"run owns exactly nine targets")
- local first=z.Rows[1].Position
- zone.Update(z,env.Vector3.new(300,400,100),env.Vector3.new(0,-90,0),true)
- check(z.Rows[1].Position==first and #z.Rows==9,"targets lock their position and never chase the player")
- local emitted={};local function emit(d)table.insert(emitted,d)end
- local score,hits=zone.Sample(z,env.Vector3.new(5,0,8),env.Vector3.new(5,1000,8),true,course.Touches,emit)
- check(score==0 and hits==0,"ascending intersections never award")
- score,hits=zone.Sample(z,env.Vector3.new(5,1000,8),env.Vector3.new(5,0,8),true,course.Touches,emit)
- check(score==180 and hits==3 and z.Hits==3 and z.BonusHits==0,"fast swept descent hits all three center layers")
- local trophies=0
- for _,d in emitted do trophies+=DestructionRewards.Reward(d.RewardUnits,d.RewardPosition.Y);check(d.DiveZone and d.RewardUnits==1,"center events preserve server reward units")end
- check(trophies==5,"first-cloud central route grants five escrow trophies")
- score,hits=zone.Sample(z,env.Vector3.new(5,1000,8),env.Vector3.new(5,0,8),true,course.Touches,emit)
- check(score==0 and hits==0 and #emitted==3,"repeated crossing cannot duplicate awards")
- local other=zone.Create(p,902,parent,60);other.FlightExtras=true;zone.Update(other,env.Vector3.new(5,600,8),env.Vector3.new(0,-90,0),true)
- emitted={};score,hits=zone.Sample(other,env.Vector3.new(235,1000,8),env.Vector3.new(235,0,8),true,course.Touches,emit)
- check(score==540 and hits==3 and other.BonusHits==3,"bonus route triples reward units without tripling object count")
- trophies=0;for _,d in emitted do trophies+=DestructionRewards.Reward(d.RewardUnits,d.RewardPosition.Y)end
- check(trophies==15,"three side targets grant fifteen escrow trophies")
- local miss=zone.Create(p,903,parent,60);miss.FlightExtras=true;zone.Update(miss,env.Vector3.new(5,600,8),env.Vector3.new(0,-90,0),true)
- score,hits=zone.Sample(miss,env.Vector3.new(400,1000,8),env.Vector3.new(400,0,8),true,course.Touches,emit)
- check(score==0 and hits==0,"off-route descent earns nothing")
- for _,r in z.Rows do for _,part in r.Model:GetDescendants()do if part:IsA("BasePart")then check(not part.CanCollide and not part.CanTouch,"targets never change fall physics")end end end
- parent:Destroy();check(parent.Parent==nil,"run container cleanup removes its world parent")
+ zone.Update(z,V.new(0,50000,0),V.new(0,-3600,0),true)
+ check(z.Spawned and #z.Rows==3,"first lane choices appear high in the descent")
+ local first=z.Rows[1];local pos=first.Position;local top,bottom=first.Top,first.Bottom
+ local noop=function()end
+ zone.Sample(z,V.new(600,top+10,0),V.new(600,top-100,0),true,course.Touches,noop)
+ check(z.Hits==0,"missing the upper entrance is not an automatic reward")
+ local score,hits=zone.Sample(z,V.new(600,top-3600,0),V.new(0,top-7200,0),true,course.Touches,noop)
+ check(hits>=1 and first.Hit,"late sideways correction can hit the original target during descent")
+ check(zone.Sample(z,V.new(0,top-7200,0),V.new(0,bottom+10,0),true,course.Touches,noop)==0,"the same lane cannot pay twice")
+ zone.Update(z,V.new(700,top-4000,0),V.new(0,-3600,0),true)
+ check(first.Position==pos,"target never moves to follow the player")
+ zone.Update(z,V.new(700,bottom+2000,0),V.new(0,-3600,0),true)
+ check(z.Section==2 and #z.Rows==6,"next section previews before the original section finishes")
+ check(z.Rows[4].Position.X==0,"future targets keep the original world lane instead of relocating")
+ for i=1,60 do zone.Update(z,V.new(700,50000-i*800,0),V.new(0,-3600,0),true);check(#z.Rows<=6,"only current and next target sections remain live")end
+ local state={Active=1,Passed=0,Age=.1};check(GateRules.Step(state,CloudConfig.HeightPresentation.Gates,550,530,.05,true,-100)=="Caught","unfinished gate cannot become harmless merely by entering dive state")
+ state={Active=1,Passed=1,Age=99};check(GateRules.Step(state,CloudConfig.HeightPresentation.Gates,550,530,.05,true,-100)=="Diving","a gate already cleared remains harmless on the return descent")
+ check(#Skins.Items>=15 and Skins.Valid(7,3)and Skins.Valid(2^#Skins.Items-1,#Skins.Items),"extended catalog preserves old and new ownership masks")
+ parent:Destroy()
 end

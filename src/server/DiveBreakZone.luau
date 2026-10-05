@@ -6,16 +6,14 @@ local Gates=require(RS:WaitForChild("CloudConfig")).HeightPresentation.Gates
 local Families=require(RS:WaitForChild("GateEncounterConfig"))
 local Rules=require(script.Parent.RocketRules)
 local Zone={Enabled=true}
-function Zone.Plan(height,speed)
+function Zone.Plan(height,speed,topOverride)
  if height<80 then return {}end
- local gap=math.max(140,math.clamp(speed or 0,0,3600)*.7)
- local top=math.min(140+gap*2,height-45);local rows={}
- if top<140+gap*2 then gap=top/3 end
- for layer=1,3 do
-  for _,lane in {0,-1,1}do
-   table.insert(rows,{Height=top-gap*(layer-1),Layer=layer,Lane=lane,Offset=lane*200,Units=lane==0 and 1 or 3,
-    Size=Vector3.new(240,24,280)})
-  end
+ speed=math.clamp(speed or height/7,90,3600)
+ local top=topOverride or height-math.min(height*.12,speed*2)
+ if top<=45 then return {}end
+ local bottom=math.max(25,top-speed*3);local rows={}
+ for _,lane in {0,-1,1}do
+  table.insert(rows,{Height=(top+bottom)/2,Top=top,Bottom=bottom,Layer=1,Lane=lane,Offset=lane*260,Units=lane==0 and 1 or 3,Size=Vector3.new(320,top-bottom,320)})
  end
  return rows
 end
@@ -32,36 +30,37 @@ local function frame(z,position)
 end
 function Zone.Update(z,position,velocity,diving,basis)
  if not Zone.Enabled or not diving then return end
- if not z.FlightExtras then z.Basis=basis or Vector3.new(1,0,0);Zone.Extras(z,position)end
- if z.Spawned then
-  for _,r in z.Rows do if position.Y<r.Position.Y-r.Size.Y/2-12 then
-   r.Model:SetAttribute("Passed",true)
-   for _,p in r.Model:GetDescendants()do if p:IsA("BasePart")then p.Transparency=1 end end
-  end end
-  return
+ local height=position.Y-z.GroundY
+ if not z.Origin then
+  z.Basis=basis or Vector3.new(1,0,0);z.Origin=position;z.LayoutSpeed=math.clamp(height/7,90,3600);z.Section=0
+  local plan=Zone.Plan(height,z.LayoutSpeed);z.NextTop=plan[1]and plan[1].Top or 0
  end
- local speed=math.clamp(math.abs(velocity.Y),0,3600)
- local top=140+math.max(140,speed*.7)*2
- if position.Y-z.GroundY>top+math.max(270,speed*1.8)then return end
- z.Spawned=true;z.Origin=position
- for _,r in Zone.Plan(position.Y-z.GroundY,speed)do
-  r.Position=Vector3.new(position.X,r.Height+z.GroundY,position.Z)+(z.Basis or Vector3.new(1,0,0))*r.Offset;r.Frame=frame(z,r.Position)
+ if not z.FlightExtras then Zone.Extras(z,position)end
+ for i=#z.Rows,1,-1 do local r=z.Rows[i]
+  if z.LastY and z.LastY<r.Bottom-12 then r.Model:Destroy();table.remove(z.Rows,i)
+  elseif position.Y<r.Bottom-12 then r.Model:SetAttribute("Passed",true)end
+ end
+ z.LastY=position.Y
+ if #z.Rows>=6 or z.NextTop<=45 or height>z.NextTop+z.LayoutSpeed*2 then return end
+ z.Spawned=true;z.Section+=1
+ local plan=Zone.Plan(height,z.LayoutSpeed,z.NextTop);if #plan==0 then return end
+ z.NextTop=plan[1].Bottom-math.max(35,z.LayoutSpeed*.4)
+ for _,r in plan do
+  r.Layer=z.Section;r.Top+=z.GroundY;r.Bottom+=z.GroundY
+  r.Position=Vector3.new(z.Origin.X,r.Height+z.GroundY,z.Origin.Z)+z.Basis*r.Offset;r.Frame=frame(z,r.Position)
   r.Color=r.Lane==0 and Color3.fromRGB(102,229,255)or Color3.fromRGB(255,202,62)
   local m=Instance.new("Model");m.Name="DiveLayer"..r.Layer.."Lane"..r.Lane;m.ModelStreamingMode=Enum.ModelStreamingMode.Persistent
-  for key,value in {TargetKind="Block",LayerIndex=r.Layer,Lane=r.Lane,RewardUnits=r.Units,Broken=false,TrophyAmount=Rewards.Reward(r.Units,r.Height)}do m:SetAttribute(key,value)end
+  for key,value in {TargetKind="Block",LayerIndex=r.Layer,Lane=r.Lane,WindowTop=r.Top,WindowBottom=r.Bottom,RewardUnits=r.Units,Broken=false,TrophyAmount=Rewards.Reward(r.Units,r.Height)}do m:SetAttribute(key,value)end
   local hit=part(m,"TargetBounds",r.Size,r.Position,r.Color);hit.CFrame=r.Frame;hit.Transparency=1;m.PrimaryPart=hit
   local columns=3;local cellX=r.Size.X/columns
-  for x=1,columns do for depth=-1,1,2 do
+  for checkpoint=0,9 do for x=1,columns do for depth=-1,1,2 do
    local size=Vector3.new(cellX-2,24,138)
-   local p=part(m,"BreakButter",size,r.Position,r.Color);p.CFrame=r.Frame*CFrame.new((x-(columns+1)/2)*cellX,0,depth*70)
+   local color=Visual.Color(r.Top-r.Size.Y*checkpoint/9,z.Id+r.Layer*13+checkpoint+x+depth)
+   local p=part(m,"BreakButter",size,r.Position,color);p.CFrame=r.Frame*CFrame.new((x-(columns+1)/2)*cellX,r.Size.Y*(.5-checkpoint/9),depth*80)
    if Visual.Style=="Butter"then
     local mesh=Instance.new("SpecialMesh");mesh.MeshType=Enum.MeshType.FileMesh;mesh.MeshId=Visual.Mesh;mesh.Scale=Vector3.new(size.X/Visual.MeshSize[1],size.Y/Visual.MeshSize[2],size.Z/Visual.MeshSize[3]);mesh.Parent=p
    end
-  end end
-  for _,edge in {-1,1}do
-   local a=part(m,"TargetOutline",Vector3.new(r.Size.X,2,2),r.Position,r.Color);a.CFrame=r.Frame*CFrame.new(0,13,edge*r.Size.Z/2);a.Material=Enum.Material.Neon
-   local b=part(m,"TargetOutline",Vector3.new(2,2,r.Size.Z),r.Position,r.Color);b.CFrame=r.Frame*CFrame.new(edge*r.Size.X/2,13,0);b.Material=Enum.Material.Neon
-  end
+  end end end
   m.Parent=z.Folder;r.Model=m;table.insert(z.Rows,r)
  end
 end
@@ -73,7 +72,7 @@ function Zone.Sample(z,from,to,diving,touches,emit)
   score+=z.Score*r.Units;hits+=1;r.Model:SetAttribute("Broken",true)
   for _,p in r.Model:GetDescendants()do if p:IsA("BasePart")then p.Transparency=1 end end
   emit({Position=to,RewardPosition=r.Position,Size=Vector3.new(78,24,138),Color=r.Color,VisualKind=Visual.Style,MaterialTag="Ruin",Index=r.Layer,Award=z.Score*r.Units,
-   ChainLength=3,RunId=z.Id,Character=z.Player.Character,CourseHit=true,DiveZone=true,RewardUnits=r.Units})
+   ChainLength=z.Section,RunId=z.Id,Character=z.Player.Character,CourseHit=true,DiveZone=true,RewardUnits=r.Units})
  end end
  for _,r in z.Rings do if not r.Hit and Zone.Crosses(r.Position,from,to,r.Radius)then
   r.Hit=true;z.RingHits+=1;z.Folder:SetAttribute("RingHits",z.RingHits)

@@ -2,6 +2,7 @@
 local G={}
 function G.Step(state,gates,previous,height,dt,diving,velocity)
  if diving then
+  if state.Active and state.Active>(state.Passed or 0)then return "Caught",state.Active end
   state.Age=0;state.Slow=0;state.Active=nil
   for index,gate in gates do if height>=gate.Bottom and height<gate.Top then state.Active=index;return "Diving",index end end
   return nil

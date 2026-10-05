@@ -137,10 +137,17 @@ local function launch(player)
  if run.xp>0 then remotes.FlightState:FireClient(player,"XP",run.id,character,run.xp)end
 end
 local function beginDive(run,reason)
- if run.diving then return end
+ if run.diving then return true end
+ local height=run.root.Position.Y-World.GroundY()
+ for index,gate in Gates do
+  if index>(run.gate.Passed or 0)and height>=gate.Bottom and height<gate.Top then
+   run.player:SetAttribute("CloudGateOutcome","Caught");finish(run,"BrainrotCaught",false);return false
+  end
+ end
  run.diving=true;run.diveAt=os.clock();run.diveSpeed=0;Pose.Dive(run.pose)
  if reason=="Aborted"then run.aborted=true;run.player:SetAttribute("FlightAborted",true)end
  remotes.FlightState:FireClient(run.player,"Dive",run.id,run.character,reason)
+ return true
 end
 function Service.Start(cannon)
  remotes=require(script.Parent.Remotes).Ensure()
@@ -197,7 +204,7 @@ function Service.Start(cannon)
    local t=age-run.launchedAt
    if run.root.Parent and not run.groundContact then
     if t>=run.motion.Burn and not run.diving then
-     beginDive(run,"FuelEmpty")
+     if not beginDive(run,"FuelEmpty")then continue end
     end
     local v=run.root.AssemblyLinearVelocity;local vy
     if run.diving then
