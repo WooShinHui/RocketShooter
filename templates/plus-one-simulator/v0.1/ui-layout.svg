@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1365" height="1100" viewBox="0 0 1365 1100"><rect width="1365" height="1100" fill="#181a1e"/>
+<rect x='1133' y='66' width='108' height='28' rx='6' fill='#232F42' stroke='#0f1016' stroke-width='4'/>
+<rect x='1247' y='66' width='108' height='28' rx='6' fill='#232F42' stroke='#0f1016' stroke-width='4'/>
+<rect x='334.5' y='612' width='560' height='58' rx='5' fill='#393933' stroke='#0f1016' stroke-width='4'/>
+<rect x='334.5' y='612' width='115.2941' height='58' fill='#FFBF20'/>
+<rect x='334.5' y='678' width='154' height='74' rx='8' fill='#FFD730' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient1' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#FFD730'/>
+<stop offset='100%' stop-color='#A99726'/>
+</linearGradient></defs><rect x='334.5' y='678' width='154' height='74' rx='8' fill='url(#gradient1)'/>
+<rect x='498.5' y='678' width='154' height='74' rx='8' fill='#FF9226' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient2' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#FF9226'/>
+<stop offset='100%' stop-color='#A9661E'/>
+</linearGradient></defs><rect x='498.5' y='678' width='154' height='74' rx='8' fill='url(#gradient2)'/>
+<rect x='662.5' y='678' width='154' height='74' rx='8' fill='#FA4953' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient3' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#FA4953'/>
+<stop offset='100%' stop-color='#A63341'/>
+</linearGradient></defs><rect x='662.5' y='678' width='154' height='74' rx='8' fill='url(#gradient3)'/>
+<rect x='836.5' y='678' width='58' height='74' rx='8' fill='#41D791' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient4' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#41D791'/>
+<stop offset='100%' stop-color='#2B9772'/>
+</linearGradient></defs><rect x='836.5' y='678' width='58' height='74' rx='8' fill='url(#gradient4)'/>
+<rect x='914.5' y='604' width='228' height='70' rx='8' fill='#FFFFFF' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient5' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#FF5478'/>
+<stop offset='25.00%' stop-color='#FFD53E'/>
+<stop offset='50.0%' stop-color='#47E9A3'/>
+<stop offset='75.00%' stop-color='#48B1FF'/>
+<stop offset='100%' stop-color='#B662FF'/>
+</linearGradient></defs><rect x='914.5' y='604' width='228' height='70' rx='8' fill='url(#gradient5)'/>
+<rect x='914.5' y='686' width='228' height='70' rx='8' fill='#FFFFFF' stroke='#0f1016' stroke-width='4'/>
+<rect x='12' y='216' width='224' height='66' rx='10' fill='#FFDA34' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient6' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#FFDA34'/>
+<stop offset='100%' stop-color='#A99929'/>
+</linearGradient></defs><rect x='12' y='216' width='224' height='66' rx='10' fill='url(#gradient6)'/>
+<rect x='12' y='292' width='106' height='98' rx='10' fill='#AB62F5' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient7' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#AB62F5'/>
+<stop offset='100%' stop-color='#7145C0'/>
+</linearGradient></defs><rect x='12' y='292' width='106' height='98' rx='10' fill='url(#gradient7)'/>
+<rect x='130' y='292' width='106' height='98' rx='10' fill='#41D791' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient8' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#41D791'/>
+<stop offset='100%' stop-color='#2B9772'/>
+</linearGradient></defs><rect x='130' y='292' width='106' height='98' rx='10' fill='url(#gradient8)'/>
+<rect x='12' y='400' width='106' height='98' rx='10' fill='#339BFF' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient9' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#339BFF'/>
+<stop offset='100%' stop-color='#226DC8'/>
+</linearGradient></defs><rect x='12' y='400' width='106' height='98' rx='10' fill='url(#gradient9)'/>
+<rect x='130' y='400' width='106' height='98' rx='10' fill='#606E91' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient10' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#606E91'/>
+<stop offset='100%' stop-color='#404D72'/>
+</linearGradient></defs><rect x='130' y='400' width='106' height='98' rx='10' fill='url(#gradient10)'/>
+<rect x='1173' y='283.8' width='180' height='92' rx='10' fill='#FFDA34' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient11' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#FFDA34'/>
+<stop offset='100%' stop-color='#A99929'/>
+</linearGradient></defs><rect x='1173' y='283.8' width='180' height='92' rx='10' fill='url(#gradient11)'/>
+<rect x='1173' y='411.8' width='180' height='92' rx='10' fill='#FF5F55' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient12' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#FF5F55'/>
+<stop offset='100%' stop-color='#A94343'/>
+</linearGradient></defs><rect x='1173' y='411.8' width='180' height='92' rx='10' fill='url(#gradient12)'/>
+<rect x='1253' y='12' width='44' height='44' rx='44' fill='#339BFF' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient13' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#339BFF'/>
+<stop offset='100%' stop-color='#226DC8'/>
+</linearGradient></defs><rect x='1253' y='12' width='44' height='44' rx='44' fill='url(#gradient13)'/>
+<rect x='1305' y='12' width='44' height='44' rx='44' fill='#339BFF' stroke='#0f1016' stroke-width='4'/>
+<defs><linearGradient id='gradient14' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#339BFF'/>
+<stop offset='100%' stop-color='#226DC8'/>
+</linearGradient></defs><rect x='1305' y='12' width='44' height='44' rx='44' fill='url(#gradient14)'/>
+<text x='1244' y='108' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='12' fill='#EBF0FA' stroke='#0f1016' stroke-width='.6'>FREE PLAYTEST</text>
+<text x='1187' y='80' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='13' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Rebirth +1</text>
+<text x='1301' y='80' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='13' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Level +1</text>
+<text x='517' y='586' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='38' fill='#73EBFF' stroke='#0f1016' stroke-width='.6'>Power: 37</text>
+<text x='348.5' y='641' text-anchor='start' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='30' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Level 13</text>
+<text x='880.5' y='641' text-anchor='end' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='32' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>7 / 34</text>
+<text x='369' y='717.5' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='24' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>R</text>
+<text x='434' y='691.5' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='8' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>o</text>
+<text x='467' y='692' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='15' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>99</text>
+<text x='441.5' y='722' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='36' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>x2</text>
+<text x='440' y='745' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='10' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>FREE TEST</text>
+<text x='533' y='717.5' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='24' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>R</text>
+<text x='598' y='691.5' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='8' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>o</text>
+<text x='631' y='692' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='15' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>199</text>
+<text x='605.5' y='722' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='36' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>x4</text>
+<text x='604' y='745' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='10' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>FREE TEST</text>
+<text x='697' y='717.5' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='24' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>R</text>
+<text x='762' y='691.5' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='8' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>o</text>
+<text x='795' y='692' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='15' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>349</text>
+<text x='769.5' y='722' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='36' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>x8</text>
+<text x='768' y='745' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='10' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>FREE TEST</text>
+<text x='865.5' y='715' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='42' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>+</text>
+<text x='894.5' y='575' text-anchor='end' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='18' fill='#C5ABFF' stroke='#0f1016' stroke-width='.6'>x1 Multiplier</text>
+<text x='894.5' y='597' text-anchor='end' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='18' fill='#86FFB8' stroke='#0f1016' stroke-width='.6'>+0% Power (Food)</text>
+<text x='318.5' y='630' text-anchor='end' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#A0D7FF' stroke='#0f1016' stroke-width='.6'>Thrust +0</text>
+<text x='318.5' y='666' text-anchor='end' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#86FFB8' stroke='#0f1016' stroke-width='.6'>Growth +0%</text>
+<text x='949.5' y='639' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='22' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>&gt;</text>
+<text x='1056.5' y='623' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>OP Auto Click</text>
+<text x='1056.5' y='652' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='25' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>OFF</text>
+<text x='949.5' y='721' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='22' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>&gt;</text>
+<text x='1056.5' y='705' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Auto Click</text>
+<text x='1056.5' y='734' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='25' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>OFF</text>
+<text x='160' y='249' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Store</text>
+<text x='56' y='249' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='23' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>S</text>
+<text x='65' y='326' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='24' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>RB</text>
+<text x='65' y='373' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='18' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Rebirth</text>
+<text x='183' y='341' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Food</text>
+<text x='65' y='434' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='24' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>FL</text>
+<text x='65' y='481' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='18' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Trails</text>
+<text x='183' y='449' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>World Travel</text>
+<text x='1289' y='329.799987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>x2 Wins</text>
+<text x='1203.5' y='326.299987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>T</text>
+<text x='1336' y='296.799987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='7' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>o</text>
+<text x='1310' y='296.799987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='12' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>TBD</text>
+<text x='1263' y='390.299987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='16' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>FREE TEST · 15 min</text>
+<text x='1289' y='457.799987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>x2 Power</text>
+<text x='1203.5' y='454.299987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>R</text>
+<text x='1336' y='424.799987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='7' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>o</text>
+<text x='1310' y='424.799987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='12' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>TBD</text>
+<text x='1263' y='518.299987792969' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='16' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>FREE TEST · 15 min</text>
+<text x='12' y='743' text-anchor='start' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='22' fill='#86FFB8' stroke='#0f1016' stroke-width='.6'>Friend Boost: +0%</text>
+<text x='1275' y='34' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='11' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>?</text>
+<text x='1327' y='34' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='11' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>G</text>
+<text x='34.5' y='92.5' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='30' fill='#FFDA34' stroke='#0f1016' stroke-width='.6'>T</text>
+<text x='65' y='92.5' text-anchor='start' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='33' fill='#FFDA34' stroke='#0f1016' stroke-width='.6'>0</text>
+<text x='34.5' y='145.5' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='22' fill='#FFDA34' stroke='#0f1016' stroke-width='.6'>RB</text>
+<text x='65' y='145.5' text-anchor='start' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='33' fill='#FFDA34' stroke='#0f1016' stroke-width='.6'>0</text>
+<text x='682' y='126' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='22' fill='#FFDC3E' stroke='#0f1016' stroke-width='.6'>Gold Ring Event in 30:00</text>
+<text x='682.5' y='310' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='22' fill='#FFE86A' stroke='#0f1016' stroke-width='.6'>+1 XP / reward burst follows character</text>
+<text x='682.5' y='206' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='25' fill='#B5CAE0' stroke='#0f1016' stroke-width='.6'>COMMON UI GEOMETRY - v0.1</text>
+<text x='682.5' y='238' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='17' fill='#97ACC2' stroke='#0f1016' stroke-width='.6'>Icons are schematic. Exact art: reference/current-ui.png</text>
+<rect x='16' y='815' width='1333' height='269' rx='12' fill='#162335' stroke='#0f1016' stroke-width='4'/>
+<text x='682.5' y='848' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='29' fill='#73EBFF' stroke='#0f1016' stroke-width='.6'>SAME +1 SYSTEMS / SWAP THE ACTION</text>
+<rect x='30' y='890' width='205' height='64' rx='8' fill='#339BFF' stroke='#0f1016' stroke-width='4'/>
+<text x='132.5' y='922' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Load / Idle</text>
+<rect x='250' y='890' width='205' height='64' rx='8' fill='#FFDA34' stroke='#0f1016' stroke-width='4'/>
+<text x='352.5' y='922' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Click + XP</text>
+<rect x='470' y='890' width='205' height='64' rx='8' fill='#41D791' stroke='#0f1016' stroke-width='4'/>
+<text x='572.5' y='922' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Level / Power</text>
+<rect x='690' y='890' width='205' height='64' rx='8' fill='#AB62F5' stroke='#0f1016' stroke-width='4'/>
+<text x='792.5' y='922' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Action adapter</text>
+<rect x='910' y='890' width='205' height='64' rx='8' fill='#FF5F55' stroke='#0f1016' stroke-width='4'/>
+<text x='1012.5' y='922' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Bank / Return</text>
+<rect x='1130' y='890' width='205' height='64' rx='8' fill='#606E91' stroke='#0f1016' stroke-width='4'/>
+<text x='1232.5' y='922' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#FFFFFF' stroke='#0f1016' stroke-width='.6'>Rebirth / Save</text>
+<text x='682.5' y='994' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='25' fill='#FFDA34' stroke='#0f1016' stroke-width='.6'>Rocket  /  Stone  /  Spit  /  Tongue  /  Sword</text>
+<text x='682.5' y='1037' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='bold' font-size='20' fill='#B5D4EA' stroke='#0f1016' stroke-width='.6'>Preserve: UI / XP / Rebirth / Trophies / Equipment / Training / Boosts / Persistence</text>
+</svg>

@@ -1,0 +1,948 @@
+{
+  "template": "plus-one-simulator",
+  "version": "0.1",
+  "createdAt": "2026-10-06T11:42:36.518Z",
+  "sourceProject": "RocketShooter",
+  "sourceRepository": "https://github.com/WooShinHui/RocketShooter",
+  "sourceGitHead": "f7f1edbaa51fb542ba9343957531925eb0e2161d",
+  "sourceIncludesWorkingTreeChanges": true,
+  "scope": "Only replace the action adapter; keep shared +1 systems and UI.",
+  "runtimeCapture": {
+    "viewport": [
+      1365,
+      768
+    ],
+    "screens": 22,
+    "coreElements": 148,
+    "pages": 7,
+    "remotes": 20
+  },
+  "sceneCheckpoint": {
+    "path": "reference/scene-checkpoint.rbxl",
+    "source": "Disk save; not a claim of current live datamodel equivalence",
+    "lastModified": "2026-10-06T11:05:48.052Z"
+  },
+  "sourceFiles": 126,
+  "references": [
+    {
+      "path": "reference/current-ui.png",
+      "bytes": 530490,
+      "sha256": "0ecc5c02525fbf10db7dd0beb2cf50053a6868267bfbf0a02d7d457e1bd77b82"
+    },
+    {
+      "path": "reference/default.project.json",
+      "bytes": 2668,
+      "sha256": "3979d1b366180806c5ca4f0ea6e13050bee8310d7a23d874e3b98088cc342aa9"
+    },
+    {
+      "path": "reference/scene-checkpoint.rbxl",
+      "bytes": 803220,
+      "sha256": "1b5226d05547f0efaead91df5cf25584305e3ef213366ebc4aaf103226deaee9"
+    },
+    {
+      "path": "reference/source/client/AltitudeLandscape.client.luau",
+      "bytes": 5502,
+      "sha256": "ff8e838c0fa90f10b28d74869f415466a7c1cec1f278556718a145345506b266"
+    },
+    {
+      "path": "reference/source/client/AltitudeMood.client.luau",
+      "bytes": 1079,
+      "sha256": "003dea26071ade5ae56742c4496450f4f98671b203be7382a5d1992a15397ed5"
+    },
+    {
+      "path": "reference/source/client/Audio.luau",
+      "bytes": 2254,
+      "sha256": "31e7718776cc0e0fea0c03b9302e82e7518c7f83430b9c8e5bf6ba7ea0d14720"
+    },
+    {
+      "path": "reference/source/client/ClickerClient.client.luau",
+      "bytes": 4972,
+      "sha256": "648dc7613f14a51f629512a929613e41ea1e7b90a932eb2800c5e9e3cb47ebdf"
+    },
+    {
+      "path": "reference/source/client/CloudGateChasers.client.luau",
+      "bytes": 3148,
+      "sha256": "04c5f8410468bc9dcaf84b9af81564b6960df1704765173651c1674edcedb485"
+    },
+    {
+      "path": "reference/source/client/CloudGateLightning.client.luau",
+      "bytes": 2494,
+      "sha256": "20f693bf43a6bf467df5fe6bd5aa8f6e1c38f397089f7b379a70f78e3c2c2200"
+    },
+    {
+      "path": "reference/source/client/ConsumedButter.client.luau",
+      "bytes": 2053,
+      "sha256": "5e49c9dc9dd9f48591233b87488a1105501e2111a9fe7258e59cbe618056781a"
+    },
+    {
+      "path": "reference/source/client/CurrencyHud.luau",
+      "bytes": 1933,
+      "sha256": "bdab8a591108006506eb72ce998527659b6a5bee2fa9d2fdce981362cdbfd4fa"
+    },
+    {
+      "path": "reference/source/client/DescentChallenge.client.luau",
+      "bytes": 6854,
+      "sha256": "dd3f18426d44accb98ee6581575a49b805a0a66e2bb8584d400d712c5465160a"
+    },
+    {
+      "path": "reference/source/client/DestructionFX.client.luau",
+      "bytes": 20148,
+      "sha256": "74e124c07047d1165f7e02dee0fe2b9ae23ccac5e8837b91dc3207e85531fb46"
+    },
+    {
+      "path": "reference/source/client/DiveBreakGuide.client.luau",
+      "bytes": 5864,
+      "sha256": "d95fb3b415c274bebca092c08c6a1425bcecf53e1b5f4fcde3845e307342755a"
+    },
+    {
+      "path": "reference/source/client/ExperiencePopup.client.luau",
+      "bytes": 3622,
+      "sha256": "0fecf60d9a4d088597e8317e0a203f3e4b3eca3959901c996e78ab30dbec1eda"
+    },
+    {
+      "path": "reference/source/client/FlightCamera.luau",
+      "bytes": 2073,
+      "sha256": "27ba7e83cd657bfd70f3688fda7a6207c6e0e092392d6d00301d3e80fa10baeb"
+    },
+    {
+      "path": "reference/source/client/FlightClient.luau",
+      "bytes": 11727,
+      "sha256": "bb115840ef02c902ee8132d93739b3d11660d7a7abc5150653e708fd69144634"
+    },
+    {
+      "path": "reference/source/client/FlightStreaming.client.luau",
+      "bytes": 541,
+      "sha256": "e0aabc74be0645e4de4b700ce4fadf9fcc1fcd4ae07c893b905655a133b6f9e0"
+    },
+    {
+      "path": "reference/source/client/FlightSummary.client.luau",
+      "bytes": 3985,
+      "sha256": "400f2d7ea0c734a1ddcd09032d7b3dae6849219b74478a6b5c23a66b3dc95a92"
+    },
+    {
+      "path": "reference/source/client/LandingFX.client.luau",
+      "bytes": 1135,
+      "sha256": "729e4ec13693d5a48ba57bbff7243540a3c9c344ee67d1d6965567ef016f24ba"
+    },
+    {
+      "path": "reference/source/client/LaunchPadGuide.client.luau",
+      "bytes": 1884,
+      "sha256": "63cab2b415f9ddd8b4ae302881ee9d81a2c1155219bf23f3281f62ee14435b1b"
+    },
+    {
+      "path": "reference/source/client/Main.client.luau",
+      "bytes": 916,
+      "sha256": "75e1a6e03fdf1934044f2067f8a96b96d42e3a8131ea50e665fb75c5dab2f13e"
+    },
+    {
+      "path": "reference/source/client/MobileControls.luau",
+      "bytes": 2893,
+      "sha256": "162788e5f47ad786ab747a089a5f0a1e796a637ebdef8f048380fb90b81c49b2"
+    },
+    {
+      "path": "reference/source/client/MobileLayout.client.luau",
+      "bytes": 2210,
+      "sha256": "a397a9e5e3456a65dbd35316c2420e7836b70c23442e8e4c3c82349ffa71b86c"
+    },
+    {
+      "path": "reference/source/client/ObjectiveHud.luau",
+      "bytes": 2965,
+      "sha256": "2feea6b305c845809e173210f4bdba39b3e4d58d696ae5d2986a117f2df727dc"
+    },
+    {
+      "path": "reference/source/client/PresentationConfig.luau",
+      "bytes": 2823,
+      "sha256": "cd4db3558a4b990ba7c28101deebc39f249643a30defdd97dad4aee45a45be29"
+    },
+    {
+      "path": "reference/source/client/ProgressionHud.client.luau",
+      "bytes": 14935,
+      "sha256": "ae4666a457e5e2bc717a02572aee702d31d8d6816b4987612f718d28f7af72e5"
+    },
+    {
+      "path": "reference/source/client/ProtoFuelClient.client.luau",
+      "bytes": 8230,
+      "sha256": "aa08c144899f77e0108680823fe76b8e0281d8ec3d617085646dd96c4ad40169"
+    },
+    {
+      "path": "reference/source/client/RemoteClient.luau",
+      "bytes": 1025,
+      "sha256": "18fe0fd26d5ee65e4458c26fc4d2a96b736f1d546f9f36269ac0cf473ffaeda1"
+    },
+    {
+      "path": "reference/source/client/RocketClient.luau",
+      "bytes": 19276,
+      "sha256": "c9bca952a284101e2fa7317395c383f3f2dc7f0422118299230339908adc845b"
+    },
+    {
+      "path": "reference/source/client/RocketInput.luau",
+      "bytes": 1544,
+      "sha256": "52a9f412f1d542c4b273ae6f3a4710cdbf86e95e0fdea2084e9289a6f55eb797"
+    },
+    {
+      "path": "reference/source/client/RocketSkinShop.client.luau",
+      "bytes": 10573,
+      "sha256": "1902484ab8971e3a24d31f6e13917268e5cc2fe0b0e1a1cb6fd546a7281b07da"
+    },
+    {
+      "path": "reference/source/client/RocketSpeedFX.luau",
+      "bytes": 3843,
+      "sha256": "60f65d176cbb41ccb6093b69745972a075cca1d83feaf62cadaf3f62432f436b"
+    },
+    {
+      "path": "reference/source/client/RocketTrailStreams.client.luau",
+      "bytes": 3043,
+      "sha256": "b095972f7cf7a964b1aa2f47a86263242108f4e7d8b578ebaa7aa9b69af2c4e2"
+    },
+    {
+      "path": "reference/source/client/RocketUISamples.client.luau",
+      "bytes": 5420,
+      "sha256": "27306f4140a2033ef2dc4beddd95416020878ae29f6a0a3a794ef95398361977"
+    },
+    {
+      "path": "reference/source/client/Showroom.client.luau",
+      "bytes": 4816,
+      "sha256": "cbd0f510bbac78000dd085b03937b2d8e1799f85a0cc8af1cef2d25d4e69d8af"
+    },
+    {
+      "path": "reference/source/client/SkyController.luau",
+      "bytes": 11597,
+      "sha256": "0bcba2b681af77747dc2283009801ee572f4d0d6ee0af099586fc137f503557c"
+    },
+    {
+      "path": "reference/source/client/SkyEnemyFX.client.luau",
+      "bytes": 1247,
+      "sha256": "9f9ec55894a551cb94cb48ec7f6d9ccbe29abfd5c22a2fd656876c34abe28b1b"
+    },
+    {
+      "path": "reference/source/client/StageCurtains.luau",
+      "bytes": 5480,
+      "sha256": "c933d5aa4468b4c9619b90f2a3e0f7745c1ea56692f147c234305e85c0666d64"
+    },
+    {
+      "path": "reference/source/client/SteeringInput.luau",
+      "bytes": 3017,
+      "sha256": "e20c5fd8ef7997a63003d0a2c45dfa0685d3e72882ea13d916bb7a6b779f7e21"
+    },
+    {
+      "path": "reference/source/client/StudioProgressTest.client.luau",
+      "bytes": 2397,
+      "sha256": "95df71956f1d9ab6acb001aef6e0a07cef647a4a64a315a1e708d0b98a5173a8"
+    },
+    {
+      "path": "reference/source/client/TotalHud.client.luau",
+      "bytes": 11120,
+      "sha256": "8f86e6fbba025a2ad63fa90a8f4bfa97556b7c4fe19235d3bbca98d72152f52c"
+    },
+    {
+      "path": "reference/source/client/TrainingFX.client.luau",
+      "bytes": 4437,
+      "sha256": "2ce1f4be2855e19b35275ff6aeb496e0106c79dd6587c4120e3138a64d9c12a0"
+    },
+    {
+      "path": "reference/source/client/XPProjection.luau",
+      "bytes": 880,
+      "sha256": "683b27ef54278a0e79743795c36d6e627ca60b4d4e0f29997cdc6dbcef1671eb"
+    },
+    {
+      "path": "reference/source/docs/BALANCE_HANDOFF.md",
+      "bytes": 5465,
+      "sha256": "2b196d6c286f007cabfc20f5855bcab2b43fa69f51cf3e81c6c2a68f518b6987"
+    },
+    {
+      "path": "reference/source/docs/CLICKER_UI_TEMPLATE.md",
+      "bytes": 2892,
+      "sha256": "e758302bfb4653d8a71be830617e3c36ba711f6bd886b9fe7744d9a9650fee68"
+    },
+    {
+      "path": "reference/source/docs/CONTENT_PASS_2026_10_03.md",
+      "bytes": 7440,
+      "sha256": "96d63d2d421033966a36db3a2abf2f151cb99caca923fb72f0805c1a56eac5d3"
+    },
+    {
+      "path": "reference/source/docs/DEVELOPMENT_SNAPSHOT_2026_10_05.md",
+      "bytes": 2504,
+      "sha256": "b05d1b645786b849a663ef681b0bfe9d7bd69e29a04ababd0f92138c5b7b3635"
+    },
+    {
+      "path": "reference/source/docs/E_PRESENTATION.md",
+      "bytes": 9160,
+      "sha256": "d35635d0f0dce5930493a6ca48bbb83cf28ff2c1283d90827a928638e96bc83b"
+    },
+    {
+      "path": "reference/source/docs/F05_STEERING_FIX.md",
+      "bytes": 4241,
+      "sha256": "597c1d875644a64d0e5975156863c4b82993dbd71bf9e358f409bf935ab8a60e"
+    },
+    {
+      "path": "reference/source/docs/F0_DESTINATION.md",
+      "bytes": 5660,
+      "sha256": "8aae1f6bef511f14decb5f525bd16bce2c5bd096004f63dc092fac1755f5aec7"
+    },
+    {
+      "path": "reference/source/docs/GAME_DESIGN.md",
+      "bytes": 51965,
+      "sha256": "1d3f3e1cad72f99f81e9ed4e7f68de57b53de31f84f899e63d856abb1f3eb26c"
+    },
+    {
+      "path": "reference/source/docs/IMPLEMENTATION_PLAN.md",
+      "bytes": 83089,
+      "sha256": "4baa80cc61f09831dad67bba82f2970f14b3735aac21e4c6e8506b98c2b4a95b"
+    },
+    {
+      "path": "reference/source/docs/LEVEL_DESIGN.md",
+      "bytes": 53014,
+      "sha256": "f4551155f63d330b723533c16c6df3f35a1b93118ecbc514c29343dbff529578"
+    },
+    {
+      "path": "reference/source/docs/NOTION_REVISION_2026_10_04.md",
+      "bytes": 1885,
+      "sha256": "4ebac8b87ab942bc50c619a4548ff2690b909985de203e9c7f7796b60510f73d"
+    },
+    {
+      "path": "reference/source/docs/PHASE_0_HANDOFF.md",
+      "bytes": 12729,
+      "sha256": "760c0edc244f13a9c797e8ee2e2c0187325dfaadbd7f23a0a79439b89042b024"
+    },
+    {
+      "path": "reference/source/docs/PHASE_1_HANDOFF.md",
+      "bytes": 6578,
+      "sha256": "1fbec9cb7c5afb2b85ed8c631ce01d0a72a8c119e1bc9be536d35faea6dd60fe"
+    },
+    {
+      "path": "reference/source/docs/PHASE_2_HANDOFF.md",
+      "bytes": 10976,
+      "sha256": "d3ec02a63c03735580c462e6c2d058861f16e7505a51816dddae0e0b71ad1381"
+    },
+    {
+      "path": "reference/source/docs/PLAYABLE_COURSE_HANDOFF.md",
+      "bytes": 5919,
+      "sha256": "1c202c0bad18359ba19eeab76b8b392fe676fc84c13337869d012b6191e8eda4"
+    },
+    {
+      "path": "reference/source/docs/TARGET_CHOICE_SLICE_HANDOFF.md",
+      "bytes": 8215,
+      "sha256": "d318fda6cf3d059fc637db3fecc44a01bcdacb7c7c55641150148117adeb2050"
+    },
+    {
+      "path": "reference/source/docs/TECHNICAL_RULES.md",
+      "bytes": 51395,
+      "sha256": "b590b30bafc4c06d8b8a90fea5554a8c897decf2a4b5622cd82143e1acc3fe1e"
+    },
+    {
+      "path": "reference/source/reference/CannonServer.server.luau",
+      "bytes": 6025,
+      "sha256": "40c0f336be9d5223fcea160576eb3c94700633dba19a8de80b94e46b776d2feb"
+    },
+    {
+      "path": "reference/source/server/AssetRegistry.luau",
+      "bytes": 8943,
+      "sha256": "d0c9e733a9fcbd2c371767746e5c57ff39a67420815655f98d572851a60d37df"
+    },
+    {
+      "path": "reference/source/server/BackRocket.luau",
+      "bytes": 7837,
+      "sha256": "49f76ac0130f1d195fcea7ed2174dae056e3f80437fed0ec0a4795e9e8f017de"
+    },
+    {
+      "path": "reference/source/server/BarrierSpawner.server.luau",
+      "bytes": 8075,
+      "sha256": "0ac4e18271529912f0583a49f3d19f70c230fe71d009b03576c4763a2a04a2a0"
+    },
+    {
+      "path": "reference/source/server/BrainrotVisuals.luau",
+      "bytes": 4929,
+      "sha256": "299310bba083bd8394ec944b058c5aa8f7d9095b5ac722d5f1fec0579cb16417"
+    },
+    {
+      "path": "reference/source/server/BreakCourse.luau",
+      "bytes": 8390,
+      "sha256": "478aa548117cbc2faf92deb7f1d9c9a0c60ff3269d77a2e936d186b0b0a88dbe"
+    },
+    {
+      "path": "reference/source/server/CampShowroom.luau",
+      "bytes": 7599,
+      "sha256": "4b8507204613c7d34c7e89dffd14134fedbf011177cfeca35f3aa90ed3fc739d"
+    },
+    {
+      "path": "reference/source/server/Cannon.server.luau",
+      "bytes": 634,
+      "sha256": "2b58cea5b57e9e9c34449ab97bf3a5cb2bab308b5542606dc8889b9211716421"
+    },
+    {
+      "path": "reference/source/server/ClickerService.server.luau",
+      "bytes": 1844,
+      "sha256": "9f218a768989b3453f67aad8a046c268cec7fc6d8308b617c5f81e037ee40a59"
+    },
+    {
+      "path": "reference/source/server/CliffCamp.luau",
+      "bytes": 6187,
+      "sha256": "31d990d7b30da64aa9965a340e021ac9090f3df7ea46735ac56e17482198296f"
+    },
+    {
+      "path": "reference/source/server/CloudDiscovery.luau",
+      "bytes": 897,
+      "sha256": "5ab0075b80ae1bb119bd79083ae4bd32d2f6aca54546814d5d7bd17739ffd71f"
+    },
+    {
+      "path": "reference/source/server/CloudSection.luau",
+      "bytes": 1662,
+      "sha256": "8ca3aa2f64b60447a45b452a20b02b60396b0845c38f0d2633dfb973e87106fc"
+    },
+    {
+      "path": "reference/source/server/CourseSection.luau",
+      "bytes": 5849,
+      "sha256": "87ed193a3c62d6369217bec2f027088704954544dabe05fcfbe31b433d41e943"
+    },
+    {
+      "path": "reference/source/server/DataManager.server.luau",
+      "bytes": 352,
+      "sha256": "9c7a82def432d7006773d55909082e4c0df40f95d05a4bbfc2260dfb28c9faae"
+    },
+    {
+      "path": "reference/source/server/DescentChallenge.luau",
+      "bytes": 3271,
+      "sha256": "21667877991966d322159f7d58c83e23d1f704504026267c543e0f4b766d984a"
+    },
+    {
+      "path": "reference/source/server/Destination.luau",
+      "bytes": 1826,
+      "sha256": "b55e6a8b65d286facb72ca006e42e2ad864ae2eb428e75846cb39498489cfcb7"
+    },
+    {
+      "path": "reference/source/server/DestructibleConfig.luau",
+      "bytes": 4558,
+      "sha256": "038b9a33d9a2f29e3d22b30e783ee0e8d76b5b35f7c618cb9985752c22d0d4f9"
+    },
+    {
+      "path": "reference/source/server/DiveBreakZone.luau",
+      "bytes": 9039,
+      "sha256": "e7340ee0d43c6e31520a47f57d371732d2d45067b1e841677b58ce8ffe17909b"
+    },
+    {
+      "path": "reference/source/server/DiveImpact.luau",
+      "bytes": 1588,
+      "sha256": "7006b509c3409441c703ee4243d77f028eac89ee236ada8a3c9a4c90696c6c79"
+    },
+    {
+      "path": "reference/source/server/FlightMetrics.luau",
+      "bytes": 1211,
+      "sha256": "b5f175c15f9198f6f43e961f95a8d0774a5618e55176e8f7aa32471e1a3e948f"
+    },
+    {
+      "path": "reference/source/server/FlightService.luau",
+      "bytes": 29208,
+      "sha256": "945188b9cdc0ae040225e3224a6a90614344f008696a26083f5778e149bbddd5"
+    },
+    {
+      "path": "reference/source/server/FlightStreaming.luau",
+      "bytes": 1086,
+      "sha256": "3c61385f3258658d7b388b350ac187b5288e05ee3f7fa11802bdca1933ee531d"
+    },
+    {
+      "path": "reference/source/server/GoldRingEvent.luau",
+      "bytes": 4512,
+      "sha256": "078fc2a564f30f7011aa21454adc1be10a9dd0895620205ac2b01b05e0f245b6"
+    },
+    {
+      "path": "reference/source/server/HorizontalSteering.luau",
+      "bytes": 2446,
+      "sha256": "1ad3a3b5a7d949a1efb47a8cc88aee44a00f15debdd09233537459a781d87347"
+    },
+    {
+      "path": "reference/source/server/LaunchTrajectory.luau",
+      "bytes": 2032,
+      "sha256": "ac920589b1bd9e5424e1a5dc8dae46494c4b712552c217c8aef466f62039d96b"
+    },
+    {
+      "path": "reference/source/server/LegacyGimmicks.luau",
+      "bytes": 4880,
+      "sha256": "39e82252df78aed7e313c0632fda54f4c54c8c4eb72a0c5416bd8b94d187b2a7"
+    },
+    {
+      "path": "reference/source/server/LevelBuilder.luau",
+      "bytes": 5195,
+      "sha256": "0a2d04cac7751b4ee23345e2a01f712b2f5a9c9d2e3c2ee54b00f6f4b9e9b468"
+    },
+    {
+      "path": "reference/source/server/LevelConfig.luau",
+      "bytes": 2501,
+      "sha256": "c600c682ca7cff04fe8ff712410a80bd27f8d4d06d0024dbc1224c4c93c0447b"
+    },
+    {
+      "path": "reference/source/server/LimbLanding.luau",
+      "bytes": 1234,
+      "sha256": "9c250186a837963260cc6ec25d0e711e135dc440669e1aa0566c40c0558d1031"
+    },
+    {
+      "path": "reference/source/server/ObstaclePatterns.luau",
+      "bytes": 3108,
+      "sha256": "44a2caf5222e1ae4ad4221e1568f297744f4eed5ff562c8fae2a88b6c02081ba"
+    },
+    {
+      "path": "reference/source/server/PlayerData.luau",
+      "bytes": 21941,
+      "sha256": "04c71bb3d8191f93896622b651e083a173c0b9d53708c1f2da87b2559c00ff53"
+    },
+    {
+      "path": "reference/source/server/PowerBoostServer.server.luau",
+      "bytes": 435,
+      "sha256": "1af736fe51e30f97b47fcdc0fed97f52f22a7fa5b3029ba73248c2b15bfaae74"
+    },
+    {
+      "path": "reference/source/server/PowerBoosts.luau",
+      "bytes": 3596,
+      "sha256": "388a7c2b59408811705a48835c03ada0ef186307e2fdda6ec83debf99c9dfee2"
+    },
+    {
+      "path": "reference/source/server/ProtoFuelServer.server.luau",
+      "bytes": 732,
+      "sha256": "7aba2d5f727e03ea686b005527b46a5822f274770d3bd76c6a88fabaecc3a590"
+    },
+    {
+      "path": "reference/source/server/ProtoFuelService.luau",
+      "bytes": 5437,
+      "sha256": "95b0dac8378036823b245a38bc3dafb137133631e8bcc41f6ee66854c2b6eb4d"
+    },
+    {
+      "path": "reference/source/server/Remotes.luau",
+      "bytes": 1462,
+      "sha256": "69bbc7fb751d9d128cdad9eec0d7b7281f1251e60e7927685d712329cf695f98"
+    },
+    {
+      "path": "reference/source/server/RocketEconomy.luau",
+      "bytes": 600,
+      "sha256": "ea5caf32bf51ce11398c4c24693fbcdd6e09eb0ae0f86b239d230c16692f8237"
+    },
+    {
+      "path": "reference/source/server/RocketFlightService.luau",
+      "bytes": 21598,
+      "sha256": "ef0d5adf92d5473d76fb43a4156c047edbb9c40b9d31dbdf1f9149ffb0c1ba72"
+    },
+    {
+      "path": "reference/source/server/RocketPose.luau",
+      "bytes": 642,
+      "sha256": "13f1495c75575e530133d11cc6af539fc94ac5b2c316def51155ec09d74bb6fe"
+    },
+    {
+      "path": "reference/source/server/RocketRules.luau",
+      "bytes": 2061,
+      "sha256": "23ab067e90d521788d9e0da9efc5cba1af55f420c4b2384f82c9099346e0d465"
+    },
+    {
+      "path": "reference/source/server/RocketShapes.luau",
+      "bytes": 3435,
+      "sha256": "550355adc32165d0bb8fde5eb8e10ae68735972b76b1c20286d68b6ead182fdf"
+    },
+    {
+      "path": "reference/source/server/RocketSkinService.server.luau",
+      "bytes": 1886,
+      "sha256": "9e4ba7063bc795bbf67f331b3a7c4a01cdfbdcbb14c56d86f57b1afeff9e1bb4"
+    },
+    {
+      "path": "reference/source/server/RunPolicy.luau",
+      "bytes": 1084,
+      "sha256": "35e454ffe7de04f179ba85c2ebadfb2122657dfbef05e7305a97b771ece5c85d"
+    },
+    {
+      "path": "reference/source/server/SessionSetup.server.luau",
+      "bytes": 44,
+      "sha256": "b132f70e170e362f4984e1cdf80e7cd5b43fe68c4a17223e9ee437495d02067f"
+    },
+    {
+      "path": "reference/source/server/SharedTraining.luau",
+      "bytes": 4762,
+      "sha256": "9542ca3d344d236388885b8afa3c4d4500a8d81c547d01041c9ebd0f6a220e11"
+    },
+    {
+      "path": "reference/source/server/ShowroomEffects.luau",
+      "bytes": 2002,
+      "sha256": "eb0f2a41fcc7f28b22419dde4109f34a1983f0d5eb53a7b3a242dad6a4efdd45"
+    },
+    {
+      "path": "reference/source/server/ShowroomService.server.luau",
+      "bytes": 1919,
+      "sha256": "b0ed31806bd7d8fbd0bc96d91db2b72799d45490c12d359ebc732a782a44831e"
+    },
+    {
+      "path": "reference/source/server/SkyIslandSpawner.server.luau",
+      "bytes": 2317,
+      "sha256": "7453e484dc164dd9829e4ec4d1ef59c35b2e6652954a0a8f9b05080173e839d4"
+    },
+    {
+      "path": "reference/source/server/SkyLife.luau",
+      "bytes": 24968,
+      "sha256": "42cd982d19cda169307d1c7188b40c759ce366483e0030cf1ab2fe7691e6ccb6"
+    },
+    {
+      "path": "reference/source/server/SkyPatrol.luau",
+      "bytes": 826,
+      "sha256": "48ac7f25a71c00a777115b0f55fbdbcc1cc62a28af34c2bb214904eb5d24b38b"
+    },
+    {
+      "path": "reference/source/server/SpawnService.luau",
+      "bytes": 1703,
+      "sha256": "a0b30c9f485deeeff7892197d932777ce4442a62243a3014d4bee21fd0c0859d"
+    },
+    {
+      "path": "reference/source/server/SteeringConfig.luau",
+      "bytes": 789,
+      "sha256": "e0a3d2e1cc86f7a351e23e8fb868d77e6b6675072ce9a1351ccb90061ce9b729"
+    },
+    {
+      "path": "reference/source/server/StudioProgressTest.server.luau",
+      "bytes": 2257,
+      "sha256": "d5a8c57a1a75fd3a45f21821e16be730c40aa2d8e5db72ecfe295df9386305d7"
+    },
+    {
+      "path": "reference/source/server/TrainingService.server.luau",
+      "bytes": 2065,
+      "sha256": "bb4c6e75da552c04cbbbb256075037343911133b20c4c13d8ba93330121904ac"
+    },
+    {
+      "path": "reference/source/server/TrophyZones.luau",
+      "bytes": 5492,
+      "sha256": "3e6db9b541725113ef1c1ab12b02f73a8fa7cc24764de574433d233808131e20"
+    },
+    {
+      "path": "reference/source/server/WorldCoordinates.luau",
+      "bytes": 1958,
+      "sha256": "97ce26e86769eb7d9ddec7c28aad69646c6ffac25afb97559e19494a40eba501"
+    },
+    {
+      "path": "reference/source/server/WorldService.luau",
+      "bytes": 4973,
+      "sha256": "b92cafa7600cfd2169193377b8dbca61476cb6b34c24543682e4028bc86dc673"
+    },
+    {
+      "path": "reference/source/shared/BalanceConfig.luau",
+      "bytes": 3739,
+      "sha256": "9fe502e4b008365f1a3b8cd96865def9521668ca34250095c06b3fc24e3cd562"
+    },
+    {
+      "path": "reference/source/shared/ClickerConfig.luau",
+      "bytes": 601,
+      "sha256": "14b0b6a27c834a4fe2ed71b78657d2070e5844fbcb11f8b02f7e845329355f59"
+    },
+    {
+      "path": "reference/source/shared/ClickerUI.luau",
+      "bytes": 8346,
+      "sha256": "de72e7c116fb8fe2e46e4c3941222368d1e42de9598a7590ebdc536f71dcf6cd"
+    },
+    {
+      "path": "reference/source/shared/CloudConfig.luau",
+      "bytes": 8192,
+      "sha256": "43035e6b0ee1b87892c8b556d36f22d6855bceb2e8d73131b7eb57b0906a9c5a"
+    },
+    {
+      "path": "reference/source/shared/CloudGateRules.luau",
+      "bytes": 1441,
+      "sha256": "c2f57af4bc27e263ad3431632e103caf881ca293f4cf820a4b1b6bc40a8bd815"
+    },
+    {
+      "path": "reference/source/shared/CourseVisualConfig.luau",
+      "bytes": 1265,
+      "sha256": "e6853d2a1de9527cbaef8755902c75e5827b3f86fc7a1a52b03c62ad58f2b1db"
+    },
+    {
+      "path": "reference/source/shared/DestructionRewardConfig.luau",
+      "bytes": 940,
+      "sha256": "c390f76fc93704e3c6152c036a53b3c2a588b93138f0415f4bd0961c78c5bdc2"
+    },
+    {
+      "path": "reference/source/shared/DestructionSpikeFlag.luau",
+      "bytes": 119,
+      "sha256": "128c9eb0e2140cd2bdc7a01fa797704c7bde742354cad5640c5a7edddd5a485b"
+    },
+    {
+      "path": "reference/source/shared/EquipmentPower.luau",
+      "bytes": 634,
+      "sha256": "731fdb6ec23cf6f0bcac751db4a75b9e9d1be8e11177c0ca9ccb7bddff4caa94"
+    },
+    {
+      "path": "reference/source/shared/GateEncounterConfig.luau",
+      "bytes": 2448,
+      "sha256": "b819e2cc63742af1a406778a2c5f4f8d38c31f07f9ce98b3740d36d16c63a245"
+    },
+    {
+      "path": "reference/source/shared/GateRequirements.luau",
+      "bytes": 985,
+      "sha256": "bb69c5dc64656b360d1be41953e5fad44db80e84824a3ca379a3284734542df7"
+    },
+    {
+      "path": "reference/source/shared/Hello.luau",
+      "bytes": 46,
+      "sha256": "68de9377a853c5dd3863901c12e8f29802b9d6d3dd01b99e44a8d332755cca8f"
+    },
+    {
+      "path": "reference/source/shared/MenuOverlay.luau",
+      "bytes": 588,
+      "sha256": "a0b2e525702e81d792ccc6c45d5a4f79ab345223f1bdbeca9bf76503fd6ab4e5"
+    },
+    {
+      "path": "reference/source/shared/PowerBoostConfig.luau",
+      "bytes": 707,
+      "sha256": "4f45eb6a1cf9996c5f338cd6c5b1783e8c8d3bf6efb8f722d668269e08dfda13"
+    },
+    {
+      "path": "reference/source/shared/ProgressionConfig.luau",
+      "bytes": 4622,
+      "sha256": "321a8769f8508ee3a1ac4a89ce748a737d4d2b0bb827d465deae53e3d844ca4c"
+    },
+    {
+      "path": "reference/source/shared/ProtoFuelConstants.luau",
+      "bytes": 413,
+      "sha256": "9c89ab1e6150524e02af9a2e9a437f1891075a77e57e3dca02c93b6ef84e9316"
+    },
+    {
+      "path": "reference/source/shared/RocketModeConfig.luau",
+      "bytes": 307,
+      "sha256": "0c0725ebfd14b2b7075e5870e87bac104e2ade5242a1368671de576428280d55"
+    },
+    {
+      "path": "reference/source/shared/RocketMotion.luau",
+      "bytes": 1966,
+      "sha256": "2c27e23da3a97e52a6376050cce931cff9755874adc82221a43f93400a7cb374"
+    },
+    {
+      "path": "reference/source/shared/RocketSkinCatalog.luau",
+      "bytes": 2288,
+      "sha256": "5c3352e5a44fb68dda7977cfae3a2d4fbe294344d7ed0e51648c42adfb420be2"
+    },
+    {
+      "path": "reference/source/shared/RocketStyles.luau",
+      "bytes": 2502,
+      "sha256": "6684288cc8d75e9fac6de960e42eea6c4ae90e71c9f4ed623f2bebf2f7b14afe"
+    },
+    {
+      "path": "reference/source/shared/RocketTrailCatalog.luau",
+      "bytes": 1823,
+      "sha256": "86d538170f53f99274eadba13182adf797974232d6b8f36ea8933b083dd37ab3"
+    },
+    {
+      "path": "reference/source/shared/RocketUI.luau",
+      "bytes": 18940,
+      "sha256": "e65ee2ec43fdec8e979c90dc1e2121725b35a72563dfc791f5ae1a05f36032ee"
+    },
+    {
+      "path": "reference/source/shared/ShowroomConfig.luau",
+      "bytes": 1892,
+      "sha256": "e457012f10a3a97f20648cb9a9b65738e3c9da511f27dd89f657fc883841a1d9"
+    },
+    {
+      "path": "reference/source/shared/SimulatorHUD.luau",
+      "bytes": 9890,
+      "sha256": "29bc1bd7ad464723a03a700056b0b98a679b9669ef16d7d89d73f473feae2ce9"
+    },
+    {
+      "path": "reference/source/shared/SimulatorTheme.luau",
+      "bytes": 2417,
+      "sha256": "5b19f3ef460485523e3b9dd375dd7ee5ab39837d34bd2cc75a8a1d6846c6fef4"
+    },
+    {
+      "path": "reference/source/shared/SkyIslandConfig.luau",
+      "bytes": 284,
+      "sha256": "1f979ad59e40ca4e8c02517ae573ce1796a32bda3575b6e005ba8493fa52ffd4"
+    },
+    {
+      "path": "reference/source/shared/TrophyZoneConfig.luau",
+      "bytes": 595,
+      "sha256": "843c2c2e9255589c631251d073348f8745bca39bbd5fbb15ca66e268c2f1ffe1"
+    },
+    {
+      "path": "reference/source/shared/UIIcons.luau",
+      "bytes": 1789,
+      "sha256": "8164ddfaa98fceb2ac01e4769fa597bea50533aa6f7a2c5a387a7901ea456c03"
+    },
+    {
+      "path": "reference/tests/altitude-regions.luau",
+      "bytes": 5452,
+      "sha256": "0129227f4ba3d70671fae126afad0b2a64877222f875e0402a7e963c37d8a9f0"
+    },
+    {
+      "path": "reference/tests/balance-skins.luau",
+      "bytes": 5029,
+      "sha256": "6db3c0bac0032b2e57e891762e38a9dc576c6d5d13ff6f7fdc16b9c08c8dddd5"
+    },
+    {
+      "path": "reference/tests/balance.luau",
+      "bytes": 6492,
+      "sha256": "320eaed082165f4f272d61b995aa1fdfb9cadec6fd0646a2a84be3e763570a22"
+    },
+    {
+      "path": "reference/tests/chain-lockin.luau",
+      "bytes": 3433,
+      "sha256": "7a15a9f99ad0aef5e80aef243e21d280ea5c13f46502d3f7242d49e224e7406b"
+    },
+    {
+      "path": "reference/tests/descent-wide.luau",
+      "bytes": 3421,
+      "sha256": "9b5808d186a9714e206c76474a83fffa6e5407c54cb945876393fb73696f68db"
+    },
+    {
+      "path": "reference/tests/descent.luau",
+      "bytes": 3006,
+      "sha256": "de3141af2cf530ae733594edc2e559ca7f4c62303c42a211dd7727911c69fb1c"
+    },
+    {
+      "path": "reference/tests/dive-break-zone.luau",
+      "bytes": 2520,
+      "sha256": "69a2aa82aa0a947d31c4a3177386ab5186fd57c385de214a0b6ff9f70aaa8219"
+    },
+    {
+      "path": "reference/tests/dive-impact.luau",
+      "bytes": 3016,
+      "sha256": "c5172c7bc5e14f68879e90df0f9f3660b49f349974b17b777f39777157a77633"
+    },
+    {
+      "path": "reference/tests/dive-toggle.cjs",
+      "bytes": 3382,
+      "sha256": "fffcf5c6628765c6ff8db3e727026d30ae73fefb7be07847b0761c7785b04f2e"
+    },
+    {
+      "path": "reference/tests/legacy-course-config.luau",
+      "bytes": 2444,
+      "sha256": "83ba2528c830d8fb7dcec9eaf2f7b34828744302f63987c73705d51f484941f1"
+    },
+    {
+      "path": "reference/tests/mobile-layout.cjs",
+      "bytes": 3014,
+      "sha256": "7628b140b55e3521d1f7cdb4053b9633628e56e0990b146ad2f4a6f42126f427"
+    },
+    {
+      "path": "reference/tests/phase2-config.luau",
+      "bytes": 743,
+      "sha256": "e0ce4558ef4722e4c53c71b35998a71054a2507b057069a0f7bb3c5d39f844e5"
+    },
+    {
+      "path": "reference/tests/playtest-repair.luau",
+      "bytes": 7696,
+      "sha256": "5ed7f8b99896b637d2f4e339a20924f87e957ef62d592a0ae2f6ea79540cb07f"
+    },
+    {
+      "path": "reference/tests/power-boosts.luau",
+      "bytes": 630,
+      "sha256": "94f201f2646c3590c6fa499a393459b25009771e7049ee0995f21a425bbb4f89"
+    },
+    {
+      "path": "reference/tests/progression.luau",
+      "bytes": 4806,
+      "sha256": "d8247b22d2062d38a3f1727bf554ed60afb93493227232037e8681f31929d91b"
+    },
+    {
+      "path": "reference/tests/proto-fuel.luau",
+      "bytes": 11794,
+      "sha256": "8fb989ec19d9f5065cdfa1e8a3abb6eb716c7c86ca30ec2917cdb08ee5777d14"
+    },
+    {
+      "path": "reference/tests/qa-propulsion.luau",
+      "bytes": 3780,
+      "sha256": "dcf0a2a223b9b3c36a0d8412c7e4772112cdc174d7fe9299519205ab6212bac5"
+    },
+    {
+      "path": "reference/tests/regression.luau",
+      "bytes": 82737,
+      "sha256": "426ab7697f3e6d9dfd54669d386e9e6bad9ea58bf38805a9c51fb9471538b18e"
+    },
+    {
+      "path": "reference/tests/rocket-clicker.luau",
+      "bytes": 3902,
+      "sha256": "2e37fa75c4f1d5fa0a86cf47db68bb3bdda8ce9b785129e7d710161b48cf0b06"
+    },
+    {
+      "path": "reference/tests/rocket-contact.luau",
+      "bytes": 3998,
+      "sha256": "cf444233323b6e7ab999a288db9c3bf3ab517c6a572df514582e78d8504c052f"
+    },
+    {
+      "path": "reference/tests/rocket-dive.luau",
+      "bytes": 5623,
+      "sha256": "db1816fd0b3bea728d6e11bce9e5aecb10a90db2cdef5e207bcb2bff227a1d4b"
+    },
+    {
+      "path": "reference/tests/rocket-feel.luau",
+      "bytes": 1117,
+      "sha256": "00a73bac48b60d887a591db5f0911ea4e79a9b20b6118f6e6d28969568cf030e"
+    },
+    {
+      "path": "reference/tests/rocket-growth.luau",
+      "bytes": 2514,
+      "sha256": "c986456bc375a49f4e56376e928f18464011b975f7ab3470f7d27a19f2f3b853"
+    },
+    {
+      "path": "reference/tests/rocket-height-dive.luau",
+      "bytes": 2275,
+      "sha256": "b237545a0539d9f824b515511ae223b847d03bcd3b9145671470afa03cada0a1"
+    },
+    {
+      "path": "reference/tests/rocket-impact.luau",
+      "bytes": 2191,
+      "sha256": "f18daa3bd2e2d6e5505f945302e89a7870073749c6384b89eba0078cfb2e847f"
+    },
+    {
+      "path": "reference/tests/rocket-orbit.luau",
+      "bytes": 929,
+      "sha256": "e0ae368a137aef9e2c71eb6f826761213fa18ac9baeb741e64db269968967f50"
+    },
+    {
+      "path": "reference/tests/rocket-passive.luau",
+      "bytes": 3850,
+      "sha256": "4716d58669da5929f88c8928c1fff0692817371d727c2bed5b2656dd5b0a6054"
+    },
+    {
+      "path": "reference/tests/rocket-polish.luau",
+      "bytes": 1064,
+      "sha256": "28567180ffef8c46f52544df8aecd71b079993766ef5d56685ee77c7855dc345"
+    },
+    {
+      "path": "reference/tests/rocket-rebuild.luau",
+      "bytes": 4409,
+      "sha256": "31beec6f43575477ae20f94cc9b80a0101c66bf7fb209ce4ff24645cdbe022ac"
+    },
+    {
+      "path": "reference/tests/run-local.cjs",
+      "bytes": 10836,
+      "sha256": "1274ea748d19392a80e741a30bff3505a4444609ea8091a23c7a99e4a789f127"
+    },
+    {
+      "path": "reference/tests/showroom-auto.luau",
+      "bytes": 772,
+      "sha256": "6a746e8e684b213f781573f7fd890950b4e04e28fde3978067023ad3e703bd37"
+    },
+    {
+      "path": "reference/tests/sky-bonuses.luau",
+      "bytes": 3091,
+      "sha256": "b3ffc89ea3f67b18c76088f0ca75caf050a9407fb28c053e4e9563b1c226fb09"
+    },
+    {
+      "path": "reference/tests/target-choice.luau",
+      "bytes": 8911,
+      "sha256": "ecb31c07326d3eacb582467be374f165fe9e1f42d72b7b3b43961ba3a78e1afe"
+    },
+    {
+      "path": "reference/tests/trophy-zones.luau",
+      "bytes": 3203,
+      "sha256": "0329585d8f5ce4cb1329658c129a0bb9786dbdbf3c65e254f9eb43e283400a54"
+    },
+    {
+      "path": "reference/tests/verify-rojo.ps1",
+      "bytes": 1842,
+      "sha256": "35521e067f40c3ea152be4bfd27b3d19538789fdb45bdbb9666ee0d7a6ab48df"
+    },
+    {
+      "path": "reference/tests/xp-projection.luau",
+      "bytes": 1161,
+      "sha256": "306cfeae4d3e5ab7028e239188030c207bc11935daa33075bdcb4b13ed8cb22f"
+    },
+    {
+      "path": "reference/ui-pages.json",
+      "bytes": 57618,
+      "sha256": "317bfaa07f2371ca2ab7b21d0d1cfa60aa44fde9aa268328a519b09a501c8d75"
+    },
+    {
+      "path": "reference/ui-runtime.json",
+      "bytes": 134464,
+      "sha256": "a2e682486027f332f08e6a06f73d27ce6158ea4eb92568b5bc86d56132d0384b"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+check(BoostConfig.Apply(100,2,.2,.1)==264,"power multiplies first, food and friends multiply separately")
+check(BoostConfig.Apply(100,1,0,0)==100,"no boost preserves baseline launch power")
+check(BoostConfig.Apply(100,8,.2,.3)==1248,"three friends add 30 percent as a separate factor")
+check(BoostConfig.Active(2,100,99)==2,"duration effect active before expiry")
+check(BoostConfig.Active(8,100,100)==1,"duration effect stops exactly at expiry")
+check(BoostConfig.Active(4,100,101)==1,"expired power effect returns to baseline")
+check(BoostConfig.Apply(2^53-1,8,.2,1)==2^53-1,"boosted power remains finite and within safe range")

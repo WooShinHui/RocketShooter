@@ -291,3 +291,6 @@ After each major phase report:
 6. remaining issues
 
 Do not automatically begin the next major phase unless explicitly authorized.
+
+## Reusable +1 game template (2026-10-06)
+When the user asks to use the existing +1 game template, read templates/plus-one-simulator/v0.1/README.md and its linked specifications first. Replace only the action adapter (rocket / stone / spit / tongue / sword); preserve the current UI layout, progression, rebirth, trophies, equipment, training, boosts, events and persistence. Do not modify other projects or silently redesign shared systems. This is an intermediate source-backed template, not an already-refactored generic engine.

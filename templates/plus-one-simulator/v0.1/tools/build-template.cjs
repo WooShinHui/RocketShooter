@@ -1,0 +1,43 @@
+// Inventory generator for the frozen reference. It never edits a live project.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const root=path.resolve(__dirname,'..');
+const rel=p=>path.relative(root,p).replace(/\\/g,'/');
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const walk=p=>fs.readdirSync(p,{withFileTypes:true}).flatMap(e=>e.name==='.generated'||e.name.endsWith('.b64')?[]:e.isDirectory()?walk(path.join(p,e.name)):[path.join(p,e.name)]).sort();
+const files=walk(path.join(root,'reference'));
+const luau=files.filter(p=>p.includes(path.sep+'source'+path.sep)&&p.endsWith('.luau'));
+const core=new Set('PlayerData Remotes RunPolicy RocketEconomy ClickerService TrainingService SharedTraining ShowroomService PowerBoosts PowerBoostServer ProgressionConfig ClickerConfig ClickerUI SimulatorHUD SimulatorTheme MenuOverlay UIIcons EquipmentPower PowerBoostConfig CurrencyHud TotalHud ClickerClient ProgressionHud ExperiencePopup XPProjection FlightSummary Showroom TrainingFX StudioProgressTest'.split(' '));
+const bridge=new Set('Main DataManager SessionSetup Cannon RocketModeConfig RocketSkinCatalog RocketTrailCatalog RocketSkinService RocketSkinShop CampShowroom ShowroomEffects ShowroomConfig CliffCamp AssetRegistry WorldService SpawnService RemoteClient ObjectiveHud GoldRingEvent'.split(' '));
+const legacy=new Set('FlightService FlightClient DescentChallenge ProtoFuelServer ProtoFuelService ProtoFuelClient BalanceConfig LegacyGimmicks LaunchTrajectory HorizontalSteering Destination CourseSection CloudSection CloudDiscovery LevelBuilder LevelConfig'.split(' '));
+const category=p=>{const n=path.basename(p).replace(/\.(?:client|server)?\.?luau$/,'');return core.has(n)?'공통 코어 / 상태 브리지 점검':bridge.has(n)?'통합·행동 연결부':legacy.has(n)?'과거/호환 경로·가드 확인':'로켓 행동·월드·표현 참고';};
+const md=s=>s.replace(/\|/g,'\\|').replace(/\r?\n/g,' ');
+const indexed=luau.map(p=>({path:rel(p),sha256:hash(p),bytes:fs.statSync(p).size,category:category(p)}));
+let index='# 동결 소스 전체 인덱스\n\n이 표는 실제 동결 파일에서 생성했다. 분류는 이식 안내이며 실행 경로/비활성 여부는 엔트리포인트와 가드를 함께 확인한다. 특히 Rocket 이름이 붙은 장비/Config/UI에도 공통 시스템이 들어 있다. `reference/source/docs/`는 과거 기록이며 새 규격보다 우선하지 않는다.\n\n';
+index+='| 파일 | 역할 | bytes | SHA-256 |\n|---|---|---:|---|\n';
+for(const row of indexed)index+=`| [${path.basename(row.path)}](${row.path}) | ${row.category} | ${row.bytes} | \`${row.sha256}\` |\n`;
+index+='\n## 진입점과 중복 실행\n\nMain.client → RocketClient(현재), DataManager.server → Data.Start, SessionSetup.server → SpawnService. Cannon.server는현재모드를확인해RocketFlightService를시작하며옛FlightService분기도보존되어있다. 독립client/server엔트리포인트(Clicker/TotalHud/Progression/Training/Showroom/Boost)는Rojo매핑으로한번만실행한다. 다음게임은이들엔트리포인트의상태브리지를유지하고로켓행동컨트롤러만대체한다.\n';
+fs.writeFileSync(path.join(root,'SOURCE_INDEX.md'),index);
+const attrs=new Map(),events=[],requires=[],assets=new Map(),functions=[];
+const add=(map,key,value)=>{if(!map.has(key))map.set(key,[]);map.get(key).push(value)};
+for(const p of luau){const text=fs.readFileSync(p,'utf8'),r=rel(p);text.split(/\r?\n/).forEach((line,i)=>{
+ for(const match of line.matchAll(/(?:SetAttribute|GetAttribute|GetAttributeChangedSignal)\("([^"]+)"/g))add(attrs,match[1],`${r}:${i+1}`);
+ if(/(?:Activated|InputBegan|TouchTapInWorld|OnServerInvoke|OnServerEvent|OnClientEvent|Triggered|Heartbeat|CharacterRemoving|PlayerRemoving|BindToClose|\.Changed):?(?:Connect|function)?/.test(line))events.push({p:r,line:i+1,text:line.trim()});
+ for(const m of line.matchAll(/rbxassetid:\/\/(\d+)/g))add(assets,m[1],`${r}:${i+1}`);
+ if(/require\(/.test(line))requires.push({p:r,line:i+1,text:line.trim()});
+ for(const m of line.matchAll(/function\s+([\w.]+)\s*\(([^)]*)\)/g))functions.push({p:r,line:i+1,name:m[1],args:m[2]});
+ });}
+const loc=v=>[...new Set(v)].map(s=>{const [p,n]=s.split(':');return `[${path.basename(p)}:${n}](${p})`;}).join(', ');
+let api='# 실제 코드 API/의존성 인벤토리\n\n정적 사용 위치의 완전한 색인이다. 문자열 목록/동적 반복으로 생성한 속성은 실제 Config/서버코드를 함께 확인한다. 문자열이 등장한다고 현재 활성 기능이라는 뜻은 아니다. 정확한 이벤트 의미는 EVENTS_AND_DATA,현재 비노출 기능은 STATUS가 우선한다.\n\n## 속성 읽기/쓰기/변경 신호\n\n| key | 사용 위치 |\n|---|---|\n';
+for(const [key,rows]of [...attrs].sort())api+=`| ${key} | ${loc(rows)} |\n`;
+api+='\n## 함수 선언\n\n| 함수(인자) | 소스 |\n|---|---|\n';for(const row of functions)api+=`| \`${md(row.name+'('+row.args+')')}\` | [${path.basename(row.p)}:${row.line}](${row.p}) |\n`;
+api+='\n## 이벤트/핸들러 연결\n\n| 위치 | 실제 연결 코드 |\n|---|---|\n';for(const row of events)api+=`| [${path.basename(row.p)}:${row.line}](${row.p}) | \`${md(row.text)}\` |\n`;
+api+='\n## require 의존성\n\n| 위치 | 실제 의존 코드 |\n|---|---|\n';for(const row of requires)api+=`| [${path.basename(row.p)}:${row.line}](${row.p}) | \`${md(row.text)}\` |\n`;
+fs.writeFileSync(path.join(root,'API_INVENTORY.md'),api);
+let art='# 에셋·Studio 소유 장면 재사용\n\nUIIcons의정확한키/ID와색상은동결소스가원본이다. UI아이콘에공개모델의Script를실행하지않는다. 외부ID는다음게임에서도사용권한/로딩이성공하는지확인한다. 실패한AdminClose103717003921399대신Close17368208554를사용하는현재결정도유지한다.\n\n## Studio 소유 템플릿\n\n- ServerStorage.ShowroomAssetTemplates.Toilet2091145711: Model,15 BaseParts,실행Script0. Union 지오메트리라소스전용Rojo빌드에포함되지않는다.\n- ServerStorage.ShowroomAssetTemplates.PedestalSparkle90896557694774: 정리된Attachment/2 ParticleEmitters. texture1084961641/1053548563,4corner×2emitters×10pedestals.\n- 요청된lobby16112265383은롤백되었고현재Workspace에없다. ServerStorage 보관/검토 사본을활성맵으로복원하지않는다.\n- reference/scene-checkpoint.rbxl은디스크체크포인트다. 복사본에동결source를동기화하고템플릿/필드모델을검사한다. 현재라이브맵을덮지않는다.\n- 최근경고문FixedEntryWarning/발사대Billboard/구름/고도팔레트는로켓행동예제다. 공통UI/훈련소/쇼룸슬롯규격과구분한다.\n\n## 쇼룸 공통 배치\n\n최종Spawn의방향이기준이다. 좌측장비2줄×5개,측면−56/−80,뒤쪽24/48/72/96/120stud. 우측훈련7개,측면+56,뒤쪽24부터22stud간격. 마주보는방향/번호1~7/영구카탈로그인덱스를유지한다. Spawn 이동완료후생성한다. 장비아트의180도회전은현재BackRocket장착축보정이며다른모델에서는자기축을검증한다. 보이는하나의훈련소에개인Seat를여러개생성하는규칙은공통이다.\n\n## 코드에서 참조하는 이미지/메시/사운드 ID\n\n| ID | 소스 위치 |\n|---|---|\n';
+for(const [id,rows]of [...assets].sort((a,b)=>Number(a[0])-Number(b[0])))art+=`| ${id} | ${loc(rows)} |\n`;
+art+='\n숫자형AssetRegistry/카탈로그상수와동적asset생성은소스도참조한다. 위표는rbxassetid문자열색인이며소유권허가목록이나현재UI노출목록이아니다.\n';
+fs.writeFileSync(path.join(root,'ASSETS.md'),art);
+const refs=walk(path.join(root,'reference')).map(p=>({path:rel(p),bytes:fs.statSync(p).size,sha256:hash(p)}));
+const manifest={template:'plus-one-simulator',version:'0.1',createdAt:new Date().toISOString(),sourceProject:'RocketShooter',sourceRepository:'https://github.com/WooShinHui/RocketShooter',sourceGitHead:'f7f1edbaa51fb542ba9343957531925eb0e2161d',sourceIncludesWorkingTreeChanges:true,scope:'Only replace the action adapter; keep shared +1 systems and UI.',runtimeCapture:{viewport:[1365,768],screens:22,coreElements:148,pages:7,remotes:20},sceneCheckpoint:{path:'reference/scene-checkpoint.rbxl',source:'Disk save; not a claim of current live datamodel equivalence',lastModified:new Date(fs.statSync(path.join(root,'reference/scene-checkpoint.rbxl')).mtimeMs).toISOString()},sourceFiles:indexed.length,references:refs};
+fs.writeFileSync(path.join(root,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
+console.log(JSON.stringify({sourceFiles:indexed.length,referenceFiles:refs.length,attributes:attrs.size,functions:functions.length,events:events.length,assets:assets.size}));

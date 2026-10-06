@@ -1,0 +1,8195 @@
+﻿{
+  "viewport": [
+    1365,
+    768
+  ],
+  "screens": [
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "Freecam",
+      "order": 0,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        768
+      ],
+      "name": "DiveBreakGuide",
+      "order": 56,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.DeviceSafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "SkyLayerGui",
+      "order": 25,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "ShowroomGui",
+      "order": 65,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        768
+      ],
+      "name": "HeadRewardBurstGui",
+      "order": 55,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.DeviceSafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "StudioProgressTestGui",
+      "order": 100,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "ClickerGui",
+      "order": 45,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": false,
+      "absoluteSize": [
+        800,
+        600
+      ],
+      "name": "RocketUISamples",
+      "order": 100,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.TopbarSafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "TotalHUD",
+      "order": 35,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "TotalMenus",
+      "order": 70,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1201,
+        58
+      ],
+      "name": "TopToolsHUD",
+      "order": 35,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.TopbarSafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        768
+      ],
+      "name": "ExperiencePopups",
+      "order": 55,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.DeviceSafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        768
+      ],
+      "name": "CloudExitTransition",
+      "order": 40,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.DeviceSafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "DiscoveryGui",
+      "order": 10,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "CurrencyHud",
+      "order": 20,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": false,
+      "absoluteSize": [
+        800,
+        600
+      ],
+      "name": "ObjectiveGui",
+      "order": 22,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "RocketFlightGui",
+      "order": 55,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        768
+      ],
+      "name": "RocketSpeedOverlay",
+      "order": 54,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.None"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        768
+      ],
+      "name": "DestructionSpikeFlash",
+      "order": 100,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.DeviceSafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "RocketSkinGui",
+      "order": 60,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "ProgressionGui",
+      "order": 40,
+      "resetOnSpawn": false,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    },
+    {
+      "enabled": true,
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "name": "AimGui",
+      "order": 0,
+      "resetOnSpawn": true,
+      "insets": "Enum.ScreenInsets.CoreUISafeInsets"
+    }
+  ],
+  "elements": [
+    {
+      "visible": true,
+      "path": "StudioProgressTestGui.Controls",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        222,
+        56
+      ],
+      "absolutePosition": [
+        1133,
+        8
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        1,
+        -10,
+        0,
+        8
+      ],
+      "anchor": [
+        1,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        222,
+        0,
+        56
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "StudioProgressTestGui.Controls.Status",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 12,
+      "size": [
+        0,
+        222,
+        0,
+        20
+      ],
+      "absoluteSize": [
+        222,
+        20
+      ],
+      "text": "FREE PLAYTEST",
+      "absolutePosition": [
+        1133,
+        40
+      ],
+      "font": "Enum.Font.Gotham",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        32
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        235,
+        240,
+        250
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "StudioProgressTestGui.Controls.RebirthPlus",
+      "class": "TextButton",
+      "corner": [
+        0,
+        6
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        35,
+        47,
+        66
+      ],
+      "textSize": 13,
+      "size": [
+        0,
+        108,
+        0,
+        28
+      ],
+      "absoluteSize": [
+        108,
+        28
+      ],
+      "text": "Rebirth +1",
+      "absolutePosition": [
+        1133,
+        8
+      ],
+      "font": "Enum.Font.GothamBold",
+      "backgroundTransparency": 0.15000000596046448,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "StudioProgressTestGui.Controls.LevelPlus",
+      "class": "TextButton",
+      "corner": [
+        0,
+        6
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        35,
+        47,
+        66
+      ],
+      "textSize": 13,
+      "size": [
+        0,
+        108,
+        0,
+        28
+      ],
+      "absoluteSize": [
+        108,
+        28
+      ],
+      "text": "Level +1",
+      "absolutePosition": [
+        1247,
+        8
+      ],
+      "font": "Enum.Font.GothamBold",
+      "backgroundTransparency": 0.15000000596046448,
+      "position": [
+        0,
+        114,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD",
+      "scale": 1,
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        1040,
+        192
+      ],
+      "absolutePosition": [
+        162.5,
+        506
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0.5,
+        0,
+        1,
+        -12
+      ],
+      "anchor": [
+        0.5,
+        1
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        1040,
+        0,
+        192
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress",
+      "scale": 1,
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        560,
+        190
+      ],
+      "absolutePosition": [
+        334.5,
+        506
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        172,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        560,
+        0,
+        190
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.Power",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 38,
+      "size": [
+        0,
+        365,
+        0,
+        44
+      ],
+      "absoluteSize": [
+        365,
+        44
+      ],
+      "text": "Power: 37",
+      "absolutePosition": [
+        334.5,
+        506
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        115,
+        235,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.XPBar",
+      "stroke": [
+        4,
+        [
+          15,
+          16,
+          22
+        ],
+        0
+      ],
+      "class": "Frame",
+      "corner": [
+        0,
+        5
+      ],
+      "z": 1,
+      "absoluteSize": [
+        560,
+        58
+      ],
+      "absolutePosition": [
+        334.5,
+        554
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        0,
+        0,
+        48
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        57,
+        57,
+        51
+      ],
+      "ownVisible": true,
+      "size": [
+        1,
+        0,
+        0,
+        58
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.XPBar.XPFill",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        115.29412078857422,
+        58
+      ],
+      "absolutePosition": [
+        334.5,
+        554
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        255,
+        191,
+        32
+      ],
+      "ownVisible": true,
+      "size": [
+        0.20588235557079315,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.XPBar.Level",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 30,
+      "size": [
+        0.44999998807907104,
+        -14,
+        1,
+        0
+      ],
+      "absoluteSize": [
+        238,
+        58
+      ],
+      "text": "Level 13",
+      "absolutePosition": [
+        348.5,
+        554
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        14,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.XPBar.XPValue",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 32,
+      "size": [
+        0.550000011920929,
+        -14,
+        1,
+        0
+      ],
+      "absoluteSize": [
+        294,
+        58
+      ],
+      "text": "7 / 34",
+      "absolutePosition": [
+        586.5,
+        554
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0.44999998807907104,
+        0,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.ClickHint",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        1,
+        0,
+        0,
+        24
+      ],
+      "absoluteSize": [
+        560,
+        24
+      ],
+      "text": "",
+      "absolutePosition": [
+        334.5,
+        616
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        110
+      ],
+      "visible": false,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        218,
+        228,
+        244
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        560,
+        74
+      ],
+      "absolutePosition": [
+        334.5,
+        620
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        114
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        560,
+        0,
+        74
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer1",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        8
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        215,
+        48
+      ],
+      "textSize": 8,
+      "size": [
+        0,
+        154,
+        0,
+        74
+      ],
+      "absoluteSize": [
+        154,
+        74
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          15,
+          16,
+          22
+        ],
+        0
+      ],
+      "absolutePosition": [
+        334.5,
+        620
+      ],
+      "font": "Enum.Font.Legacy",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        77,
+        0,
+        37
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        27,
+        42,
+        53
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer1.RocketIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        342.5,
+        633
+      ],
+      "z": 2,
+      "absoluteSize": [
+        53,
+        53
+      ],
+      "image": "rbxassetid://16670799841",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        8,
+        0,
+        13
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        53,
+        0,
+        53
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer1.RobuxIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        425.5,
+        625
+      ],
+      "z": 2,
+      "absoluteSize": [
+        17,
+        17
+      ],
+      "image": "rbxassetid://17368048685",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        91,
+        0,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        17,
+        0,
+        17
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer1.PreviewPrice",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 15,
+      "size": [
+        0,
+        43,
+        0,
+        22
+      ],
+      "absoluteSize": [
+        43,
+        22
+      ],
+      "text": "99",
+      "absolutePosition": [
+        445.5,
+        623
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        111,
+        0,
+        3
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer1.Multiplier",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 36,
+      "size": [
+        0,
+        84,
+        0,
+        40
+      ],
+      "absoluteSize": [
+        84,
+        40
+      ],
+      "text": "x2",
+      "absolutePosition": [
+        399.5,
+        644
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        65,
+        0,
+        24
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer1.Preview",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 10,
+      "size": [
+        0,
+        85,
+        0,
+        12
+      ],
+      "absoluteSize": [
+        85,
+        12
+      ],
+      "text": "FREE TEST",
+      "absolutePosition": [
+        397.5,
+        681
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        63,
+        0,
+        61
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer2",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        8
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        146,
+        38
+      ],
+      "textSize": 8,
+      "size": [
+        0,
+        154,
+        0,
+        74
+      ],
+      "absoluteSize": [
+        154,
+        74
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          15,
+          16,
+          22
+        ],
+        0
+      ],
+      "absolutePosition": [
+        498.5,
+        620
+      ],
+      "font": "Enum.Font.Legacy",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        241,
+        0,
+        37
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        27,
+        42,
+        53
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer2.RocketIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        506.5,
+        633
+      ],
+      "z": 2,
+      "absoluteSize": [
+        53,
+        53
+      ],
+      "image": "rbxassetid://16670799841",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        8,
+        0,
+        13
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        53,
+        0,
+        53
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer2.RobuxIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        589.5,
+        625
+      ],
+      "z": 2,
+      "absoluteSize": [
+        17,
+        17
+      ],
+      "image": "rbxassetid://17368048685",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        91,
+        0,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        17,
+        0,
+        17
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer2.PreviewPrice",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 15,
+      "size": [
+        0,
+        43,
+        0,
+        22
+      ],
+      "absoluteSize": [
+        43,
+        22
+      ],
+      "text": "199",
+      "absolutePosition": [
+        609.5,
+        623
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        111,
+        0,
+        3
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer2.Multiplier",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 36,
+      "size": [
+        0,
+        84,
+        0,
+        40
+      ],
+      "absoluteSize": [
+        84,
+        40
+      ],
+      "text": "x4",
+      "absolutePosition": [
+        563.5,
+        644
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        65,
+        0,
+        24
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer2.Preview",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 10,
+      "size": [
+        0,
+        85,
+        0,
+        12
+      ],
+      "absoluteSize": [
+        85,
+        12
+      ],
+      "text": "FREE TEST",
+      "absolutePosition": [
+        561.5,
+        681
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        63,
+        0,
+        61
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer3",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        8
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        250,
+        73,
+        83
+      ],
+      "textSize": 8,
+      "size": [
+        0,
+        154,
+        0,
+        74
+      ],
+      "absoluteSize": [
+        154,
+        74
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          15,
+          16,
+          22
+        ],
+        0
+      ],
+      "absolutePosition": [
+        662.5,
+        620
+      ],
+      "font": "Enum.Font.Legacy",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        405,
+        0,
+        37
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        27,
+        42,
+        53
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer3.RocketIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        670.5,
+        633
+      ],
+      "z": 2,
+      "absoluteSize": [
+        53,
+        53
+      ],
+      "image": "rbxassetid://16670799841",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        8,
+        0,
+        13
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        53,
+        0,
+        53
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer3.RobuxIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        753.5,
+        625
+      ],
+      "z": 2,
+      "absoluteSize": [
+        17,
+        17
+      ],
+      "image": "rbxassetid://17368048685",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        91,
+        0,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        17,
+        0,
+        17
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer3.PreviewPrice",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 15,
+      "size": [
+        0,
+        43,
+        0,
+        22
+      ],
+      "absoluteSize": [
+        43,
+        22
+      ],
+      "text": "349",
+      "absolutePosition": [
+        773.5,
+        623
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        111,
+        0,
+        3
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer3.Multiplier",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 36,
+      "size": [
+        0,
+        84,
+        0,
+        40
+      ],
+      "absoluteSize": [
+        84,
+        40
+      ],
+      "text": "x8",
+      "absolutePosition": [
+        727.5,
+        644
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        65,
+        0,
+        24
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.Offer3.Preview",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 10,
+      "size": [
+        0,
+        85,
+        0,
+        12
+      ],
+      "absoluteSize": [
+        85,
+        12
+      ],
+      "text": "FREE TEST",
+      "absolutePosition": [
+        725.5,
+        681
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        63,
+        0,
+        61
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.UpgradeOffers.MoreUpgrades",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        8
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        65,
+        215,
+        145
+      ],
+      "textSize": 42,
+      "size": [
+        0,
+        58,
+        0,
+        74
+      ],
+      "absoluteSize": [
+        58,
+        74
+      ],
+      "text": "+",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          15,
+          16,
+          22
+        ],
+        0
+      ],
+      "absolutePosition": [
+        836.5,
+        620
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        531,
+        0,
+        37
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.PowerMultiplier",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        190,
+        0,
+        22
+      ],
+      "absoluteSize": [
+        190,
+        22
+      ],
+      "text": "x1 Multiplier",
+      "absolutePosition": [
+        704.5,
+        506
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        370,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        197,
+        171,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerProgress.FoodPercent",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        190,
+        0,
+        22
+      ],
+      "absoluteSize": [
+        190,
+        22
+      ],
+      "text": "+0% Power (Food)",
+      "absolutePosition": [
+        704.5,
+        528
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        370,
+        0,
+        22
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        134,
+        255,
+        184
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.EquipmentBonuses",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        156,
+        110
+      ],
+      "absolutePosition": [
+        162.5,
+        554
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        48
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        156,
+        0,
+        110
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.EquipmentBonuses.Thrust",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        156,
+        0,
+        36
+      ],
+      "absoluteSize": [
+        156,
+        36
+      ],
+      "text": "Thrust +0",
+      "absolutePosition": [
+        162.5,
+        554
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        160,
+        215,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.EquipmentBonuses.Growth",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        156,
+        0,
+        36
+      ],
+      "absoluteSize": [
+        156,
+        36
+      ],
+      "text": "Growth +0%",
+      "absolutePosition": [
+        162.5,
+        590
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        36
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        134,
+        255,
+        184
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        228,
+        152
+      ],
+      "absolutePosition": [
+        914.5,
+        546
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        752,
+        0,
+        40
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        228,
+        0,
+        152
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons.OPAutoClick",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        8
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "textSize": 8,
+      "size": [
+        0,
+        228,
+        0,
+        70
+      ],
+      "absoluteSize": [
+        228,
+        70
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          15,
+          16,
+          22
+        ],
+        0
+      ],
+      "absolutePosition": [
+        914.5,
+        546
+      ],
+      "font": "Enum.Font.Legacy",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        114,
+        0,
+        35
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 20,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              84,
+              120
+            ]
+          ],
+          [
+            0.25,
+            [
+              255,
+              213,
+              62
+            ]
+          ],
+          [
+            0.5,
+            [
+              71,
+              233,
+              163
+            ]
+          ],
+          [
+            0.75,
+            [
+              72,
+              177,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              182,
+              98,
+              255
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        27,
+        42,
+        53
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons.OPAutoClick.OPCursorIcon",
+      "gradient": {
+        "rotation": 35,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              75,
+              112
+            ]
+          ],
+          [
+            0.25,
+            [
+              255,
+              222,
+              65
+            ]
+          ],
+          [
+            0.5,
+            [
+              75,
+              255,
+              174
+            ]
+          ],
+          [
+            0.75,
+            [
+              81,
+              155,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              211,
+              94,
+              255
+            ]
+          ]
+        ]
+      },
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        924.5,
+        556
+      ],
+      "z": 2,
+      "absoluteSize": [
+        50,
+        50
+      ],
+      "image": "rbxassetid://135569585073294",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        10,
+        0,
+        10
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        50,
+        0,
+        50
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons.OPAutoClick.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        156,
+        0,
+        28
+      ],
+      "absoluteSize": [
+        156,
+        28
+      ],
+      "text": "OP Auto Click",
+      "absolutePosition": [
+        978.5,
+        551
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        64,
+        0,
+        5
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons.OPAutoClick.Action",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 25,
+      "size": [
+        0,
+        156,
+        0,
+        32
+      ],
+      "absoluteSize": [
+        156,
+        32
+      ],
+      "text": "OFF",
+      "absolutePosition": [
+        978.5,
+        578
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        64,
+        0,
+        32
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons.FreeAutoClick",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        8
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "textSize": 8,
+      "size": [
+        0,
+        228,
+        0,
+        70
+      ],
+      "absoluteSize": [
+        228,
+        70
+      ],
+      "text": "",
+      "stroke": [
+        4,
+        [
+          15,
+          16,
+          22
+        ],
+        0
+      ],
+      "absolutePosition": [
+        914.5,
+        628
+      ],
+      "font": "Enum.Font.Legacy",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        114,
+        0,
+        117
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        27,
+        42,
+        53
+      ]
+    },
+    {
+      "visible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons.FreeAutoClick.CursorIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        924.5,
+        638
+      ],
+      "z": 2,
+      "absoluteSize": [
+        50,
+        50
+      ],
+      "image": "rbxassetid://135569585073294",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        10,
+        0,
+        10
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        50,
+        0,
+        50
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons.FreeAutoClick.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        156,
+        0,
+        28
+      ],
+      "absoluteSize": [
+        156,
+        28
+      ],
+      "text": "Auto Click",
+      "absolutePosition": [
+        978.5,
+        633
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        64,
+        0,
+        5
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ClickerGui.BottomHUD.ClickerButtons.FreeAutoClick.Action",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 25,
+      "size": [
+        0,
+        156,
+        0,
+        32
+      ],
+      "absoluteSize": [
+        156,
+        32
+      ],
+      "text": "OFF",
+      "absolutePosition": [
+        978.5,
+        660
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        64,
+        0,
+        32
+      ],
+      "visible": true,
+      "z": 3,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.Navigation",
+      "scale": 1,
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        224,
+        282
+      ],
+      "absolutePosition": [
+        12,
+        158
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        12,
+        0,
+        158
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        224,
+        0,
+        282
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.Store",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        218,
+        52
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        224,
+        0,
+        66
+      ],
+      "absoluteSize": [
+        224,
+        66
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        12,
+        158
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        112,
+        0,
+        33
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.Store.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        140,
+        0,
+        66
+      ],
+      "absoluteSize": [
+        140,
+        66
+      ],
+      "text": "Store",
+      "absolutePosition": [
+        90,
+        158
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        78,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.Navigation.Store.ShopIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        30,
+        165
+      ],
+      "z": 2,
+      "absoluteSize": [
+        52,
+        52
+      ],
+      "image": "rbxassetid://17368217589",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        18,
+        0,
+        7
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        52,
+        0,
+        52
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.Rebirth",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        171,
+        98,
+        245
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        106,
+        0,
+        98
+      ],
+      "absoluteSize": [
+        106,
+        98
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        12,
+        234
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        53,
+        0,
+        125
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.Navigation.Rebirth.RebirthIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        36,
+        239
+      ],
+      "z": 2,
+      "absoluteSize": [
+        58,
+        58
+      ],
+      "image": "rbxassetid://17368214873",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        24,
+        0,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        58,
+        0,
+        58
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.Rebirth.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        102,
+        0,
+        32
+      ],
+      "absoluteSize": [
+        102,
+        32
+      ],
+      "text": "Rebirth",
+      "absolutePosition": [
+        14,
+        299
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        2,
+        0,
+        65
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.Food",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        65,
+        215,
+        145
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        106,
+        0,
+        98
+      ],
+      "absoluteSize": [
+        106,
+        98
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        130,
+        234
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        171,
+        0,
+        125
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.Food.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        94,
+        0,
+        98
+      ],
+      "absoluteSize": [
+        94,
+        98
+      ],
+      "text": "Food",
+      "absolutePosition": [
+        136,
+        234
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        6,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.Trails",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        51,
+        155,
+        255
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        106,
+        0,
+        98
+      ],
+      "absoluteSize": [
+        106,
+        98
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        12,
+        342
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        53,
+        0,
+        233
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.Navigation.Trails.TrailIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        36,
+        347
+      ],
+      "z": 2,
+      "absoluteSize": [
+        58,
+        58
+      ],
+      "image": "rbxassetid://15403144723",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        24,
+        0,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        58,
+        0,
+        58
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.Trails.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        102,
+        0,
+        32
+      ],
+      "absoluteSize": [
+        102,
+        32
+      ],
+      "text": "Trails",
+      "absolutePosition": [
+        14,
+        407
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        2,
+        0,
+        65
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.WorldTravel",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        96,
+        110,
+        145
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        106,
+        0,
+        98
+      ],
+      "absoluteSize": [
+        106,
+        98
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        130,
+        342
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        171,
+        0,
+        233
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.Navigation.WorldTravel.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        94,
+        0,
+        98
+      ],
+      "absoluteSize": [
+        94,
+        98
+      ],
+      "text": "World Travel",
+      "absolutePosition": [
+        136,
+        342
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        6,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.DurationOffers",
+      "scale": 1,
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        180,
+        230
+      ],
+      "absolutePosition": [
+        1173,
+        225.79998779296875
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        1,
+        -12,
+        0.47999998927116394,
+        0
+      ],
+      "anchor": [
+        1,
+        0.5
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        180,
+        0,
+        230
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.DurationOffers.Wins2",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        218,
+        52
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        180,
+        0,
+        92
+      ],
+      "absoluteSize": [
+        180,
+        92
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        1173,
+        225.79998779296875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        90,
+        0,
+        46
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.DurationOffers.Wins2.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        118,
+        0,
+        92
+      ],
+      "absoluteSize": [
+        118,
+        92
+      ],
+      "text": "x2 Wins",
+      "absolutePosition": [
+        1230,
+        225.79998779296875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        57,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.DurationOffers.Wins2.TrophyIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        1181,
+        245.79998779296875
+      ],
+      "z": 2,
+      "absoluteSize": [
+        45,
+        45
+      ],
+      "image": "rbxassetid://12129301834",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        8,
+        0,
+        20
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        45,
+        0,
+        45
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.DurationOffers.Wins2.RobuxIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        1328,
+        230.79998779296875
+      ],
+      "z": 2,
+      "absoluteSize": [
+        16,
+        16
+      ],
+      "image": "rbxassetid://17368048685",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        155,
+        0,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        16,
+        0,
+        16
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.DurationOffers.Wins2.FuturePrice",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 12,
+      "size": [
+        0,
+        32,
+        0,
+        20
+      ],
+      "absoluteSize": [
+        32,
+        20
+      ],
+      "text": "TBD",
+      "absolutePosition": [
+        1294,
+        228.79998779296875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        121,
+        0,
+        3
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.DurationOffers.WinsTime",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 16,
+      "size": [
+        0,
+        180,
+        0,
+        25
+      ],
+      "absoluteSize": [
+        180,
+        25
+      ],
+      "text": "FREE TEST · 15 min",
+      "absolutePosition": [
+        1173,
+        319.79998779296875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        94
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.DurationOffers.Power2",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        95,
+        85
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        180,
+        0,
+        92
+      ],
+      "absoluteSize": [
+        180,
+        92
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        1173,
+        353.79998779296875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        90,
+        0,
+        174
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.DurationOffers.Power2.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        118,
+        0,
+        92
+      ],
+      "absoluteSize": [
+        118,
+        92
+      ],
+      "text": "x2 Power",
+      "absolutePosition": [
+        1230,
+        353.79998779296875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        57,
+        0,
+        0
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.DurationOffers.Power2.RocketIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        1181,
+        373.79998779296875
+      ],
+      "z": 2,
+      "absoluteSize": [
+        45,
+        45
+      ],
+      "image": "rbxassetid://16670799841",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        8,
+        0,
+        20
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        45,
+        0,
+        45
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TotalHUD.DurationOffers.Power2.RobuxIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        1328,
+        358.79998779296875
+      ],
+      "z": 2,
+      "absoluteSize": [
+        16,
+        16
+      ],
+      "image": "rbxassetid://17368048685",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        155,
+        0,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        16,
+        0,
+        16
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.DurationOffers.Power2.FuturePrice",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 12,
+      "size": [
+        0,
+        32,
+        0,
+        20
+      ],
+      "absoluteSize": [
+        32,
+        20
+      ],
+      "text": "TBD",
+      "absolutePosition": [
+        1294,
+        356.79998779296875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        121,
+        0,
+        3
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.DurationOffers.PowerTime",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 16,
+      "size": [
+        0,
+        180,
+        0,
+        25
+      ],
+      "absoluteSize": [
+        180,
+        25
+      ],
+      "text": "FREE TEST · 15 min",
+      "absolutePosition": [
+        1173,
+        447.79998779296875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        222
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalHUD.FriendBoost",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        1
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 22,
+      "size": [
+        0,
+        260,
+        0,
+        30
+      ],
+      "absoluteSize": [
+        260,
+        30
+      ],
+      "text": "Friend Boost: +0%",
+      "absolutePosition": [
+        12,
+        670
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        12,
+        1,
+        -10
+      ],
+      "visible": true,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        134,
+        255,
+        184
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "TotalMenus.Shade",
+      "class": "TextButton",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        20,
+        31,
+        50
+      ],
+      "textSize": 8,
+      "size": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "text": "",
+      "absolutePosition": [
+        0,
+        0
+      ],
+      "font": "Enum.Font.Legacy",
+      "backgroundTransparency": 0.30000001192092896,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        27,
+        42,
+        53
+      ]
+    },
+    {
+      "visible": false,
+      "path": "TotalMenus.Panel",
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "scale": 1,
+      "class": "Frame",
+      "corner": [
+        0,
+        10
+      ],
+      "z": 1,
+      "absoluteSize": [
+        560,
+        470
+      ],
+      "absolutePosition": [
+        402.5,
+        120
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0.5,
+        0,
+        0.5,
+        0
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        30,
+        48,
+        73
+      ],
+      "ownVisible": false,
+      "size": [
+        0,
+        560,
+        0,
+        470
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalMenus.Panel.Title",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 32,
+      "size": [
+        0,
+        450,
+        0,
+        48
+      ],
+      "absoluteSize": [
+        450,
+        48
+      ],
+      "text": "Store",
+      "absolutePosition": [
+        424.5,
+        132
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        22,
+        0,
+        12
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        218,
+        52
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalMenus.Panel.Close",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        95,
+        85
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        50,
+        0,
+        48
+      ],
+      "absoluteSize": [
+        50,
+        48
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        896.5,
+        132
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        519,
+        0,
+        36
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "TotalMenus.Panel.Close.CloseIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        905.5,
+        140
+      ],
+      "z": 2,
+      "absoluteSize": [
+        32,
+        32
+      ],
+      "image": "rbxassetid://17368208554",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        9,
+        0,
+        8
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        32,
+        0,
+        32
+      ]
+    },
+    {
+      "visible": false,
+      "path": "TotalMenus.Panel.Content",
+      "class": "ScrollingFrame",
+      "z": 1,
+      "absoluteSize": [
+        524,
+        330
+      ],
+      "absolutePosition": [
+        420.5,
+        200
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        18,
+        0,
+        80
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        524,
+        0,
+        330
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TotalMenus.Panel.Status",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 17,
+      "size": [
+        0,
+        524,
+        0,
+        38
+      ],
+      "absoluteSize": [
+        524,
+        38
+      ],
+      "text": "",
+      "absolutePosition": [
+        420.5,
+        538
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        18,
+        0,
+        418
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TopToolsHUD.TopTools",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        96,
+        44
+      ],
+      "absolutePosition": [
+        1253,
+        -46
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        1,
+        -16,
+        0,
+        12
+      ],
+      "anchor": [
+        1,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        96,
+        0,
+        44
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TopToolsHUD.TopTools.Guide",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        1,
+        0
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        51,
+        155,
+        255
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        44,
+        0,
+        44
+      ],
+      "absoluteSize": [
+        44,
+        44
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        1253,
+        -46
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        22,
+        0,
+        22
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TopToolsHUD.TopTools.Guide.GuideIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        1263,
+        -36
+      ],
+      "z": 2,
+      "absoluteSize": [
+        24,
+        24
+      ],
+      "image": "rbxassetid://15403140844",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        10,
+        0,
+        10
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        24,
+        0,
+        24
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "TopToolsHUD.TopTools.Settings",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        1,
+        0
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        51,
+        155,
+        255
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        44,
+        0,
+        44
+      ],
+      "absoluteSize": [
+        44,
+        44
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        1305,
+        -46
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        74,
+        0,
+        22
+      ],
+      "visible": true,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": true,
+      "path": "TopToolsHUD.TopTools.Settings.SettingsIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        1315,
+        -36
+      ],
+      "z": 2,
+      "absoluteSize": [
+        24,
+        24
+      ],
+      "image": "rbxassetid://17368089841",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        10,
+        0,
+        10
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        24,
+        0,
+        24
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.GrowthDock",
+      "scale": 0.8799999952316284,
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        174.24000549316406,
+        188.3199920654297
+      ],
+      "absolutePosition": [
+        12,
+        245
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        12,
+        0,
+        245
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": false,
+      "size": [
+        0,
+        198,
+        0,
+        214
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenRebirth",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        78,
+        87,
+        96
+      ],
+      "textSize": 54,
+      "size": [
+        0,
+        198,
+        0,
+        66
+      ],
+      "absoluteSize": [
+        174.24000549316406,
+        58.07999801635742
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        12,
+        245
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        99,
+        0,
+        33
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenRebirth.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 22,
+      "size": [
+        0,
+        118,
+        0,
+        41
+      ],
+      "absoluteSize": [
+        103.83999633789062,
+        36.07999801635742
+      ],
+      "text": "Rebirth",
+      "absolutePosition": [
+        75.36000061035156,
+        245
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        72,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.GrowthDock.OpenRebirth.TileIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        19.040002822875977,
+        250.27999877929688
+      ],
+      "z": 2,
+      "absoluteSize": [
+        47.52000045776367,
+        47.52000045776367
+      ],
+      "image": "rbxassetid://17368214873",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        8,
+        0,
+        6
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        54,
+        0,
+        54
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenRebirth.Percent",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        118,
+        0,
+        23
+      ],
+      "absoluteSize": [
+        103.83999633789062,
+        20.239999771118164
+      ],
+      "text": "66%",
+      "absolutePosition": [
+        75.36000061035156,
+        279.32000732421875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        72,
+        0,
+        39
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.GrowthDock.OpenTraining",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        51,
+        155,
+        255
+      ],
+      "textSize": 48,
+      "size": [
+        0,
+        96,
+        0,
+        100
+      ],
+      "absoluteSize": [
+        84.47999572753906,
+        88
+      ],
+      "text": "🚽",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        110.56000518798828,
+        245
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        160,
+        0,
+        50
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenTraining.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        96,
+        0,
+        26
+      ],
+      "absoluteSize": [
+        84.47999572753906,
+        22.8799991607666
+      ],
+      "text": "Training",
+      "absolutePosition": [
+        110.56000518798828,
+        310.1199951171875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        74
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenCommunity",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        78,
+        87,
+        96
+      ],
+      "textSize": 48,
+      "size": [
+        0,
+        198,
+        0,
+        66
+      ],
+      "absoluteSize": [
+        174.24000549316406,
+        58.07999801635742
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        12,
+        375.239990234375
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        99,
+        0,
+        181
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenCommunity.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 22,
+      "size": [
+        0,
+        118,
+        0,
+        66
+      ],
+      "absoluteSize": [
+        103.83999633789062,
+        58.07999801635742
+      ],
+      "text": "Gifts",
+      "absolutePosition": [
+        75.36000061035156,
+        375.239990234375
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        72,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.GrowthDock.OpenCommunity.TileIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        19.040002822875977,
+        380.5199890136719
+      ],
+      "z": 2,
+      "absoluteSize": [
+        47.52000045776367,
+        47.52000045776367
+      ],
+      "image": "rbxassetid://15402967660",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        8,
+        0,
+        6
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        54,
+        0,
+        54
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.GrowthDock.AutoClick",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        96,
+        123,
+        145
+      ],
+      "textSize": 40,
+      "size": [
+        0,
+        96,
+        0,
+        100
+      ],
+      "absoluteSize": [
+        84.47999572753906,
+        88
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        110.56000518798828,
+        345.32000732421875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        160,
+        0,
+        164
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.GrowthDock.AutoClick.UpgradeIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        128.16000366210938,
+        352.3599853515625
+      ],
+      "z": 2,
+      "absoluteSize": [
+        49.279998779296875,
+        49.279998779296875
+      ],
+      "image": "rbxassetid://17368045028",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        20,
+        0,
+        8
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        56,
+        0,
+        56
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.AutoClick.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        96,
+        0,
+        26
+      ],
+      "absoluteSize": [
+        84.47999572753906,
+        22.8799991607666
+      ],
+      "text": "Shop",
+      "absolutePosition": [
+        110.56000518798828,
+        410.44000244140625
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        74
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.GrowthDock.Level",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        172,
+        0,
+        28
+      ],
+      "absoluteSize": [
+        151.36000061035156,
+        24.639999389648438
+      ],
+      "text": "Current Level 13",
+      "absolutePosition": [
+        12,
+        406.03997802734375
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        183
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        218,
+        52
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.GrowthDock.XPBar",
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "class": "Frame",
+      "corner": [
+        0,
+        10
+      ],
+      "z": 1,
+      "absoluteSize": [
+        151.36000061035156,
+        14.079999923706055
+      ],
+      "absolutePosition": [
+        12,
+        435.08001708984375
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        0,
+        0,
+        216
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        20,
+        31,
+        50
+      ],
+      "ownVisible": false,
+      "size": [
+        0,
+        172,
+        0,
+        16
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.GrowthDock.XPBar.XPFill",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        31.162353515625,
+        14.079999923706055
+      ],
+      "absolutePosition": [
+        12,
+        435.08001708984375
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        65,
+        215,
+        145
+      ],
+      "ownVisible": true,
+      "size": [
+        0.20588235557079315,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.GrowthDock.XPValue",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        172,
+        0,
+        24
+      ],
+      "absoluteSize": [
+        151.36000061035156,
+        21.119998931884766
+      ],
+      "text": "7 / 34 XP",
+      "absolutePosition": [
+        12,
+        453.55999755859375
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        237
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.GrowthDock.NextGoal",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 21,
+      "size": [
+        0,
+        208,
+        0,
+        60
+      ],
+      "absoluteSize": [
+        183.0399932861328,
+        52.79999923706055
+      ],
+      "text": "Rebirth at Level 20\nNext level in 27 XP",
+      "absolutePosition": [
+        12,
+        545.9599609375
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        342
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        218,
+        52
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.GrowthDock.GrowthPower",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 19,
+      "size": [
+        0,
+        172,
+        0,
+        30
+      ],
+      "absoluteSize": [
+        151.36000061035156,
+        26.399999618530273
+      ],
+      "text": "Training Power +36",
+      "absolutePosition": [
+        12,
+        518.6799926757812
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        311
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.GrowthDock.PassiveRate",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        172,
+        0,
+        32
+      ],
+      "absoluteSize": [
+        151.36000061035156,
+        28.15999984741211
+      ],
+      "text": "Passive XP +1.00 / sec",
+      "absolutePosition": [
+        12,
+        547.719970703125
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        344
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        65,
+        215,
+        145
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.GrowthDock.OpenSkins",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        171,
+        98,
+        245
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        208,
+        0,
+        48
+      ],
+      "absoluteSize": [
+        183.0399932861328,
+        42.23999786376953
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        12,
+        445.6400146484375
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        104,
+        0,
+        252
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.GrowthDock.OpenSkins.RocketIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        20.799999237060547,
+        450.9200134277344
+      ],
+      "z": 2,
+      "absoluteSize": [
+        31.68000030517578,
+        31.68000030517578
+      ],
+      "image": "rbxassetid://16670799841",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        10,
+        0,
+        6
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        36,
+        0,
+        36
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenSkins.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        150,
+        0,
+        48
+      ],
+      "absoluteSize": [
+        132,
+        42.23999786376953
+      ],
+      "text": "Inventory",
+      "absolutePosition": [
+        57.75999450683594,
+        445.6400146484375
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        52,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenTrails",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        78,
+        87,
+        96
+      ],
+      "textSize": 24,
+      "size": [
+        0,
+        198,
+        0,
+        66
+      ],
+      "absoluteSize": [
+        174.24000549316406,
+        58.07999801635742
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        12,
+        310.1199951171875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        99,
+        0,
+        107
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.GrowthDock.OpenTrails.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 22,
+      "size": [
+        0,
+        118,
+        0,
+        66
+      ],
+      "absoluteSize": [
+        103.83999633789062,
+        58.07999801635742
+      ],
+      "text": "Trails",
+      "absolutePosition": [
+        75.36000061035156,
+        310.1199951171875
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        72,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.GrowthDock.OpenTrails.TileIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        19.040002822875977,
+        315.3999938964844
+      ],
+      "z": 2,
+      "absoluteSize": [
+        47.52000045776367,
+        47.52000045776367
+      ],
+      "image": "rbxassetid://15403144723",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        8,
+        0,
+        6
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        54,
+        0,
+        54
+      ]
+    },
+    {
+      "ownVisible": false,
+      "path": "ProgressionGui.ModalShade",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        20,
+        31,
+        50
+      ],
+      "textSize": 26,
+      "size": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "absoluteSize": [
+        1365,
+        710
+      ],
+      "text": "",
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        0,
+        0
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0.3499999940395355,
+      "position": [
+        0.5,
+        0,
+        0.5,
+        0
+      ],
+      "visible": false,
+      "z": 10,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel",
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "scale": 1,
+      "class": "Frame",
+      "corner": [
+        0,
+        10
+      ],
+      "z": 11,
+      "absoluteSize": [
+        500,
+        460
+      ],
+      "absolutePosition": [
+        432.5,
+        125
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0.5,
+        0,
+        0.5,
+        0
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        30,
+        48,
+        73
+      ],
+      "ownVisible": false,
+      "size": [
+        0,
+        500,
+        0,
+        460
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Title",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 35,
+      "size": [
+        0,
+        372,
+        0,
+        48
+      ],
+      "absoluteSize": [
+        372,
+        48
+      ],
+      "text": "Rebirth",
+      "absolutePosition": [
+        452.5,
+        137
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        20,
+        0,
+        12
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Close",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        95,
+        85
+      ],
+      "textSize": 42,
+      "size": [
+        0,
+        80,
+        0,
+        76
+      ],
+      "absoluteSize": [
+        80,
+        76
+      ],
+      "text": "",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        840.5,
+        135
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        448,
+        0,
+        48
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Close.CloseIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        855.5,
+        147
+      ],
+      "z": 2,
+      "absoluteSize": [
+        50,
+        50
+      ],
+      "image": "rbxassetid://17368208554",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        15,
+        0,
+        12
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        50,
+        0,
+        50
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        500,
+        346
+      ],
+      "absolutePosition": [
+        432.5,
+        209
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        84
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        500,
+        0,
+        346
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        500,
+        346
+      ],
+      "absolutePosition": [
+        432.5,
+        209
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.RequiredLevel",
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "class": "Frame",
+      "corner": [
+        0,
+        10
+      ],
+      "z": 1,
+      "absoluteSize": [
+        324,
+        48
+      ],
+      "absolutePosition": [
+        520.5,
+        209
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        88,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        255,
+        218,
+        52
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        324,
+        0,
+        48
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.RequiredLevel.Value",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 28,
+      "size": [
+        0,
+        324,
+        0,
+        48
+      ],
+      "absoluteSize": [
+        324,
+        48
+      ],
+      "text": "Requires Level 20 required",
+      "absolutePosition": [
+        520.5,
+        209
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.CurrentCard",
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "class": "Frame",
+      "corner": [
+        0,
+        10
+      ],
+      "z": 1,
+      "absoluteSize": [
+        194,
+        84
+      ],
+      "absolutePosition": [
+        452.5,
+        269
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        20,
+        0,
+        60
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        65,
+        215,
+        145
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        194,
+        0,
+        84
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.CurrentCard.Value",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 25,
+      "size": [
+        0,
+        194,
+        0,
+        84
+      ],
+      "absoluteSize": [
+        194,
+        84
+      ],
+      "text": "Current XP Rate\nx1.00",
+      "absolutePosition": [
+        452.5,
+        269
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.NextCard",
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "class": "Frame",
+      "corner": [
+        0,
+        10
+      ],
+      "z": 1,
+      "absoluteSize": [
+        194,
+        84
+      ],
+      "absolutePosition": [
+        718.5,
+        269
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        286,
+        0,
+        60
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        65,
+        215,
+        145
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        194,
+        0,
+        84
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.NextCard.Value",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 25,
+      "size": [
+        0,
+        194,
+        0,
+        84
+      ],
+      "absoluteSize": [
+        194,
+        84
+      ],
+      "text": "After Rebirth\nx1.50",
+      "absolutePosition": [
+        718.5,
+        269
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.Arrow",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 44,
+      "size": [
+        0,
+        55,
+        0,
+        64
+      ],
+      "absoluteSize": [
+        55,
+        64
+      ],
+      "text": "▶",
+      "absolutePosition": [
+        654.5,
+        279
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        222,
+        0,
+        70
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.MultiplierMeaning",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        460,
+        0,
+        20
+      ],
+      "absoluteSize": [
+        460,
+        20
+      ],
+      "text": "Boosts passive, flight and toilet XP",
+      "absolutePosition": [
+        452.5,
+        354
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        20,
+        0,
+        145
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.LevelProgress",
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "class": "Frame",
+      "corner": [
+        0,
+        10
+      ],
+      "z": 1,
+      "absoluteSize": [
+        460,
+        48
+      ],
+      "absolutePosition": [
+        452.5,
+        372
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        20,
+        0,
+        163
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        20,
+        31,
+        50
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        460,
+        0,
+        48
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.LevelProgress.Fill",
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "class": "Frame",
+      "corner": [
+        0,
+        10
+      ],
+      "z": 1,
+      "absoluteSize": [
+        303.73529052734375,
+        48
+      ],
+      "absolutePosition": [
+        452.5000305175781,
+        372
+      ],
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        51,
+        155,
+        255
+      ],
+      "ownVisible": true,
+      "size": [
+        0.6602941155433655,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.LevelProgress.Value",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        460,
+        0,
+        48
+      ],
+      "absoluteSize": [
+        460,
+        48
+      ],
+      "text": "Level 13 / 20 · 7 levels left\n273 XP until rebirth",
+      "absolutePosition": [
+        452.5,
+        372
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 2,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.ConfirmRebirth",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        111,
+        120,
+        141
+      ],
+      "textSize": 28,
+      "size": [
+        0,
+        294,
+        0,
+        82
+      ],
+      "absoluteSize": [
+        294,
+        82
+      ],
+      "text": "Level 20 required",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        452.5,
+        436
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        167,
+        0,
+        268
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.SkipRebirth",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        65,
+        215,
+        145
+      ],
+      "textSize": 19,
+      "size": [
+        0,
+        154,
+        0,
+        82
+      ],
+      "absoluteSize": [
+        154,
+        82
+      ],
+      "text": "Skip Rebirth",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        758.5,
+        436
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        403,
+        0,
+        268
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.SkipRebirth.Caption",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        154,
+        0,
+        22
+      ],
+      "absoluteSize": [
+        154,
+        22
+      ],
+      "text": "Coming Soon",
+      "absolutePosition": [
+        758.5,
+        493
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        57
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.ResetNote",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        460,
+        0,
+        24
+      ],
+      "absoluteSize": [
+        460,
+        24
+      ],
+      "text": "Resets level / XP · Keeps toilets, trophies and records",
+      "absolutePosition": [
+        452.5,
+        524
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        20,
+        0,
+        315
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.TrainingPage",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        500,
+        346
+      ],
+      "absolutePosition": [
+        432.5,
+        209
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": false,
+      "size": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.TrainingPage.TrainingIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        462.5,
+        221
+      ],
+      "z": 2,
+      "absoluteSize": [
+        125,
+        125
+      ],
+      "image": "rbxassetid://15403007921",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        30,
+        0,
+        12
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        125,
+        0,
+        125
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.TrainingPage.TierValue",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 26,
+      "size": [
+        0,
+        304,
+        0,
+        60
+      ],
+      "absoluteSize": [
+        304,
+        60
+      ],
+      "text": "Wood Toilet\nBonus +1.00 XP / sec",
+      "absolutePosition": [
+        608.5,
+        209
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        176,
+        0,
+        0
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.TrainingPage.Buffs",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 22,
+      "size": [
+        0,
+        304,
+        0,
+        60
+      ],
+      "absoluteSize": [
+        304,
+        60
+      ],
+      "text": "Gear XP x1\nPad x1 · Rebirth x1.00",
+      "absolutePosition": [
+        608.5,
+        274
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        176,
+        0,
+        65
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        218,
+        52
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.TrainingPage.BuyTier",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        110,
+        125,
+        142
+      ],
+      "textSize": 20,
+      "size": [
+        0,
+        460,
+        0,
+        82
+      ],
+      "absoluteSize": [
+        460,
+        82
+      ],
+      "text": "Stone Toilet · Bonus 1.5 XP/sec\nRequires 1 rebirths · Current 0\nPress E at the right showroom",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        452.5,
+        366
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        250,
+        0,
+        198
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.TrainingPage.TapXP",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        218,
+        52
+      ],
+      "textSize": 22,
+      "size": [
+        0,
+        220,
+        0,
+        82
+      ],
+      "absoluteSize": [
+        220,
+        82
+      ],
+      "text": "Click +1 XP",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        452.5,
+        464
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        130,
+        0,
+        296
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.TrainingPage.OPAuto",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        171,
+        98,
+        245
+      ],
+      "textSize": 22,
+      "size": [
+        0,
+        228,
+        0,
+        82
+      ],
+      "absoluteSize": [
+        228,
+        82
+      ],
+      "text": "Training Gloves · XP x1.5\nBuy for 5 Trophies",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        684.5,
+        464
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        366,
+        0,
+        296
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.CommunityPage",
+      "class": "Frame",
+      "z": 1,
+      "absoluteSize": [
+        500,
+        346
+      ],
+      "absolutePosition": [
+        432.5,
+        209
+      ],
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": false,
+      "size": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "visible": false,
+      "path": "ProgressionGui.RebirthPanel.Content.CommunityPage.GiftIcon",
+      "imageColor": [
+        255,
+        255,
+        255
+      ],
+      "class": "ImageLabel",
+      "absolutePosition": [
+        722.5,
+        219
+      ],
+      "z": 2,
+      "absoluteSize": [
+        150,
+        150
+      ],
+      "image": "rbxassetid://15402967660",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        290,
+        0,
+        10
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "ownVisible": true,
+      "size": [
+        0,
+        150,
+        0,
+        150
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.CommunityPage.Like",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        255,
+        95,
+        85
+      ],
+      "textSize": 26,
+      "size": [
+        0,
+        254,
+        0,
+        82
+      ],
+      "absoluteSize": [
+        254,
+        82
+      ],
+      "text": "♥ Like",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        452.5,
+        224
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        147,
+        0,
+        56
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.CommunityPage.Join",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        51,
+        155,
+        255
+      ],
+      "textSize": 26,
+      "size": [
+        0,
+        254,
+        0,
+        82
+      ],
+      "absoluteSize": [
+        254,
+        82
+      ],
+      "text": "✚ Join",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        452.5,
+        321
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        147,
+        0,
+        153
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.CommunityPage.Claim",
+      "scale": 1,
+      "class": "TextButton",
+      "corner": [
+        0,
+        10
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "background": [
+        65,
+        215,
+        145
+      ],
+      "textSize": 30,
+      "size": [
+        0,
+        460,
+        0,
+        82
+      ],
+      "absoluteSize": [
+        460,
+        82
+      ],
+      "text": "🎁 Claim",
+      "z": 1,
+      "stroke": [
+        4,
+        [
+          10,
+          10,
+          20
+        ],
+        0
+      ],
+      "absolutePosition": [
+        452.5,
+        436
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 0,
+      "position": [
+        0,
+        250,
+        0,
+        268
+      ],
+      "visible": false,
+      "gradient": {
+        "rotation": 90,
+        "keys": [
+          [
+            0,
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          [
+            1,
+            [
+              169,
+              179,
+              200
+            ]
+          ]
+        ]
+      },
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Content.CommunityPage.ConnectionStatus",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        460,
+        0,
+        24
+      ],
+      "absoluteSize": [
+        460,
+        24
+      ],
+      "text": "Community rewards coming soon",
+      "absolutePosition": [
+        452.5,
+        523
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        20,
+        0,
+        314
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "ownVisible": true,
+      "path": "ProgressionGui.RebirthPanel.Message",
+      "class": "TextLabel",
+      "anchor": [
+        0,
+        0
+      ],
+      "background": [
+        163,
+        162,
+        165
+      ],
+      "textSize": 18,
+      "size": [
+        0,
+        460,
+        0,
+        22
+      ],
+      "absoluteSize": [
+        460,
+        22
+      ],
+      "text": "",
+      "absolutePosition": [
+        452.5,
+        559
+      ],
+      "font": "Enum.Font.GothamBlack",
+      "backgroundTransparency": 1,
+      "position": [
+        0,
+        20,
+        0,
+        434
+      ],
+      "visible": false,
+      "z": 1,
+      "textScaled": false,
+      "textColor": [
+        255,
+        255,
+        255
+      ]
+    }
+  ]
+}

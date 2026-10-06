@@ -1,0 +1,8 @@
+# Frozen references must retain exact bytes and SHA-256 across OS checkouts.
+*.md text eol=lf
+*.svg text eol=lf
+tools/* text eol=lf
+contracts/* text eol=lf
+reference/** -text
+*.png binary
+*.rbxl binary

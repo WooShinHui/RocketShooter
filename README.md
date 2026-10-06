@@ -34,3 +34,6 @@ The local regression runner mocks the Roblox engine; it does not validate device
 - `AGENTS.md`: instructions for development agents.
 
 The binary place is tracked because it preserves Studio-owned content. Generated builds, test scratch, logs, lock files and credentials are ignored. Keep source updates and place saves synchronized; do not commit a transient Play session as the development place.
+
+## Reusable +1 simulator template
+The current UI and common lifecycle are frozen in [templates/plus-one-simulator/v0.1/README.md](templates/plus-one-simulator/v0.1/README.md). Read it before reusing the game with another action. Gemini/Claude/Codex entry points link to the same specification.

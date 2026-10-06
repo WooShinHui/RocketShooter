@@ -1,0 +1,51 @@
+{
+  "verifiedAt": "2026-10-06T11:43:53.999Z",
+  "references": 184,
+  "sourceFiles": 126,
+  "links": 1597,
+  "uiScreens": 22,
+  "coreUIElements": 148,
+  "pages": 7,
+  "referenceHashes": "PASS",
+  "linksAndRequiredFiles": "PASS",
+  "imageSignature": "PASS",
+  "sourceCompilation": {
+    "status": "PASS",
+    "files": 126
+  },
+  "actionContractCompilation": "PASS",
+  "mockedRegression": {
+    "status": "PASS",
+    "summary": [
+      "PASS\tduration effect active before expiry",
+      "PASS\tduration effect stops exactly at expiry",
+      "PASS\texpired power effect returns to baseline",
+      "PASS\tboosted power remains finite and within safe range",
+      "All 2827 regression checks passed (mock engine; legacy course fixture; Studio physics not tested)."
+    ]
+  },
+  "mobileLayout": {
+    "status": "PASS",
+    "summary": [
+      "Passed 109 mobile legacy-dock regression checks (real script, mocked engine)."
+    ]
+  },
+  "rocketDiveToggle": {
+    "status": "PASS",
+    "summary": [
+      "Passed 13 Fast Dive toggle regression checks (real handlers, mocked input)."
+    ]
+  },
+  "rojoBuild": {
+    "status": "PASS",
+    "summary": "Building project 'rocketShooter'\nBuilt project to validation.rbxlx"
+  },
+  "visualInspection": "ui-layout.png and actual current-ui.png inspected; schematic icon labels differ intentionally from reference art",
+  "liveObservation": "7 pages opened and restored; 22 ScreenGui/148 core elements; action UI from frozen source",
+  "notPerformed": [
+    "physical mobile device QA",
+    "two real network clients",
+    "published-server persistence QA",
+    "new stone/spit/tongue/sword adapter implementation"
+  ]
+}

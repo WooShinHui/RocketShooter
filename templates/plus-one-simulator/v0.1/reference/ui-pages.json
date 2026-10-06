@@ -1,0 +1,3265 @@
+﻿{
+  "Store": {
+    "page": "Store",
+    "elements": [
+      {
+        "absolutePosition": [
+          0,
+          0
+        ],
+        "path": "TotalMenus.Shade",
+        "text": "",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          1365,
+          710
+        ],
+        "class": "TextButton",
+        "textSize": 8,
+        "size": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel",
+        "position": [
+          0.5,
+          0,
+          0.5,
+          0
+        ],
+        "absoluteSize": [
+          560,
+          470
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          402.5,
+          120
+        ],
+        "size": [
+          0,
+          560,
+          0,
+          470
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Title",
+        "text": "Store",
+        "position": [
+          0,
+          22,
+          0,
+          12
+        ],
+        "absoluteSize": [
+          450,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 32,
+        "size": [
+          0,
+          450,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          896.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Close",
+        "text": "",
+        "position": [
+          0,
+          519,
+          0,
+          36
+        ],
+        "absoluteSize": [
+          50,
+          48
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          50,
+          0,
+          48
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Close.CloseIcon",
+        "position": [
+          0,
+          9,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          32,
+          32
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          905.5,
+          140
+        ],
+        "size": [
+          0,
+          32,
+          0,
+          32
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content",
+        "position": [
+          0,
+          18,
+          0,
+          80
+        ],
+        "absoluteSize": [
+          524,
+          330
+        ],
+        "class": "ScrollingFrame",
+        "absolutePosition": [
+          420.5,
+          200
+        ],
+        "size": [
+          0,
+          524,
+          0,
+          330
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          200
+        ],
+        "path": "TotalMenus.Panel.Content.Wins2",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          32
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          494.5,
+          200
+        ],
+        "path": "TotalMenus.Panel.Content.Wins2.Caption",
+        "text": "x2 Wins · 15 minutes · FREE TEST",
+        "position": [
+          0,
+          70,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          420,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          420,
+          0,
+          64
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content.Wins2.TrophyIcon",
+        "position": [
+          0,
+          12,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          436.5,
+          208
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          276
+        ],
+        "path": "TotalMenus.Panel.Content.Power2",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          108
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          494.5,
+          276
+        ],
+        "path": "TotalMenus.Panel.Content.Power2.Caption",
+        "text": "x2 Power · 15 minutes · FREE TEST",
+        "position": [
+          0,
+          70,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          420,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          420,
+          0,
+          64
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content.Power2.RocketIcon",
+        "position": [
+          0,
+          12,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          436.5,
+          284
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          352
+        ],
+        "path": "TotalMenus.Panel.Content.Power4",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          184
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          494.5,
+          352
+        ],
+        "path": "TotalMenus.Panel.Content.Power4.Caption",
+        "text": "x4 Power · 15 minutes · FREE TEST",
+        "position": [
+          0,
+          70,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          420,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          420,
+          0,
+          64
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content.Power4.RocketIcon",
+        "position": [
+          0,
+          12,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          436.5,
+          360
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          428
+        ],
+        "path": "TotalMenus.Panel.Content.Power8",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          260
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          494.5,
+          428
+        ],
+        "path": "TotalMenus.Panel.Content.Power8.Caption",
+        "text": "x8 Power · 15 minutes · FREE TEST",
+        "position": [
+          0,
+          70,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          420,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          420,
+          0,
+          64
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content.Power8.RocketIcon",
+        "position": [
+          0,
+          12,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          436.5,
+          436
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          420.5,
+          538
+        ],
+        "path": "TotalMenus.Panel.Status",
+        "text": "",
+        "position": [
+          0,
+          18,
+          0,
+          418
+        ],
+        "absoluteSize": [
+          524,
+          38
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          524,
+          0,
+          38
+        ]
+      }
+    ]
+  },
+  "Food": {
+    "page": "Food",
+    "elements": [
+      {
+        "absolutePosition": [
+          0,
+          0
+        ],
+        "path": "TotalMenus.Shade",
+        "text": "",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          1365,
+          710
+        ],
+        "class": "TextButton",
+        "textSize": 8,
+        "size": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel",
+        "position": [
+          0.5,
+          0,
+          0.5,
+          0
+        ],
+        "absoluteSize": [
+          560,
+          470
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          402.5,
+          120
+        ],
+        "size": [
+          0,
+          560,
+          0,
+          470
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Title",
+        "text": "Food",
+        "position": [
+          0,
+          22,
+          0,
+          12
+        ],
+        "absoluteSize": [
+          450,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 32,
+        "size": [
+          0,
+          450,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          896.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Close",
+        "text": "",
+        "position": [
+          0,
+          519,
+          0,
+          36
+        ],
+        "absoluteSize": [
+          50,
+          48
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          50,
+          0,
+          48
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Close.CloseIcon",
+        "position": [
+          0,
+          9,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          32,
+          32
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          905.5,
+          140
+        ],
+        "size": [
+          0,
+          32,
+          0,
+          32
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content",
+        "position": [
+          0,
+          18,
+          0,
+          80
+        ],
+        "absoluteSize": [
+          524,
+          330
+        ],
+        "class": "ScrollingFrame",
+        "absolutePosition": [
+          420.5,
+          200
+        ],
+        "size": [
+          0,
+          524,
+          0,
+          330
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          200
+        ],
+        "path": "TotalMenus.Panel.Content.Food1",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          32
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          430.5,
+          200
+        ],
+        "path": "TotalMenus.Panel.Content.Food1.Caption",
+        "text": "Selected · None · +0% Power · FREE",
+        "position": [
+          0,
+          6,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          496,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          496,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          276
+        ],
+        "path": "TotalMenus.Panel.Content.Food2",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          108
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          430.5,
+          276
+        ],
+        "path": "TotalMenus.Panel.Content.Food2.Caption",
+        "text": "Snack · +5% Power · FREE",
+        "position": [
+          0,
+          6,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          496,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          496,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          352
+        ],
+        "path": "TotalMenus.Panel.Content.Food3",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          184
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          430.5,
+          352
+        ],
+        "path": "TotalMenus.Panel.Content.Food3.Caption",
+        "text": "Meal · +10% Power · FREE",
+        "position": [
+          0,
+          6,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          496,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          496,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          428
+        ],
+        "path": "TotalMenus.Panel.Content.Food4",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          260
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          430.5,
+          428
+        ],
+        "path": "TotalMenus.Panel.Content.Food4.Caption",
+        "text": "Feast · +20% Power · FREE",
+        "position": [
+          0,
+          6,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          496,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          496,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          420.5,
+          538
+        ],
+        "path": "TotalMenus.Panel.Status",
+        "text": "",
+        "position": [
+          0,
+          18,
+          0,
+          418
+        ],
+        "absoluteSize": [
+          524,
+          38
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          524,
+          0,
+          38
+        ]
+      }
+    ]
+  },
+  "World": {
+    "page": "World",
+    "elements": [
+      {
+        "absolutePosition": [
+          0,
+          0
+        ],
+        "path": "TotalMenus.Shade",
+        "text": "",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          1365,
+          710
+        ],
+        "class": "TextButton",
+        "textSize": 8,
+        "size": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel",
+        "position": [
+          0.5,
+          0,
+          0.5,
+          0
+        ],
+        "absoluteSize": [
+          560,
+          470
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          402.5,
+          120
+        ],
+        "size": [
+          0,
+          560,
+          0,
+          470
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Title",
+        "text": "World Travel",
+        "position": [
+          0,
+          22,
+          0,
+          12
+        ],
+        "absoluteSize": [
+          450,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 32,
+        "size": [
+          0,
+          450,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          896.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Close",
+        "text": "",
+        "position": [
+          0,
+          519,
+          0,
+          36
+        ],
+        "absoluteSize": [
+          50,
+          48
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          50,
+          0,
+          48
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Close.CloseIcon",
+        "position": [
+          0,
+          9,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          32,
+          32
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          905.5,
+          140
+        ],
+        "size": [
+          0,
+          32,
+          0,
+          32
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content",
+        "position": [
+          0,
+          18,
+          0,
+          80
+        ],
+        "absoluteSize": [
+          524,
+          330
+        ],
+        "class": "ScrollingFrame",
+        "absolutePosition": [
+          420.5,
+          200
+        ],
+        "size": [
+          0,
+          524,
+          0,
+          330
+        ]
+      },
+      {
+        "absolutePosition": [
+          420.5,
+          230
+        ],
+        "path": "TotalMenus.Panel.Content.ComingSoon",
+        "text": "World 2 · Coming Soon",
+        "position": [
+          0,
+          0,
+          0,
+          30
+        ],
+        "absoluteSize": [
+          524,
+          60
+        ],
+        "class": "TextLabel",
+        "textSize": 30,
+        "size": [
+          0,
+          524,
+          0,
+          60
+        ]
+      },
+      {
+        "absolutePosition": [
+          420.5,
+          538
+        ],
+        "path": "TotalMenus.Panel.Status",
+        "text": "",
+        "position": [
+          0,
+          18,
+          0,
+          418
+        ],
+        "absoluteSize": [
+          524,
+          38
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          524,
+          0,
+          38
+        ]
+      }
+    ]
+  },
+  "Guide": {
+    "page": "Guide",
+    "elements": [
+      {
+        "absolutePosition": [
+          0,
+          0
+        ],
+        "path": "TotalMenus.Shade",
+        "text": "",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          1365,
+          710
+        ],
+        "class": "TextButton",
+        "textSize": 8,
+        "size": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel",
+        "position": [
+          0.5,
+          0,
+          0.5,
+          0
+        ],
+        "absoluteSize": [
+          560,
+          470
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          402.5,
+          120
+        ],
+        "size": [
+          0,
+          560,
+          0,
+          470
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Title",
+        "text": "Guide",
+        "position": [
+          0,
+          22,
+          0,
+          12
+        ],
+        "absoluteSize": [
+          450,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 32,
+        "size": [
+          0,
+          450,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          896.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Close",
+        "text": "",
+        "position": [
+          0,
+          519,
+          0,
+          36
+        ],
+        "absoluteSize": [
+          50,
+          48
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          50,
+          0,
+          48
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Close.CloseIcon",
+        "position": [
+          0,
+          9,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          32,
+          32
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          905.5,
+          140
+        ],
+        "size": [
+          0,
+          32,
+          0,
+          32
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content",
+        "position": [
+          0,
+          18,
+          0,
+          80
+        ],
+        "absoluteSize": [
+          524,
+          330
+        ],
+        "class": "ScrollingFrame",
+        "absolutePosition": [
+          420.5,
+          200
+        ],
+        "size": [
+          0,
+          524,
+          0,
+          330
+        ]
+      },
+      {
+        "absolutePosition": [
+          432.5,
+          208
+        ],
+        "path": "TotalMenus.Panel.Content.Instructions",
+        "text": "Click to gain XP and Power.\n\nLeft showroom: press E to buy / equip rockets.\nRight showroom: unlock toilets with rebirths, then approach to train.\n\nPower = Base × Multiplier × (1 + Food %) × (1 + Friend %).\nEach friend in this server adds 10%.\n\nLaunch, break objects, earn Trophies!",
+        "position": [
+          0,
+          12,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          492,
+          305
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          492,
+          0,
+          305
+        ]
+      },
+      {
+        "absolutePosition": [
+          420.5,
+          538
+        ],
+        "path": "TotalMenus.Panel.Status",
+        "text": "",
+        "position": [
+          0,
+          18,
+          0,
+          418
+        ],
+        "absoluteSize": [
+          524,
+          38
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          524,
+          0,
+          38
+        ]
+      }
+    ]
+  },
+  "Settings": {
+    "page": "Settings",
+    "elements": [
+      {
+        "absolutePosition": [
+          0,
+          0
+        ],
+        "path": "TotalMenus.Shade",
+        "text": "",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          1365,
+          710
+        ],
+        "class": "TextButton",
+        "textSize": 8,
+        "size": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel",
+        "position": [
+          0.5,
+          0,
+          0.5,
+          0
+        ],
+        "absoluteSize": [
+          560,
+          470
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          402.5,
+          120
+        ],
+        "size": [
+          0,
+          560,
+          0,
+          470
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Title",
+        "text": "Settings",
+        "position": [
+          0,
+          22,
+          0,
+          12
+        ],
+        "absoluteSize": [
+          450,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 32,
+        "size": [
+          0,
+          450,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          896.5,
+          132
+        ],
+        "path": "TotalMenus.Panel.Close",
+        "text": "",
+        "position": [
+          0,
+          519,
+          0,
+          36
+        ],
+        "absoluteSize": [
+          50,
+          48
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          50,
+          0,
+          48
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Close.CloseIcon",
+        "position": [
+          0,
+          9,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          32,
+          32
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          905.5,
+          140
+        ],
+        "size": [
+          0,
+          32,
+          0,
+          32
+        ]
+      },
+      {
+        "path": "TotalMenus.Panel.Content",
+        "position": [
+          0,
+          18,
+          0,
+          80
+        ],
+        "absoluteSize": [
+          524,
+          330
+        ],
+        "class": "ScrollingFrame",
+        "absolutePosition": [
+          420.5,
+          200
+        ],
+        "size": [
+          0,
+          524,
+          0,
+          330
+        ]
+      },
+      {
+        "absolutePosition": [
+          424.5,
+          200
+        ],
+        "path": "TotalMenus.Panel.Content.Sound",
+        "text": "",
+        "position": [
+          0,
+          258,
+          0,
+          32
+        ],
+        "absoluteSize": [
+          508,
+          64
+        ],
+        "class": "TextButton",
+        "textSize": 24,
+        "size": [
+          0,
+          508,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          430.5,
+          200
+        ],
+        "path": "TotalMenus.Panel.Content.Sound.Caption",
+        "text": "Sound: ON",
+        "position": [
+          0,
+          6,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          496,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          496,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          420.5,
+          290
+        ],
+        "path": "TotalMenus.Panel.Content.SettingsNote",
+        "text": "Settings apply on this device for this session.",
+        "position": [
+          0,
+          0,
+          0,
+          90
+        ],
+        "absoluteSize": [
+          524,
+          60
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          524,
+          0,
+          60
+        ]
+      },
+      {
+        "absolutePosition": [
+          420.5,
+          538
+        ],
+        "path": "TotalMenus.Panel.Status",
+        "text": "",
+        "position": [
+          0,
+          18,
+          0,
+          418
+        ],
+        "absoluteSize": [
+          524,
+          38
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          524,
+          0,
+          38
+        ]
+      }
+    ]
+  },
+  "Rebirth": {
+    "page": "Rebirth",
+    "elements": [
+      {
+        "absolutePosition": [
+          0,
+          0
+        ],
+        "path": "ProgressionGui.ModalShade",
+        "text": "",
+        "position": [
+          0.5,
+          0,
+          0.5,
+          0
+        ],
+        "absoluteSize": [
+          1365,
+          710
+        ],
+        "class": "TextButton",
+        "textSize": 26,
+        "size": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel",
+        "position": [
+          0.5,
+          0,
+          0.5,
+          0
+        ],
+        "absoluteSize": [
+          500,
+          460
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          125
+        ],
+        "size": [
+          0,
+          500,
+          0,
+          460
+        ]
+      },
+      {
+        "absolutePosition": [
+          452.5,
+          137
+        ],
+        "path": "ProgressionGui.RebirthPanel.Title",
+        "text": "Rebirth",
+        "position": [
+          0,
+          20,
+          0,
+          12
+        ],
+        "absoluteSize": [
+          372,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 35,
+        "size": [
+          0,
+          372,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          840.5,
+          135
+        ],
+        "path": "ProgressionGui.RebirthPanel.Close",
+        "text": "",
+        "position": [
+          0,
+          448,
+          0,
+          48
+        ],
+        "absoluteSize": [
+          80,
+          76
+        ],
+        "class": "TextButton",
+        "textSize": 42,
+        "size": [
+          0,
+          80,
+          0,
+          76
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel.Close.CloseIcon",
+        "position": [
+          0,
+          15,
+          0,
+          12
+        ],
+        "absoluteSize": [
+          50,
+          50
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          855.5,
+          147
+        ],
+        "size": [
+          0,
+          50,
+          0,
+          50
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel.Content",
+        "position": [
+          0,
+          0,
+          0,
+          84
+        ],
+        "absoluteSize": [
+          500,
+          346
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          209
+        ],
+        "size": [
+          0,
+          500,
+          0,
+          346
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          500,
+          346
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          209
+        ],
+        "size": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.RequiredLevel",
+        "position": [
+          0,
+          88,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          324,
+          48
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          520.5,
+          209
+        ],
+        "size": [
+          0,
+          324,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          520.5,
+          209
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.RequiredLevel.Value",
+        "text": "Requires Level 20 required",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          324,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 28,
+        "size": [
+          0,
+          324,
+          0,
+          48
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.CurrentCard",
+        "position": [
+          0,
+          20,
+          0,
+          60
+        ],
+        "absoluteSize": [
+          194,
+          84
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          452.5,
+          269
+        ],
+        "size": [
+          0,
+          194,
+          0,
+          84
+        ]
+      },
+      {
+        "absolutePosition": [
+          452.5,
+          269
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.CurrentCard.Value",
+        "text": "Current XP Rate\nx1.00",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          194,
+          84
+        ],
+        "class": "TextLabel",
+        "textSize": 25,
+        "size": [
+          0,
+          194,
+          0,
+          84
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.NextCard",
+        "position": [
+          0,
+          286,
+          0,
+          60
+        ],
+        "absoluteSize": [
+          194,
+          84
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          718.5,
+          269
+        ],
+        "size": [
+          0,
+          194,
+          0,
+          84
+        ]
+      },
+      {
+        "absolutePosition": [
+          718.5,
+          269
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.NextCard.Value",
+        "text": "After Rebirth\nx1.50",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          194,
+          84
+        ],
+        "class": "TextLabel",
+        "textSize": 25,
+        "size": [
+          0,
+          194,
+          0,
+          84
+        ]
+      },
+      {
+        "absolutePosition": [
+          654.5,
+          279
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.Arrow",
+        "text": "▶",
+        "position": [
+          0,
+          222,
+          0,
+          70
+        ],
+        "absoluteSize": [
+          55,
+          64
+        ],
+        "class": "TextLabel",
+        "textSize": 44,
+        "size": [
+          0,
+          55,
+          0,
+          64
+        ]
+      },
+      {
+        "absolutePosition": [
+          452.5,
+          354
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.MultiplierMeaning",
+        "text": "Boosts passive, flight and toilet XP",
+        "position": [
+          0,
+          20,
+          0,
+          145
+        ],
+        "absoluteSize": [
+          460,
+          20
+        ],
+        "class": "TextLabel",
+        "textSize": 18,
+        "size": [
+          0,
+          460,
+          0,
+          20
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.LevelProgress",
+        "position": [
+          0,
+          20,
+          0,
+          163
+        ],
+        "absoluteSize": [
+          460,
+          48
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          452.5,
+          372
+        ],
+        "size": [
+          0,
+          460,
+          0,
+          48
+        ]
+      },
+      {
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.LevelProgress.Fill",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          373.17498779296875,
+          48
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          452.5000305175781,
+          372
+        ],
+        "size": [
+          0.8112499713897705,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "absolutePosition": [
+          452.5,
+          372
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.LevelProgress.Value",
+        "text": "Level 16 / 20 · 4 levels left\n163 XP until rebirth",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          460,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          460,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          452.5,
+          436
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.ConfirmRebirth",
+        "text": "Level 20 required",
+        "position": [
+          0,
+          167,
+          0,
+          268
+        ],
+        "absoluteSize": [
+          294,
+          82
+        ],
+        "class": "TextButton",
+        "textSize": 28,
+        "size": [
+          0,
+          294,
+          0,
+          82
+        ]
+      },
+      {
+        "absolutePosition": [
+          758.5,
+          436
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.SkipRebirth",
+        "text": "Skip Rebirth",
+        "position": [
+          0,
+          403,
+          0,
+          268
+        ],
+        "absoluteSize": [
+          154,
+          82
+        ],
+        "class": "TextButton",
+        "textSize": 19,
+        "size": [
+          0,
+          154,
+          0,
+          82
+        ]
+      },
+      {
+        "absolutePosition": [
+          758.5,
+          493
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.SkipRebirth.Caption",
+        "text": "Coming Soon",
+        "position": [
+          0,
+          0,
+          0,
+          57
+        ],
+        "absoluteSize": [
+          154,
+          22
+        ],
+        "class": "TextLabel",
+        "textSize": 18,
+        "size": [
+          0,
+          154,
+          0,
+          22
+        ]
+      },
+      {
+        "absolutePosition": [
+          452.5,
+          524
+        ],
+        "path": "ProgressionGui.RebirthPanel.Content.RebirthPage.ResetNote",
+        "text": "Resets level / XP · Keeps toilets, trophies and records",
+        "position": [
+          0,
+          20,
+          0,
+          315
+        ],
+        "absoluteSize": [
+          460,
+          24
+        ],
+        "class": "TextLabel",
+        "textSize": 18,
+        "size": [
+          0,
+          460,
+          0,
+          24
+        ]
+      },
+      {
+        "absolutePosition": [
+          452.5,
+          559
+        ],
+        "path": "ProgressionGui.RebirthPanel.Message",
+        "text": "",
+        "position": [
+          0,
+          20,
+          0,
+          434
+        ],
+        "absoluteSize": [
+          460,
+          22
+        ],
+        "class": "TextLabel",
+        "textSize": 18,
+        "size": [
+          0,
+          460,
+          0,
+          22
+        ]
+      }
+    ]
+  },
+  "Trails": {
+    "page": "Trails",
+    "elements": [
+      {
+        "absolutePosition": [
+          0,
+          0
+        ],
+        "path": "RocketSkinGui.Shade",
+        "text": "",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          1365,
+          710
+        ],
+        "class": "TextButton",
+        "textSize": 8,
+        "size": [
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop",
+        "position": [
+          0.5,
+          0,
+          0.5,
+          0
+        ],
+        "absoluteSize": [
+          560,
+          530
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          402.5,
+          90
+        ],
+        "size": [
+          0,
+          560,
+          0,
+          530
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.RocketIcon",
+        "position": [
+          0,
+          18,
+          0,
+          14
+        ],
+        "absoluteSize": [
+          36,
+          36
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          420.5,
+          104
+        ],
+        "size": [
+          0,
+          36,
+          0,
+          36
+        ]
+      },
+      {
+        "absolutePosition": [
+          466.5,
+          98
+        ],
+        "path": "RocketSkinGui.Shop.Title",
+        "text": "Trails",
+        "position": [
+          0,
+          64,
+          0,
+          8
+        ],
+        "absoluteSize": [
+          420,
+          46
+        ],
+        "class": "TextLabel",
+        "textSize": 28,
+        "size": [
+          0,
+          420,
+          0,
+          46
+        ]
+      },
+      {
+        "absolutePosition": [
+          896.5,
+          100
+        ],
+        "path": "RocketSkinGui.Shop.Close",
+        "text": "×",
+        "position": [
+          0,
+          519,
+          0,
+          32
+        ],
+        "absoluteSize": [
+          50,
+          44
+        ],
+        "class": "TextButton",
+        "textSize": 30,
+        "size": [
+          0,
+          50,
+          0,
+          44
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.TrophyIcon",
+        "position": [
+          0,
+          18,
+          0,
+          61
+        ],
+        "absoluteSize": [
+          28,
+          28
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          420.5,
+          151
+        ],
+        "size": [
+          0,
+          28,
+          0,
+          28
+        ]
+      },
+      {
+        "absolutePosition": [
+          456.5,
+          148
+        ],
+        "path": "RocketSkinGui.Shop.Balance",
+        "text": "0 · Thrust +0 / Growth +0%",
+        "position": [
+          0,
+          54,
+          0,
+          58
+        ],
+        "absoluteSize": [
+          488,
+          32
+        ],
+        "class": "TextLabel",
+        "textSize": 20,
+        "size": [
+          0,
+          488,
+          0,
+          32
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment",
+        "position": [
+          0,
+          16,
+          0,
+          106
+        ],
+        "absoluteSize": [
+          528,
+          362
+        ],
+        "class": "ScrollingFrame",
+        "absolutePosition": [
+          418.5,
+          196
+        ],
+        "size": [
+          0,
+          528,
+          0,
+          362
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsNone",
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "absoluteSize": [
+          516,
+          94
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          418.5,
+          196
+        ],
+        "size": [
+          0,
+          516,
+          0,
+          94
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsNone.TrailPreview",
+        "position": [
+          0,
+          14,
+          0,
+          18
+        ],
+        "absoluteSize": [
+          64,
+          58
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          214
+        ],
+        "size": [
+          0,
+          64,
+          0,
+          58
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsNone.TrailPreview.TrailIcon",
+        "position": [
+          0,
+          8,
+          0,
+          5
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          440.5,
+          219
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          203
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsNone.Name",
+        "text": "Default Exhaust",
+        "position": [
+          0,
+          98,
+          0,
+          7
+        ],
+        "absoluteSize": [
+          286,
+          30
+        ],
+        "class": "TextLabel",
+        "textSize": 23,
+        "size": [
+          0,
+          286,
+          0,
+          30
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          235
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsNone.Requirement",
+        "text": "Thrust +0 · Growth +0% · Owned",
+        "position": [
+          0,
+          98,
+          0,
+          39
+        ],
+        "absoluteSize": [
+          286,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          286,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          808.5,
+          218
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsNone.Action",
+        "text": "Equipped",
+        "position": [
+          0,
+          447,
+          0,
+          47
+        ],
+        "absoluteSize": [
+          114,
+          50
+        ],
+        "class": "TextButton",
+        "textSize": 20,
+        "size": [
+          0,
+          114,
+          0,
+          50
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsEmber",
+        "position": [
+          0,
+          0,
+          0,
+          102
+        ],
+        "absoluteSize": [
+          516,
+          94
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          418.5,
+          298
+        ],
+        "size": [
+          0,
+          516,
+          0,
+          94
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsEmber.TrailPreview",
+        "position": [
+          0,
+          14,
+          0,
+          18
+        ],
+        "absoluteSize": [
+          64,
+          58
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          316
+        ],
+        "size": [
+          0,
+          64,
+          0,
+          58
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsEmber.TrailPreview.TrailIcon",
+        "position": [
+          0,
+          8,
+          0,
+          5
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          440.5,
+          321
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          305
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsEmber.Name",
+        "text": "Ember Flame",
+        "position": [
+          0,
+          98,
+          0,
+          7
+        ],
+        "absoluteSize": [
+          286,
+          30
+        ],
+        "class": "TextLabel",
+        "textSize": 23,
+        "size": [
+          0,
+          286,
+          0,
+          30
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          337
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsEmber.Requirement",
+        "text": "Thrust +5 · Growth +2%\n15 Trophies",
+        "position": [
+          0,
+          98,
+          0,
+          39
+        ],
+        "absoluteSize": [
+          286,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          286,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          808.5,
+          320
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsEmber.Action",
+        "text": "Locked",
+        "position": [
+          0,
+          447,
+          0,
+          47
+        ],
+        "absoluteSize": [
+          114,
+          50
+        ],
+        "class": "TextButton",
+        "textSize": 20,
+        "size": [
+          0,
+          114,
+          0,
+          50
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsMint",
+        "position": [
+          0,
+          0,
+          0,
+          204
+        ],
+        "absoluteSize": [
+          516,
+          94
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          418.5,
+          400
+        ],
+        "size": [
+          0,
+          516,
+          0,
+          94
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsMint.TrailPreview",
+        "position": [
+          0,
+          14,
+          0,
+          18
+        ],
+        "absoluteSize": [
+          64,
+          58
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          418
+        ],
+        "size": [
+          0,
+          64,
+          0,
+          58
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsMint.TrailPreview.TrailIcon",
+        "position": [
+          0,
+          8,
+          0,
+          5
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          440.5,
+          423
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          407
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsMint.Name",
+        "text": "Mint Stream",
+        "position": [
+          0,
+          98,
+          0,
+          7
+        ],
+        "absoluteSize": [
+          286,
+          30
+        ],
+        "class": "TextLabel",
+        "textSize": 23,
+        "size": [
+          0,
+          286,
+          0,
+          30
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          439
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsMint.Requirement",
+        "text": "Thrust +9 · Growth +4%\n60 Trophies",
+        "position": [
+          0,
+          98,
+          0,
+          39
+        ],
+        "absoluteSize": [
+          286,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          286,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          808.5,
+          422
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsMint.Action",
+        "text": "Locked",
+        "position": [
+          0,
+          447,
+          0,
+          47
+        ],
+        "absoluteSize": [
+          114,
+          50
+        ],
+        "class": "TextButton",
+        "textSize": 20,
+        "size": [
+          0,
+          114,
+          0,
+          50
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsViolet",
+        "position": [
+          0,
+          0,
+          0,
+          306
+        ],
+        "absoluteSize": [
+          516,
+          94
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          418.5,
+          502
+        ],
+        "size": [
+          0,
+          516,
+          0,
+          94
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsViolet.TrailPreview",
+        "position": [
+          0,
+          14,
+          0,
+          18
+        ],
+        "absoluteSize": [
+          64,
+          58
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          520
+        ],
+        "size": [
+          0,
+          64,
+          0,
+          58
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsViolet.TrailPreview.TrailIcon",
+        "position": [
+          0,
+          8,
+          0,
+          5
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          440.5,
+          525
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          509
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsViolet.Name",
+        "text": "Violet Pulse",
+        "position": [
+          0,
+          98,
+          0,
+          7
+        ],
+        "absoluteSize": [
+          286,
+          30
+        ],
+        "class": "TextLabel",
+        "textSize": 23,
+        "size": [
+          0,
+          286,
+          0,
+          30
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          541
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsViolet.Requirement",
+        "text": "Thrust +14 · Growth +7%\n180 Trophies",
+        "position": [
+          0,
+          98,
+          0,
+          39
+        ],
+        "absoluteSize": [
+          286,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          286,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          808.5,
+          524
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsViolet.Action",
+        "text": "Locked",
+        "position": [
+          0,
+          447,
+          0,
+          47
+        ],
+        "absoluteSize": [
+          114,
+          50
+        ],
+        "class": "TextButton",
+        "textSize": 20,
+        "size": [
+          0,
+          114,
+          0,
+          50
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsAurora",
+        "position": [
+          0,
+          0,
+          0,
+          408
+        ],
+        "absoluteSize": [
+          516,
+          94
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          418.5,
+          604
+        ],
+        "size": [
+          0,
+          516,
+          0,
+          94
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsAurora.TrailPreview",
+        "position": [
+          0,
+          14,
+          0,
+          18
+        ],
+        "absoluteSize": [
+          64,
+          58
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          622
+        ],
+        "size": [
+          0,
+          64,
+          0,
+          58
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsAurora.TrailPreview.TrailIcon",
+        "position": [
+          0,
+          8,
+          0,
+          5
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          440.5,
+          627
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          611
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsAurora.Name",
+        "text": "Aurora Wave",
+        "position": [
+          0,
+          98,
+          0,
+          7
+        ],
+        "absoluteSize": [
+          286,
+          30
+        ],
+        "class": "TextLabel",
+        "textSize": 23,
+        "size": [
+          0,
+          286,
+          0,
+          30
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          643
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsAurora.Requirement",
+        "text": "Thrust +20 · Growth +10%\n600 Trophies",
+        "position": [
+          0,
+          98,
+          0,
+          39
+        ],
+        "absoluteSize": [
+          286,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          286,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          808.5,
+          626
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsAurora.Action",
+        "text": "Locked",
+        "position": [
+          0,
+          447,
+          0,
+          47
+        ],
+        "absoluteSize": [
+          114,
+          50
+        ],
+        "class": "TextButton",
+        "textSize": 20,
+        "size": [
+          0,
+          114,
+          0,
+          50
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsPrism",
+        "position": [
+          0,
+          0,
+          0,
+          510
+        ],
+        "absoluteSize": [
+          516,
+          94
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          418.5,
+          706
+        ],
+        "size": [
+          0,
+          516,
+          0,
+          94
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsPrism.TrailPreview",
+        "position": [
+          0,
+          14,
+          0,
+          18
+        ],
+        "absoluteSize": [
+          64,
+          58
+        ],
+        "class": "Frame",
+        "absolutePosition": [
+          432.5,
+          724
+        ],
+        "size": [
+          0,
+          64,
+          0,
+          58
+        ]
+      },
+      {
+        "path": "RocketSkinGui.Shop.Equipment.TrailsPrism.TrailPreview.TrailIcon",
+        "position": [
+          0,
+          8,
+          0,
+          5
+        ],
+        "absoluteSize": [
+          48,
+          48
+        ],
+        "class": "ImageLabel",
+        "absolutePosition": [
+          440.5,
+          729
+        ],
+        "size": [
+          0,
+          48,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          713
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsPrism.Name",
+        "text": "Prism Rush",
+        "position": [
+          0,
+          98,
+          0,
+          7
+        ],
+        "absoluteSize": [
+          286,
+          30
+        ],
+        "class": "TextLabel",
+        "textSize": 23,
+        "size": [
+          0,
+          286,
+          0,
+          30
+        ]
+      },
+      {
+        "absolutePosition": [
+          516.5,
+          745
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsPrism.Requirement",
+        "text": "Thrust +25 · Growth +15%\n1800 Trophies",
+        "position": [
+          0,
+          98,
+          0,
+          39
+        ],
+        "absoluteSize": [
+          286,
+          48
+        ],
+        "class": "TextLabel",
+        "textSize": 17,
+        "size": [
+          0,
+          286,
+          0,
+          48
+        ]
+      },
+      {
+        "absolutePosition": [
+          808.5,
+          728
+        ],
+        "path": "RocketSkinGui.Shop.Equipment.TrailsPrism.Action",
+        "text": "Locked",
+        "position": [
+          0,
+          447,
+          0,
+          47
+        ],
+        "absoluteSize": [
+          114,
+          50
+        ],
+        "class": "TextButton",
+        "textSize": 20,
+        "size": [
+          0,
+          114,
+          0,
+          50
+        ]
+      },
+      {
+        "absolutePosition": [
+          420.5,
+          572
+        ],
+        "path": "RocketSkinGui.Shop.Message",
+        "text": "Power bonus + Rocket exhaust trail",
+        "position": [
+          0,
+          18,
+          0,
+          482
+        ],
+        "absoluteSize": [
+          524,
+          36
+        ],
+        "class": "TextLabel",
+        "textSize": 18,
+        "size": [
+          0,
+          524,
+          0,
+          36
+        ]
+      }
+    ]
+  }
+}
